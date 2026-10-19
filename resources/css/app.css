@@ -1,0 +1,365 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none !important;
+}
+
+/* Custom Scrollbars ala Spark Admin */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+}
+
+/* Spark Admin Custom Card & Stats Design System */
+.card-spark {
+    background-color: #FFFFFF;
+    border: none;
+    border-radius: 24px;
+    padding: 1.75rem;
+    box-shadow: 0 10px 30px rgba(11, 19, 15, 0.04);
+    position: relative;
+    overflow: hidden;
+}
+
+.alert-spark-card {
+    background-color: #0A0E2E;
+    color: #FFFFFF;
+    border-radius: 24px;
+    padding: 1.75rem;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(10, 14, 46, 0.15);
+}
+
+.alert-spark-bg-shape {
+    position: absolute;
+    bottom: -24px;
+    right: -24px;
+    width: 135px;
+    height: 135px;
+    opacity: 0.95;
+    pointer-events: none;
+    transform: rotate(15deg);
+    transition: transform 0.4s ease-in-out;
+}
+.alert-spark-card:hover .alert-spark-bg-shape {
+    transform: rotate(45deg) scale(1.08);
+}
+
+.alert-spark-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #FFFFFF;
+    font-size: 0.725rem;
+    font-weight: 700;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    margin-bottom: 1rem;
+}
+.alert-spark-badge::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: #ffa916;
+    border-radius: 9999px;
+    box-shadow: 0 0 8px #ffa916;
+}
+
+.alert-spark-date {
+    font-size: 0.75rem;
+    color: #94A3B8;
+    margin-bottom: 0.35rem;
+}
+
+.alert-spark-text {
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.35;
+    color: #FFFFFF;
+    margin-bottom: 1rem;
+}
+
+.alert-spark-link {
+    color: #ffa916;
+    font-size: 0.875rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: auto;
+    transition: all 0.2s ease;
+}
+.alert-spark-link:hover {
+    color: #ffb738;
+    transform: translateX(3px);
+}
+
+/* Promo Banner Card */
+.promo-banner-card {
+    background-color: #0A0E2E;
+    color: #FFFFFF;
+    border-radius: 24px;
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(10, 14, 46, 0.15);
+}
+.promo-banner-bg-shape {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 110px;
+    height: 110px;
+    opacity: 0.9;
+    pointer-events: none;
+    transform: rotate(20deg);
+}
+.promo-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    line-height: 1.35;
+    margin-bottom: 0.5rem;
+    color: #FFFFFF;
+    position: relative;
+    z-index: 2;
+}
+.promo-desc {
+    font-size: 0.8rem;
+    color: #94A3B8;
+    margin-bottom: 1.25rem;
+    position: relative;
+    z-index: 2;
+}
+.btn-promo {
+    background-color: #ffa916;
+    color: #0A0E2E;
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 0.65rem 1.25rem;
+    border-radius: 9999px;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(255, 169, 22, 0.3);
+    position: relative;
+    z-index: 2;
+}
+.btn-promo:hover {
+    background-color: #ffb738;
+    transform: translateY(-1px);
+}
+
+/* Stat Cards */
+.stat-label-spark {
+    font-size: 0.875rem;
+    color: #6C7E75;
+    font-weight: 600;
+}
+.stat-value-spark {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0B130F;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin: 0.4rem 0;
+}
+.trend-badge-spark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.785rem;
+    font-weight: 700;
+}
+
+/* Transaction List Spark */
+.transaction-item-spark {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1rem;
+    border-radius: 18px;
+    transition: background-color 0.2s ease;
+}
+.transaction-item-spark:hover {
+    background-color: #F4F6F5;
+}
+
+/* Progress Spark */
+.spark-progress-track {
+    width: 100%;
+    height: 8px;
+    background-color: #E9EFEF;
+    border-radius: 9999px;
+    overflow: hidden;
+}
+.spark-progress-fill {
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.6s ease;
+}
+
+/* Spark Admin Table Design System */
+.table-card-spark {
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    border: 1px solid #E9EFEF;
+    box-shadow: 0 4px 20px -2px rgba(10, 14, 46, 0.04);
+    overflow: hidden;
+    width: 100%;
+}
+
+.table-spark-custom {
+    width: 100%;
+    margin-bottom: 0;
+    vertical-align: middle;
+    border-collapse: collapse;
+}
+
+.table-spark-custom th {
+    background-color: #F8FAF9;
+    color: #6C7E75;
+    font-size: 0.725rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0.875rem 1.25rem;
+    border-bottom: 1px solid #E9EFEF;
+}
+
+.table-spark-custom td {
+    padding: 0.875rem 1.25rem;
+    border-bottom: 1px solid rgba(233, 239, 239, 0.7);
+    white-space: nowrap;
+}
+
+.table-spark-custom tbody tr {
+    transition: background-color 0.15s ease-in-out;
+}
+
+.table-spark-custom tbody tr:hover {
+    background-color: rgba(244, 246, 245, 0.65);
+}
+
+.table-spark-custom tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Action button items in table cell */
+.table-btn-action {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    border: 1px solid #E9EFEF;
+    background-color: #FFFFFF;
+    color: #495465;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.table-btn-action:hover {
+    background-color: #0A0E2E;
+    color: #FFFFFF;
+    border-color: #0A0E2E;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(10, 14, 46, 0.15);
+}
+
+.table-btn-action.delete:hover {
+    background-color: #EF4444;
+    color: #FFFFFF;
+    border-color: #EF4444;
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
+}
+
+.table-btn-action.accent:hover {
+    background-color: #ffa916;
+    color: #0A0E2E;
+    border-color: #ffa916;
+    box-shadow: 0 4px 10px rgba(255, 169, 22, 0.3);
+}
+
+/* Badge styles with status dot */
+.badge-table {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.65rem;
+    font-size: 0.725rem;
+    font-weight: 700;
+    border-radius: 9999px;
+}
+
+.badge-table::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+}
+
+.badge-table.success {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #059669;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+.badge-table.success::before {
+    background-color: #10B981;
+}
+
+.badge-table.pending,
+.badge-table.warning {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #D97706;
+    border: 1px solid rgba(245, 158, 11, 0.2);
+}
+.badge-table.pending::before,
+.badge-table.warning::before {
+    background-color: #F59E0B;
+}
+
+.badge-table.failed,
+.badge-table.danger {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #DC2626;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+.badge-table.failed::before,
+.badge-table.danger::before {
+    background-color: #EF4444;
+}
+
+.badge-table.accent {
+    background-color: rgba(255, 169, 22, 0.15);
+    color: #B45309;
+    border: 1px solid rgba(255, 169, 22, 0.3);
+}
+.badge-table.accent::before {
+    background-color: #ffa916;
+}

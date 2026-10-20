@@ -1,180 +1,216 @@
-<div class="bg-white border border-[#DEE2E7] rounded-xl overflow-x-auto">
-    <table class="w-full text-sm min-w-[850px]">
-        <thead class="bg-[#F7F8F9] text-[#495465] text-xs uppercase">
-            <tr>
-                <th class="text-center px-4 py-3 w-12">No</th>
-                <th class="text-left px-4 py-3">Plat Nomor</th>
-                <th class="text-left px-4 py-3">Nama Kendaraan</th>
-                <th class="text-left px-4 py-3">Jenis</th>
-                <th class="text-left px-4 py-3">Status</th>
-                <th class="text-left px-4 py-3">Servis Terakhir</th>
-                <th class="text-left px-4 py-3">Jadwal Servis</th>
-                <th class="text-left px-4 py-3">Pajak STNK</th>
-                <th class="text-center px-4 py-3">Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($kendaraanList as $k)
-                @php
-                    $statusServis = $k->status_servis;
-                    $statusPajak = $k->status_pajak;
-                    $isAdmin = auth()->user()->role === 'admin';
-                    $canServis = in_array(auth()->user()->role, ['admin', 'teknisi', 'dosen_tendik']);
-                @endphp
-                <tr class="border-t border-[#DEE2E7]">
-                    <td class="px-4 py-3 text-center text-[#495465] text-xs font-medium">
-                        {{ $loop->iteration + ($kendaraanList->currentPage() - 1) * $kendaraanList->perPage() }}
-                    </td>
-                    <td class="px-4 py-3 font-semibold text-[#181B21]">
-                        {{ $k->plat_nomor }}
-                    </td>
-                    <td class="px-4 py-3">
-                        <div class="flex items-center gap-2.5">
-                            @if ($k->foto_url)
-                                <img src="{{ asset($k->foto_url) }}" alt="{{ $k->nama_kendaraan }}" class="w-9 h-9 object-cover rounded-lg border border-[#DEE2E7] shrink-0" />
-                            @else
-                                <div class="w-9 h-9 rounded-lg bg-[#F7F8F9] border border-[#DEE2E7] flex items-center justify-center text-[#9EA9B9] shrink-0">
-                                    <x-heroicon-o-truck class="w-5 h-5 opacity-40" />
-                                </div>
-                            @endif
-                            <div>
-                                <div class="font-medium text-[#181B21]">{{ $k->nama_kendaraan }}</div>
-                                @if ($k->merek_tipe || $k->tahun_perolehan)
-                                    <div class="text-xs text-[#9EA9B9]">
-                                        {{ $k->merek_tipe ?? '' }} {{ $k->tahun_perolehan ? '(' . $k->tahun_perolehan . ')' : '' }}
+<div class="table-card-spark">
+    <div class="overflow-x-auto">
+        <table class="table-spark-custom">
+            <thead>
+                <tr>
+                    <th class="text-center w-12">No</th>
+                    <th class="text-left">Kendaraan & Nomor Polisi</th>
+                    <th class="text-left">Jenis</th>
+                    <th class="text-left">Status Operasional</th>
+                    <th class="text-left">Jadwal Servis</th>
+                    <th class="text-left">Pajak STNK</th>
+                    <th class="text-center w-40">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($kendaraanList as $k)
+                    @php
+                        $statusServis = $k->status_servis;
+                        $statusPajak = $k->status_pajak;
+                        $isAdmin = auth()->user()->role === 'admin';
+                        $canServis = in_array(auth()->user()->role, ['admin', 'teknisi', 'dosen_tendik']);
+                    @endphp
+                    <tr>
+                        <td class="text-center text-[#6C7E75] text-xs font-semibold">
+                            {{ $loop->iteration + ($kendaraanList->currentPage() - 1) * $kendaraanList->perPage() }}
+                        </td>
+
+                        <!-- Kendaraan & Plat -->
+                        <td>
+                            <div class="flex items-center gap-3">
+                                @if ($k->foto_url)
+                                    <img src="{{ asset($k->foto_url) }}" alt="{{ $k->nama_kendaraan }}"
+                                        class="w-11 h-11 object-cover rounded-xl border border-[#E9EFEF] shadow-2xs shrink-0" />
+                                @else
+                                    <div class="w-11 h-11 rounded-xl bg-[#0A0E2E]/5 border border-[#E9EFEF] flex items-center justify-center text-[#0A0E2E] shrink-0">
+                                        <x-heroicon-o-truck class="w-6 h-6 opacity-75" />
                                     </div>
                                 @endif
-                            </div>
-                        </div>
-                    </td>
-                    <td class="px-4 py-3 text-[#495465]">
-                        {{ $k->jenis_kendaraan }}
-                    </td>
-                    <td class="px-4 py-3">
-                        @if ($k->status === 'Tersedia')
-                            <x-ui.badge variant="success">Tersedia</x-ui.badge>
-                        @elseif ($k->status === 'Digunakan')
-                            <x-ui.badge variant="warning">Digunakan</x-ui.badge>
-                        @else
-                            <x-ui.badge variant="danger">Perawatan</x-ui.badge>
-                        @endif
-                    </td>
-                    <td class="px-4 py-3 text-[#495465]">
-                        {{ $k->tanggal_servis_terakhir ? $k->tanggal_servis_terakhir->format('d/m/Y') : '-' }}
-                    </td>
-                    <td class="px-4 py-3">
-                        <x-ui.badge :variant="$statusServis['variant']">
-                            {{ $statusServis['badge'] }}
-                        </x-ui.badge>
-                    </td>
-                    <td class="px-4 py-3 text-[#495465]">
-                        {{ $k->tanggal_pajak_stnk ? $k->tanggal_pajak_stnk->format('d/m/Y') : '-' }}
-                    </td>
-                    <td class="px-4 py-3 text-center whitespace-nowrap">
-                        <div class="flex items-center justify-center gap-1.5">
-                            <a href="{{ route('transportasi.show', $k->kendaraan_id) }}">
-                                <x-ui.button type="button" variant="outline" size="sm">
-                                    <x-heroicon-o-eye class="w-3.5 h-3.5" /> Detail
-                                </x-ui.button>
-                            </a>
-
-                            <div x-data="{
-                                dropdownOpen: false,
-                                top: 0,
-                                left: 0,
-                                openDropdown(e) {
-                                    const rect = e.currentTarget.getBoundingClientRect();
-                                    const dropdownHeight = 175;
-                                    const dropdownWidth = 176;
-
-                                    if (window.innerHeight - rect.bottom < dropdownHeight) {
-                                        this.top = Math.max(10, rect.top - dropdownHeight);
-                                    } else {
-                                        this.top = rect.bottom + 4;
-                                    }
-
-                                    this.left = Math.max(10, rect.right - dropdownWidth);
-                                    this.dropdownOpen = true;
-                                }
-                            }" class="inline-block">
-                                <button type="button" @click="openDropdown($event)"
-                                    class="w-8 h-8 rounded-lg flex items-center justify-center text-[#495465] hover:bg-[#F7F8F9] hover:text-[#181B21] transition-colors focus:outline-none border border-transparent hover:border-[#DEE2E7]"
-                                    title="Menu Aksi">
-                                    <x-heroicon-o-ellipsis-vertical class="w-5 h-5" />
-                                </button>
-
-                                <template x-teleport="body">
-                                    <div x-show="dropdownOpen" x-cloak
-                                        @click.outside="dropdownOpen = false"
-                                        @scroll.window="dropdownOpen = false"
-                                        x-transition:enter="transition ease-out duration-100"
-                                        x-transition:enter-start="transform opacity-0 scale-95"
-                                        x-transition:enter-end="transform opacity-100 scale-100"
-                                        x-transition:leave="transition ease-in duration-75"
-                                        x-transition:leave-start="transform opacity-100 scale-100"
-                                        x-transition:leave-end="transform opacity-0 scale-95"
-                                        :style="`top: ${top}px; left: ${left}px; position: fixed;`"
-                                        class="z-50 w-44 rounded-xl bg-white p-1.5 shadow-xl border border-[#DEE2E7] divide-y divide-[#DEE2E7]">
-
-                                        <div class="py-0.5 space-y-0.5">
-                                            <a href="{{ route('transportasi.show', $k->kendaraan_id) }}"
-                                                class="w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-[#181B21] hover:bg-[#F7F8F9] rounded-lg transition-colors text-left">
-                                                <x-heroicon-o-eye class="w-4 h-4 text-[#120F8B]" />
-                                                Detail Kendaraan
-                                            </a>
-
-                                            @if ($canServis)
-                                                <button type="button"
-                                                    @click="dropdownOpen = false; bukaCatatServis({{ Illuminate\Support\Js::from($k) }})"
-                                                    class="w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-[#181B21] hover:bg-[#F7F8F9] rounded-lg transition-colors text-left">
-                                                    <x-heroicon-o-wrench class="w-4 h-4 text-[#120F8B]" />
-                                                    Catat Servis
-                                                </button>
-                                            @endif
-
-                                        <button type="button"
-                                            @click="dropdownOpen = false; bukaRiwayat({{ $k->kendaraan_id }})"
-                                            class="w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-[#181B21] hover:bg-[#F7F8F9] rounded-lg transition-colors text-left">
-                                            <x-heroicon-o-document-text class="w-4 h-4 text-[#495465]" />
-                                            Riwayat Servis
-                                        </button>
+                                <div class="min-w-0">
+                                    <a href="{{ route('transportasi.show', $k->kendaraan_id) }}"
+                                        class="font-bold text-[#0A0E2E] text-sm hover:text-[#ffa916] transition-colors block truncate"
+                                        title="{{ $k->nama_kendaraan }}">
+                                        {{ $k->nama_kendaraan }}
+                                    </a>
+                                    <div class="flex items-center gap-1.5 mt-0.5">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-mono font-bold bg-[#0A0E2E] text-[#ffa916] shadow-2xs">
+                                            {{ $k->plat_nomor }}
+                                        </span>
+                                        @if ($k->merek_tipe || $k->tahun_perolehan)
+                                            <span class="text-xs text-[#6C7E75] truncate max-w-[140px]">
+                                                {{ $k->merek_tipe ?? '' }} {{ $k->tahun_perolehan ? '(' . $k->tahun_perolehan . ')' : '' }}
+                                            </span>
+                                        @endif
                                     </div>
+                                </div>
+                            </div>
+                        </td>
 
-                                    @if ($isAdmin)
-                                        <div class="pt-1 mt-0.5 space-y-0.5">
-                                            <button type="button"
-                                                @click="dropdownOpen = false; modalOpen = true; editData = {{ Illuminate\Support\Js::from($k) }}"
-                                                class="w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-[#181B21] hover:bg-[#F7F8F9] rounded-lg transition-colors text-left">
-                                                <x-heroicon-o-pencil-square class="w-4 h-4 text-[#495465]" />
-                                                Edit Kendaraan
-                                            </button>
+                        <!-- Jenis Angkutan -->
+                        <td>
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#F4F6F5] border border-[#E9EFEF] text-[#0A0E2E]">
+                                @if ($k->jenis_kendaraan === 'Motor')
+                                    Motor
+                                @elseif ($k->jenis_kendaraan === 'Bus/Minibus')
+                                    Minibus / Bus
+                                @elseif ($k->jenis_kendaraan === 'Mobil')
+                                    Mobil
+                                @else
+                                    {{ $k->jenis_kendaraan }}
+                                @endif
+                            </span>
+                        </td>
 
-                                            <div class="w-full" @click="dropdownOpen = false">
-                                                <x-ui.confirm-delete-form
-                                                    action="{{ route('transportasi.destroy', $k) }}"
-                                                    title="Hapus Kendaraan"
-                                                    message="Kendaraan '{{ $k->nama_kendaraan }}' ({{ $k->plat_nomor }}) akan dihapus permanen beserta riwayat servisnya."
-                                                    buttonClass="w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-[#EF4444] hover:bg-[#FEF7F7] rounded-lg transition-colors text-left">
-                                                    <x-heroicon-o-trash class="w-4 h-4 text-[#EF4444]" />
-                                                    Hapus Kendaraan
-                                                </x-ui.confirm-delete-form>
-                                            </div>
-                                        </div>
+                        <!-- Status Operasional -->
+                        <td>
+                            @if ($k->status === 'Tersedia')
+                                <span class="badge-table success">
+                                    <span class="badge-table-dot"></span>
+                                    <span>Tersedia</span>
+                                </span>
+                            @elseif ($k->status === 'Digunakan')
+                                <span class="badge-table warning">
+                                    <span class="badge-table-dot"></span>
+                                    <span>Digunakan</span>
+                                </span>
+                            @else
+                                <span class="badge-table danger">
+                                    <span class="badge-table-dot"></span>
+                                    <span>Dalam Perawatan</span>
+                                </span>
+                            @endif
+                        </td>
+
+                        <!-- Jadwal Servis Berkala -->
+                        <td>
+                            <div class="flex flex-col gap-0.5">
+                                @if ($statusServis['status'] === 'Aman')
+                                    <span class="badge-table success w-fit">
+                                        <span class="badge-table-dot"></span>
+                                        <span>{{ $statusServis['badge'] }}</span>
+                                    </span>
+                                @elseif ($statusServis['status'] === 'Mendekati Servis')
+                                    <span class="badge-table warning w-fit">
+                                        <span class="badge-table-dot"></span>
+                                        <span>{{ $statusServis['badge'] }}</span>
+                                    </span>
+                                @elseif ($statusServis['status'] === 'Jatuh Tempo')
+                                    <span class="badge-table danger w-fit">
+                                        <span class="badge-table-dot"></span>
+                                        <span>{{ $statusServis['badge'] }}</span>
+                                    </span>
+                                @else
+                                    <span class="badge-table info w-fit">
+                                        <span class="badge-table-dot"></span>
+                                        <span>{{ $statusServis['badge'] }}</span>
+                                    </span>
+                                @endif
+                                <span class="text-[11px] text-[#6C7E75] mt-0.5">
+                                    @if ($k->tanggal_servis_terakhir)
+                                        Servis: {{ $k->tanggal_servis_terakhir->format('d/m/Y') }}
+                                    @else
+                                        Belum pernah servis
+                                    @endif
+                                </span>
+                            </div>
+                        </td>
+
+                        <!-- Pajak STNK -->
+                        <td>
+                            @if ($k->tanggal_pajak_stnk)
+                                <div class="flex flex-col gap-0.5">
+                                    <span class="text-xs font-semibold text-[#0A0E2E]">
+                                        {{ $k->tanggal_pajak_stnk->format('d/m/Y') }}
+                                    </span>
+                                    @if ($statusPajak)
+                                        <span class="text-[10px] font-bold 
+                                            @if ($statusPajak['variant'] === 'danger') text-rose-600 
+                                            @elseif ($statusPajak['variant'] === 'warning') text-amber-600 
+                                            @else text-emerald-600 @endif">
+                                            {{ $statusPajak['keterangan'] }}
+                                        </span>
                                     @endif
                                 </div>
-                            </template>
-                        </div>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="9" class="px-4 py-6 text-center text-[#9EA9B9]">
-                        Belum ada data kendaraan.
-                    </td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
+                            @else
+                                <span class="text-xs text-[#6C7E75]">-</span>
+                            @endif
+                        </td>
 
-<div class="mt-4">{{ $kendaraanList->links() }}</div>
+                        <!-- Aksi Buttons -->
+                        <td class="text-center whitespace-nowrap">
+                            <div class="flex items-center justify-center gap-1.5">
+                                <!-- Detail Page -->
+                                <a href="{{ route('transportasi.show', $k->kendaraan_id) }}"
+                                    class="table-btn-action"
+                                    title="Lihat Detail & Spesifikasi">
+                                    <x-heroicon-o-eye class="w-4 h-4" />
+                                </a>
+
+                                <!-- Catat Servis -->
+                                @if ($canServis)
+                                    <button type="button"
+                                        @click="bukaCatatServis({{ Illuminate\Support\Js::from($k) }})"
+                                        class="table-btn-action hover:!border-amber-400 hover:!bg-amber-500 hover:!text-white"
+                                        title="Catat Servis Bengkel">
+                                        <x-heroicon-o-wrench-screwdriver class="w-4 h-4 text-amber-600 group-hover:text-white" />
+                                    </button>
+                                @endif
+
+                                <!-- Riwayat Servis -->
+                                <button type="button"
+                                    @click="bukaRiwayat({{ $k->kendaraan_id }})"
+                                    class="table-btn-action"
+                                    title="Riwayat Servis Kendaraan">
+                                    <x-heroicon-o-clipboard-document-list class="w-4 h-4" />
+                                </button>
+
+                                <!-- Edit & Hapus (Admin) -->
+                                @if ($isAdmin)
+                                    <button type="button"
+                                        @click="modalOpen = true; editData = {{ Illuminate\Support\Js::from($k) }}"
+                                        class="table-btn-action"
+                                        title="Edit Kendaraan">
+                                        <x-heroicon-o-pencil class="w-4 h-4" />
+                                    </button>
+
+                                    <x-ui.confirm-delete-form
+                                        action="{{ route('transportasi.destroy', $k) }}"
+                                        title="Hapus Kendaraan"
+                                        message="Kendaraan '{{ $k->nama_kendaraan }}' ({{ $k->plat_nomor }}) akan dihapus permanen beserta riwayat servisnya."
+                                        buttonClass="table-btn-action delete">
+                                        <x-heroicon-o-trash class="w-4 h-4" />
+                                    </x-ui.confirm-delete-form>
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="7" class="py-12 px-4 text-center">
+                            <div class="w-12 h-12 rounded-2xl bg-[#F4F6F5] border border-[#E9EFEF] flex items-center justify-center mx-auto text-[#6C7E75] mb-3">
+                                <x-heroicon-o-truck class="w-6 h-6 opacity-40" />
+                            </div>
+                            <p class="text-sm font-bold text-[#0A0E2E]">Belum ada data kendaraan</p>
+                            <p class="text-xs text-[#6C7E75] mt-1">Coba ubah kata kunci pencarian atau tambahkan kendaraan baru ke sistem.</p>
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Table Footer / Pagination -->
+    <div class="p-4 sm:p-5 border-t border-[#E9EFEF] bg-white">
+        {{ $kendaraanList->links() }}
+    </div>
+</div>

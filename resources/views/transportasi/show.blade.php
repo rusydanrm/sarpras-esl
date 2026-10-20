@@ -4,219 +4,302 @@
         editModalOpen: {{ $errors->hasAny(['nama_kendaraan', 'plat_nomor', 'jenis_kendaraan', 'interval_servis_bulan']) ? 'true' : 'false' }},
         editData: {{ Illuminate\Support\Js::from($kendaraan) }}
     }">
-        {{-- Link Navigasi Kembali --}}
-        <div class="mb-3">
-            <a href="{{ route('transportasi.index') }}" class="text-xs text-[#495465] hover:text-[#120F8B] hover:underline inline-flex items-center gap-1 font-medium">
-                <x-heroicon-o-arrow-left class="w-3.5 h-3.5" /> Kembali ke Transportasi
+        <!-- Breadcrumb Kembali ala Spark -->
+        <div class="mb-4">
+            <a href="{{ route('transportasi.index') }}"
+                class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white border border-[#E9EFEF] text-xs font-semibold text-[#0A0E2E] hover:bg-[#F4F6F5] transition-colors shadow-2xs">
+                <x-heroicon-o-arrow-left class="w-3.5 h-3.5" />
+                <span>Kembali ke Transportasi</span>
             </a>
         </div>
 
-        {{-- Flash Messages --}}
+        <!-- Success & Error Alerts -->
         @if (session('success'))
-            <x-ui.badge variant="success" class="block mb-4 !rounded-lg px-3 py-2 text-sm font-medium">
-                {{ session('success') }}
-            </x-ui.badge>
+            <div class="mb-5 p-4 bg-emerald-50 border border-emerald-200/80 rounded-2xl flex items-center gap-3 text-sm text-emerald-800 shadow-2xs">
+                <div class="w-8 h-8 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
+                    <x-heroicon-o-check-circle class="w-5 h-5" />
+                </div>
+                <div class="font-medium flex-1">{{ session('success') }}</div>
+            </div>
         @endif
 
         @if ($errors->any())
-            <div class="mb-4 p-3 bg-[#FEF7F7] text-[#EF4444] rounded-lg text-sm border border-[#EF4444]/20">
-                <ul class="list-disc list-inside">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+            <div class="mb-5 p-4 bg-rose-50 border border-rose-200/80 rounded-2xl flex items-start gap-3 text-sm text-rose-800 shadow-2xs">
+                <div class="w-8 h-8 rounded-xl bg-rose-100 flex items-center justify-center text-rose-600 shrink-0 mt-0.5">
+                    <x-heroicon-o-exclamation-triangle class="w-5 h-5" />
+                </div>
+                <div class="flex-1">
+                    <h4 class="font-bold mb-1">Terdapat beberapa kesalahan:</h4>
+                    <ul class="list-disc list-inside text-xs space-y-0.5 text-rose-700">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         @endif
 
-        {{-- Header Bar --}}
-        <div class="bg-white border border-[#DEE2E7] rounded-xl p-4 sm:p-5 mb-5 shadow-sm">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <!-- Hero Card Detail Kendaraan ala Spark Admin -->
+        <div class="bg-white border border-[#E9EFEF] rounded-2xl p-5 sm:p-6 mb-6 shadow-2xs">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 <div>
-                    <div class="text-xs text-[#495465] flex items-center gap-1">
-                        <span>Unit</span> <span class="font-semibold text-[#181B21]">Departemen Ekonomi Sumberdaya dan Lingkungan (ESL)</span>
+                    <div class="flex items-center gap-2 text-xs font-semibold text-[#6C7E75] mb-1">
+                        <span class="inline-block w-2 h-2 rounded-full bg-[#ffa916]"></span>
+                        <span>Departemen Ekonomi Sumberdaya dan Lingkungan (ESL)</span>
                     </div>
-                    <h1 class="text-2xl font-bold text-[#181B21] mt-0.5">{{ $kendaraan->nama_kendaraan }}</h1>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <h1 class="text-2xl font-extrabold text-[#0A0E2E] tracking-tight">{{ $kendaraan->nama_kendaraan }}</h1>
+                        <span class="px-2.5 py-1 bg-[#0A0E2E] text-[#ffa916] font-mono text-xs font-bold rounded-lg shadow-2xs">
+                            {{ $kendaraan->plat_nomor }}
+                        </span>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 mt-3 text-xs">
+                        <span class="px-2.5 py-1 rounded-lg bg-[#F4F6F5] border border-[#E9EFEF] font-semibold text-[#0A0E2E]">
+                            {{ $kendaraan->jenis_kendaraan }}
+                        </span>
+
+                        @if ($kendaraan->merek_tipe)
+                            <span class="text-[#6C7E75]">•</span>
+                            <span class="text-[#0A0E2E] font-medium">{{ $kendaraan->merek_tipe }}</span>
+                        @endif
+
+                        <span class="text-[#6C7E75]">•</span>
+                        <!-- Status Operasional Badge -->
+                        @if ($kendaraan->status === 'Tersedia')
+                            <span class="badge-table success">
+                                <span class="badge-table-dot"></span>
+                                <span>Tersedia</span>
+                            </span>
+                        @elseif ($kendaraan->status === 'Digunakan')
+                            <span class="badge-table warning">
+                                <span class="badge-table-dot"></span>
+                                <span>Digunakan</span>
+                            </span>
+                        @else
+                            <span class="badge-table danger">
+                                <span class="badge-table-dot"></span>
+                                <span>Dalam Perawatan</span>
+                            </span>
+                        @endif
+
+                        <!-- Kondisi Badge -->
+                        <span class="text-[#6C7E75]">•</span>
+                        @if ($kendaraan->kondisi === 'Baik')
+                            <span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                Kondisi: Baik
+                            </span>
+                        @elseif ($kendaraan->kondisi === 'Rusak Ringan')
+                            <span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                                Kondisi: Rusak Ringan
+                            </span>
+                        @else
+                            <span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-rose-50 text-rose-700 border border-rose-200">
+                                Kondisi: Rusak Berat
+                            </span>
+                        @endif
+                    </div>
                 </div>
-                <div class="flex items-center gap-2">
-                    <a href="{{ route('transportasi.index') }}"
-                        class="px-3.5 py-1.5 bg-white hover:bg-[#F7F8F9] text-[#495465] hover:text-[#181B21] border border-[#DEE2E7] text-xs font-semibold rounded-lg shadow-sm flex items-center gap-1.5 transition-colors">
-                        <x-heroicon-o-arrow-uturn-left class="w-3.5 h-3.5" /> Kembali
-                    </a>
+
+                <!-- Action Button Group -->
+                <div class="flex flex-wrap items-center gap-2.5">
+                    @if (in_array(auth()->user()->role, ['admin', 'teknisi', 'dosen_tendik']))
+                        <button type="button" @click="servisModalOpen = true"
+                            class="px-4 py-2 bg-[#ffa916] hover:bg-[#ffb738] text-[#0A0E2E] text-xs font-bold rounded-xl shadow-[0_4px_12px_rgba(255,169,22,0.25)] flex items-center gap-1.5 transition-all cursor-pointer">
+                            <x-heroicon-o-wrench-screwdriver class="w-4 h-4 stroke-2" />
+                            <span>Catat Servis</span>
+                        </button>
+                    @endif
+
+                    @if (auth()->user()->role === 'admin')
+                        <button type="button" @click="editModalOpen = true"
+                            class="px-3.5 py-2 bg-white hover:bg-[#F4F6F5] text-[#0A0E2E] border border-[#E9EFEF] text-xs font-semibold rounded-xl shadow-2xs flex items-center gap-1.5 transition-colors cursor-pointer">
+                            <x-heroicon-o-pencil class="w-4 h-4 text-[#6C7E75]" />
+                            <span>Edit Kendaraan</span>
+                        </button>
+                    @endif
+
                     <a href="{{ route('laporan.pdf') }}" target="_blank"
-                        class="px-3.5 py-1.5 bg-[#C8102E] hover:bg-[#A50D26] text-white text-xs font-semibold rounded-lg shadow-sm flex items-center gap-1.5 transition-colors">
-                        <x-heroicon-o-document-text class="w-3.5 h-3.5" /> Export PDF
+                        class="px-3.5 py-2 bg-[#C8102E] hover:bg-[#A50D26] text-white text-xs font-semibold rounded-xl shadow-2xs flex items-center gap-1.5 transition-colors">
+                        <x-heroicon-o-document-text class="w-4 h-4" />
+                        <span>Ekspor PDF</span>
                     </a>
                 </div>
-            </div>
-            <div class="mt-3 p-2.5 bg-[#F7F8F9] border border-[#DEE2E7] rounded-lg text-xs text-[#495465] flex flex-wrap items-center gap-2">
-                <span>Nomor Polisi:</span>
-                <span class="font-bold text-[#181B21] bg-white px-2 py-0.5 rounded border border-[#DEE2E7]">{{ $kendaraan->plat_nomor }}</span>
-                <span class="text-[#9EA9B9]">|</span>
-                <span>Jenis: <strong class="text-[#181B21]">{{ $kendaraan->jenis_kendaraan }}</strong></span>
-                @if ($kendaraan->merek_tipe)
-                    <span class="text-[#9EA9B9]">|</span>
-                    <span>Tipe: <strong class="text-[#181B21]">{{ $kendaraan->merek_tipe }}</strong></span>
-                @endif
-                <span class="text-[#9EA9B9]">|</span>
-                <span>Status:</span>
-                @if ($kendaraan->status === 'Tersedia')
-                    <x-ui.badge variant="success">Tersedia</x-ui.badge>
-                @elseif ($kendaraan->status === 'Digunakan')
-                    <x-ui.badge variant="warning">Digunakan</x-ui.badge>
-                @else
-                    <x-ui.badge variant="danger">Dalam Perawatan</x-ui.badge>
-                @endif
             </div>
         </div>
 
-        {{-- 2 Kolom Grid Layout --}}
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 text-sm">
-            
-            {{-- Kolom Kiri: Informasi Kendaraan (7 col) --}}
-            <div class="lg:col-span-7 space-y-5">
-                <div class="border border-[#DEE2E7] rounded-xl overflow-hidden bg-white shadow-sm">
-                    <div class="bg-[#120F8B] px-4 py-2.5 flex items-center justify-between text-white">
-                        <span class="text-xs font-bold uppercase tracking-wider">Informasi Kendaraan</span>
+        <!-- 2 Kolom Grid Layout ala Spark Admin -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 text-sm">
+
+            <!-- Kolom Kiri: Informasi Teknis & Valuasi (7 col) -->
+            <div class="lg:col-span-7 space-y-6">
+
+                <!-- Card 1: Spesifikasi & Identitas Teknis -->
+                <div class="bg-white border border-[#E9EFEF] rounded-2xl overflow-hidden shadow-2xs">
+                    <div class="p-4 sm:p-5 border-b border-[#E9EFEF] flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <div class="w-7 h-7 rounded-lg bg-[#0A0E2E]/5 border border-[#E9EFEF] flex items-center justify-center text-[#0A0E2E]">
+                                <x-heroicon-o-information-circle class="w-4 h-4" />
+                            </div>
+                            <h3 class="text-sm font-bold text-[#0A0E2E]">Spesifikasi & Identitas Teknis</h3>
+                        </div>
                         @if (auth()->user()->role === 'admin')
                             <button type="button" @click="editModalOpen = true"
-                                class="px-2.5 py-1 bg-white text-[#120F8B] hover:bg-[#F7F8F9] text-xs font-semibold rounded shadow-sm flex items-center gap-1 transition-colors cursor-pointer">
-                                <x-heroicon-o-pencil-square class="w-3.5 h-3.5" /> Edit Data
+                                class="text-xs font-semibold text-[#ffa916] hover:underline flex items-center gap-1 cursor-pointer">
+                                <x-heroicon-o-pencil-square class="w-3.5 h-3.5" />
+                                <span>Edit</span>
                             </button>
                         @endif
                     </div>
-                    <div class="p-4 sm:p-5 text-xs space-y-2.5">
-                        <div class="grid grid-cols-5 gap-2 py-1.5 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">Nama Kendaraan</span>
-                            <span class="col-span-3 font-semibold text-[#181B21] text-sm">{{ $kendaraan->nama_kendaraan }}</span>
+                    <div class="p-4 sm:p-5 text-xs divide-y divide-[#E9EFEF]">
+                        <div class="grid grid-cols-5 gap-2 py-2">
+                            <span class="col-span-2 text-[#6C7E75] font-semibold">Nama Kendaraan</span>
+                            <span class="col-span-3 font-bold text-[#0A0E2E] text-sm">{{ $kendaraan->nama_kendaraan }}</span>
                         </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1.5 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">Nomor Polisi (Plat)</span>
-                            <span class="col-span-3 font-bold text-[#181B21] font-mono text-sm">{{ $kendaraan->plat_nomor }}</span>
+                        <div class="grid grid-cols-5 gap-2 py-2">
+                            <span class="col-span-2 text-[#6C7E75] font-semibold">Nomor Polisi (Plat)</span>
+                            <span class="col-span-3 font-mono font-bold text-[#0A0E2E] text-sm">{{ $kendaraan->plat_nomor }}</span>
                         </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1.5 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">Jenis Angkutan</span>
-                            <span class="col-span-3 font-medium text-[#181B21]">{{ $kendaraan->jenis_kendaraan }}</span>
+                        <div class="grid grid-cols-5 gap-2 py-2">
+                            <span class="col-span-2 text-[#6C7E75] font-semibold">Jenis Kendaraan</span>
+                            <span class="col-span-3 font-medium text-[#0A0E2E]">{{ $kendaraan->jenis_kendaraan }}</span>
                         </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1.5 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">Model Kendaraan</span>
-                            <span class="col-span-3 text-[#181B21]">{{ $kendaraan->model_kendaraan ?: '-' }}</span>
+                        <div class="grid grid-cols-5 gap-2 py-2">
+                            <span class="col-span-2 text-[#6C7E75] font-semibold">Model Kendaraan</span>
+                            <span class="col-span-3 text-[#0A0E2E]">{{ $kendaraan->model_kendaraan ?: '-' }}</span>
                         </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1.5 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">Merek / Tipe / Spesifikasi</span>
-                            <span class="col-span-3 text-[#181B21]">{{ $kendaraan->merek_tipe ?: '-' }}</span>
+                        <div class="grid grid-cols-5 gap-2 py-2">
+                            <span class="col-span-2 text-[#6C7E75] font-semibold">Merek / Tipe / Spesifikasi</span>
+                            <span class="col-span-3 text-[#0A0E2E]">{{ $kendaraan->merek_tipe ?: '-' }}</span>
                         </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1.5 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">Kode Barang & NUP</span>
-                            <span class="col-span-3 font-mono text-[#181B21]">{{ $kendaraan->kode_barang ?: '-' }} / {{ $kendaraan->nup ?: '-' }}</span>
+                        <div class="grid grid-cols-5 gap-2 py-2">
+                            <span class="col-span-2 text-[#6C7E75] font-semibold">Kode Barang & NUP</span>
+                            <span class="col-span-3 font-mono text-[#0A0E2E]">{{ $kendaraan->kode_barang ?: '-' }} / {{ $kendaraan->nup ?: '-' }}</span>
                         </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1.5 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">No. Rangka</span>
-                            <span class="col-span-3 font-mono text-[#181B21]">{{ $kendaraan->no_rangka ?: '-' }}</span>
+                        <div class="grid grid-cols-5 gap-2 py-2">
+                            <span class="col-span-2 text-[#6C7E75] font-semibold">Nomor Rangka Mesin</span>
+                            <span class="col-span-3 font-mono text-[#0A0E2E]">{{ $kendaraan->no_rangka ?: '-' }}</span>
                         </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1.5 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">No. Mesin</span>
-                            <span class="col-span-3 font-mono text-[#181B21]">{{ $kendaraan->no_mesin ?: '-' }}</span>
+                        <div class="grid grid-cols-5 gap-2 py-2">
+                            <span class="col-span-2 text-[#6C7E75] font-semibold">Nomor Blok Mesin</span>
+                            <span class="col-span-3 font-mono text-[#0A0E2E]">{{ $kendaraan->no_mesin ?: '-' }}</span>
                         </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1.5 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">Tahun Perolehan</span>
-                            <div class="col-span-3 text-[#181B21]">
-                                <span class="font-semibold">{{ $kendaraan->tahun_perolehan ?: '-' }}</span>
-                                @if ($kendaraan->usia_teks)
-                                    <span class="text-[#EF4444] font-medium ml-1.5">(Umur {{ $kendaraan->usia_teks }})</span>
-                                @endif
-                            </div>
+                        <div class="grid grid-cols-5 gap-2 py-2">
+                            <span class="col-span-2 text-[#6C7E75] font-semibold">Penanggung Jawab / Driver</span>
+                            <span class="col-span-3 font-bold text-[#0A0E2E]">{{ $kendaraan->penanggung_jawab ?: 'Belum ditentukan' }}</span>
                         </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1.5 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">Harga Perolehan</span>
-                            <span class="col-span-3 font-semibold text-[#181B21]">Rp {{ number_format($kendaraan->harga_perolehan ?: 0, 0, ',', '.') }}</span>
-                        </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1.5 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">Sumber Dana</span>
-                            <span class="col-span-3 text-[#181B21]">{{ $kendaraan->sumber_dana ?: '-' }}</span>
-                        </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1.5 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">Kondisi Fisik</span>
-                            <div class="col-span-3">
-                                @if ($kendaraan->kondisi === 'Baik')
-                                    <x-ui.badge variant="success">Baik</x-ui.badge>
-                                @elseif ($kendaraan->kondisi === 'Rusak Ringan')
-                                    <x-ui.badge variant="warning">Rusak Ringan</x-ui.badge>
-                                @else
-                                    <x-ui.badge variant="danger">Rusak Berat</x-ui.badge>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1.5 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">Status Operasional</span>
-                            <div class="col-span-3">
-                                @if ($kendaraan->status === 'Tersedia')
-                                    <x-ui.badge variant="success">Tersedia & Siap Pakai</x-ui.badge>
-                                @elseif ($kendaraan->status === 'Digunakan')
-                                    <x-ui.badge variant="warning">Sedang Digunakan</x-ui.badge>
-                                @else
-                                    <x-ui.badge variant="danger">Dalam Perawatan / Bengkel</x-ui.badge>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1.5 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">Penanggung Jawab / Driver</span>
-                            <span class="col-span-3 font-semibold text-[#181B21]">{{ $kendaraan->penanggung_jawab ?: '-' }}</span>
-                        </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1.5 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">Pajak STNK Tahunan</span>
-                            <div class="col-span-3">
-                                <div class="font-semibold text-[#181B21]">
-                                    {{ $kendaraan->tanggal_pajak_stnk ? date('d/m/Y', strtotime($kendaraan->tanggal_pajak_stnk)) : '-' }}
-                                </div>
-                                @if ($kendaraan->stnk_countdown)
-                                    <div class="text-[11px] font-medium mt-0.5 {{ str_contains($kendaraan->stnk_countdown, 'Lewat') ? 'text-[#EF4444]' : 'text-[#120F8B]' }}">
-                                        {{ $kendaraan->stnk_countdown }}
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1.5">
-                            <span class="col-span-2 text-[#495465] font-medium">Keterangan / Catatan</span>
-                            <span class="col-span-3 text-[#495465]">{{ $kendaraan->keterangan ?: '-' }}</span>
+                        <div class="grid grid-cols-5 gap-2 py-2">
+                            <span class="col-span-2 text-[#6C7E75] font-semibold">Catatan Keterangan</span>
+                            <span class="col-span-3 text-[#6C7E75]">{{ $kendaraan->keterangan ?: '-' }}</span>
                         </div>
                     </div>
                 </div>
+
+                <!-- Card 2: Valuasi & Perolehan Aset -->
+                <div class="bg-white border border-[#E9EFEF] rounded-2xl overflow-hidden shadow-2xs">
+                    <div class="p-4 sm:p-5 border-b border-[#E9EFEF] flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <div class="w-7 h-7 rounded-lg bg-[#0A0E2E]/5 border border-[#E9EFEF] flex items-center justify-center text-[#0A0E2E]">
+                                <x-heroicon-o-banknotes class="w-4 h-4" />
+                            </div>
+                            <h3 class="text-sm font-bold text-[#0A0E2E]">Data Valuasi & Perolehan Aset</h3>
+                        </div>
+                    </div>
+                    <div class="p-4 sm:p-5">
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 mb-4">
+                            <div class="bg-[#F8FAF9] p-3 rounded-xl border border-[#E9EFEF]">
+                                <div class="text-[11px] text-[#6C7E75] font-medium">Tahun Perolehan</div>
+                                <div class="text-base font-extrabold text-[#0A0E2E] mt-0.5">{{ $kendaraan->tahun_perolehan ?: '-' }}</div>
+                                @if ($kendaraan->usia_teks)
+                                    <div class="text-[10px] text-rose-600 font-bold mt-0.5">Umur: {{ $kendaraan->usia_teks }}</div>
+                                @endif
+                            </div>
+                            <div class="bg-[#F8FAF9] p-3 rounded-xl border border-[#E9EFEF]">
+                                <div class="text-[11px] text-[#6C7E75] font-medium">Sumber Dana</div>
+                                <div class="text-base font-extrabold text-[#0A0E2E] mt-0.5">{{ $kendaraan->sumber_dana ?: '-' }}</div>
+                                <div class="text-[10px] text-[#6C7E75] mt-0.5">Masa: {{ $kendaraan->masa_manfaat ?: 7 }} Thn</div>
+                            </div>
+                            <div class="bg-[#F8FAF9] p-3 rounded-xl border border-[#E9EFEF]">
+                                <div class="text-[11px] text-[#6C7E75] font-medium">Harga Perolehan</div>
+                                <div class="text-sm font-extrabold text-[#0A0E2E] mt-0.5">
+                                    Rp {{ number_format($kendaraan->harga_perolehan ?: 0, 0, ',', '.') }}
+                                </div>
+                                <div class="text-[10px] text-[#6C7E75] mt-0.5">Nilai awal</div>
+                            </div>
+                            <div class="bg-[#F8FAF9] p-3 rounded-xl border border-[#E9EFEF]">
+                                <div class="text-[11px] text-[#6C7E75] font-medium">Nilai Buku Saat Ini</div>
+                                <div class="text-sm font-extrabold text-emerald-600 mt-0.5">
+                                    Rp {{ number_format($kendaraan->nilai_buku ?: 0, 0, ',', '.') }}
+                                </div>
+                                <div class="text-[10px] text-[#6C7E75] mt-0.5">Pasca penyusutan</div>
+                            </div>
+                        </div>
+
+                        <div class="text-xs text-[#6C7E75] bg-[#F4F6F5] p-3 rounded-xl border border-[#E9EFEF] flex items-center justify-between">
+                            <span>Akumulasi Penyusutan Aset:</span>
+                            <span class="font-bold text-[#0A0E2E]">Rp {{ number_format($kendaraan->akumulasi_penyusutan ?: 0, 0, ',', '.') }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Pajak STNK Tahunan -->
+                <div class="bg-white border border-[#E9EFEF] rounded-2xl p-5 shadow-2xs">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-2">
+                            <div class="w-7 h-7 rounded-lg bg-[#0A0E2E]/5 border border-[#E9EFEF] flex items-center justify-center text-[#0A0E2E]">
+                                <x-heroicon-o-identification class="w-4 h-4" />
+                            </div>
+                            <h3 class="text-sm font-bold text-[#0A0E2E]">Status Pajak STNK Tahunan</h3>
+                        </div>
+                        @if ($kendaraan->status_pajak)
+                            <span class="px-2.5 py-1 rounded-lg text-xs font-bold
+                                @if ($kendaraan->status_pajak['variant'] === 'danger') bg-rose-50 text-rose-700 border border-rose-200
+                                @elseif ($kendaraan->status_pajak['variant'] === 'warning') bg-amber-50 text-amber-700 border border-amber-200
+                                @else bg-emerald-50 text-emerald-700 border border-emerald-200 @endif">
+                                {{ $kendaraan->status_pajak['badge'] }}
+                            </span>
+                        @endif
+                    </div>
+
+                    <div class="flex items-center justify-between p-3.5 bg-[#F8FAF9] rounded-xl border border-[#E9EFEF] text-xs">
+                        <div>
+                            <span class="text-[#6C7E75]">Jatuh Tempo Pajak:</span>
+                            <span class="font-bold text-[#0A0E2E] ml-1">
+                                {{ $kendaraan->tanggal_pajak_stnk ? date('d/m/Y', strtotime($kendaraan->tanggal_pajak_stnk)) : 'Belum diatur' }}
+                            </span>
+                        </div>
+                        @if ($kendaraan->stnk_countdown)
+                            <div class="font-bold text-xs {{ str_contains($kendaraan->stnk_countdown, 'Lewat') ? 'text-rose-600' : 'text-emerald-600' }}">
+                                {{ $kendaraan->stnk_countdown }}
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
             </div>
 
-            {{-- Kolom Kanan: Foto Fisik, Jadwal Servis & Riwayat Perbaikan (5 col) --}}
-            <div class="lg:col-span-5 space-y-5">
-                
-                {{-- Kartu 1: Foto Kendaraan --}}
-                <div class="border border-[#DEE2E7] rounded-xl overflow-hidden bg-white shadow-sm">
-                    <div class="bg-[#120F8B] px-4 py-2.5 text-white flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase tracking-wider">Foto Fisik Kendaraan</span>
-                        <x-heroicon-o-camera class="w-4 h-4 text-white/80" />
+            <!-- Kolom Kanan: Foto Fisik, Servis & Riwayat (5 col) -->
+            <div class="lg:col-span-5 space-y-6">
+
+                <!-- Card Foto Kendaraan -->
+                <div class="bg-white border border-[#E9EFEF] rounded-2xl overflow-hidden shadow-2xs">
+                    <div class="p-4 sm:p-5 border-b border-[#E9EFEF] flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <div class="w-7 h-7 rounded-lg bg-[#0A0E2E]/5 border border-[#E9EFEF] flex items-center justify-center text-[#0A0E2E]">
+                                <x-heroicon-o-camera class="w-4 h-4" />
+                            </div>
+                            <h3 class="text-sm font-bold text-[#0A0E2E]">Foto Fisik Kendaraan</h3>
+                        </div>
                     </div>
-                    <div class="p-4 flex flex-col items-center justify-center bg-[#F7F8F9]/40 min-h-[200px]">
+                    <div class="p-5 flex flex-col items-center justify-center bg-[#F8FAF9]/50 min-h-[220px]">
                         @if ($kendaraan->foto_url)
                             <img src="{{ asset($kendaraan->foto_url) }}" alt="{{ $kendaraan->nama_kendaraan }}"
-                                class="max-h-56 w-auto rounded-lg object-contain border border-[#DEE2E7] shadow-xs" />
+                                class="max-h-60 w-auto rounded-xl object-contain border border-[#E9EFEF] shadow-xs" />
                         @else
-                            <div class="flex flex-col items-center justify-center py-6 text-[#9EA9B9]">
-                                <x-heroicon-o-truck class="w-16 h-16 mb-2 opacity-30" />
-                                <span class="text-xs font-semibold text-[#495465]">Belum ada foto fisik</span>
+                            <div class="flex flex-col items-center justify-center py-8 text-[#6C7E75]">
+                                <x-heroicon-o-truck class="w-14 h-14 mb-2 opacity-30 text-[#0A0E2E]" />
+                                <span class="text-xs font-semibold text-[#0A0E2E]">Belum ada foto fisik</span>
                                 @if (auth()->user()->role === 'admin')
-                                    <button type="button" @click="editModalOpen = true" class="text-[11px] text-[#120F8B] hover:underline font-medium mt-1">
+                                    <button type="button" @click="editModalOpen = true" class="text-xs text-[#ffa916] hover:underline font-bold mt-1.5 cursor-pointer">
                                         + Unggah Foto Kendaraan
                                     </button>
                                 @endif
@@ -225,94 +308,120 @@
                     </div>
                 </div>
 
-                {{-- Kartu 2: Jadwal Servis Rutin --}}
-                <div class="border border-[#DEE2E7] rounded-xl overflow-hidden bg-white shadow-sm">
-                    <div class="bg-[#120F8B] px-4 py-2.5 text-white flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase tracking-wider">Jadwal Servis Rutin</span>
-                        <x-heroicon-o-calendar-days class="w-4 h-4 text-white/80" />
-                    </div>
-                    <div class="p-4 sm:p-5 text-xs space-y-2.5">
-                        <div class="grid grid-cols-5 gap-2 py-1 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">Interval Rutin</span>
-                            <span class="col-span-3 font-semibold text-[#181B21]">
-                                Setiap {{ $kendaraan->interval_servis_bulan ?: 6 }} Bulan
-                            </span>
+                <!-- Card Jadwal Servis Rutin -->
+                <div class="bg-white border border-[#E9EFEF] rounded-2xl overflow-hidden shadow-2xs">
+                    <div class="p-4 sm:p-5 border-b border-[#E9EFEF] flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <div class="w-7 h-7 rounded-lg bg-[#0A0E2E]/5 border border-[#E9EFEF] flex items-center justify-center text-[#0A0E2E]">
+                                <x-heroicon-o-calendar-days class="w-4 h-4" />
+                            </div>
+                            <h3 class="text-sm font-bold text-[#0A0E2E]">Jadwal Servis Berkala</h3>
                         </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1 border-b border-gray-100">
-                            <span class="col-span-2 text-[#495465] font-medium">Servis Terakhir</span>
-                            <span class="col-span-3 text-[#181B21]">
+                        @if ($kendaraan->status_servis['status'] === 'Aman')
+                            <span class="badge-table success">
+                                <span class="badge-table-dot"></span>
+                                <span>{{ $kendaraan->status_servis['badge'] }}</span>
+                            </span>
+                        @elseif ($kendaraan->status_servis['status'] === 'Mendekati Servis')
+                            <span class="badge-table warning">
+                                <span class="badge-table-dot"></span>
+                                <span>{{ $kendaraan->status_servis['badge'] }}</span>
+                            </span>
+                        @elseif ($kendaraan->status_servis['status'] === 'Jatuh Tempo')
+                            <span class="badge-table danger">
+                                <span class="badge-table-dot"></span>
+                                <span>{{ $kendaraan->status_servis['badge'] }}</span>
+                            </span>
+                        @else
+                            <span class="badge-table info">
+                                <span class="badge-table-dot"></span>
+                                <span>{{ $kendaraan->status_servis['badge'] }}</span>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="p-4 sm:p-5 text-xs divide-y divide-[#E9EFEF]">
+                        <div class="grid grid-cols-5 gap-2 py-2">
+                            <span class="col-span-2 text-[#6C7E75] font-semibold">Interval Servis</span>
+                            <span class="col-span-3 font-bold text-[#0A0E2E]">Setiap {{ $kendaraan->interval_servis_bulan ?: 6 }} Bulan</span>
+                        </div>
+                        <div class="grid grid-cols-5 gap-2 py-2">
+                            <span class="col-span-2 text-[#6C7E75] font-semibold">Servis Terakhir</span>
+                            <span class="col-span-3 text-[#0A0E2E]">
                                 {{ $kendaraan->tanggal_servis_terakhir ? date('d/m/Y', strtotime($kendaraan->tanggal_servis_terakhir)) : 'Belum pernah' }}
                             </span>
                         </div>
-
-                        <div class="grid grid-cols-5 gap-2 py-1">
-                            <span class="col-span-2 text-[#495465] font-medium">Status Servis</span>
-                            <span class="col-span-3">
-                                <x-ui.badge :variant="$kendaraan->status_servis['variant']">
-                                    {{ $kendaraan->status_servis['badge'] }}
-                                </x-ui.badge>
+                        <div class="grid grid-cols-5 gap-2 py-2">
+                            <span class="col-span-2 text-[#6C7E75] font-semibold">Status Servis</span>
+                            <span class="col-span-3 text-[#6C7E75]">
+                                {{ $kendaraan->status_servis['keterangan'] }}
                             </span>
                         </div>
                     </div>
                 </div>
 
-                {{-- Kartu 3: Riwayat Servis & Perbaikan --}}
-                <div class="border border-[#DEE2E7] rounded-xl overflow-hidden bg-white shadow-sm">
-                    <div class="bg-[#120F8B] px-4 py-2.5 flex items-center justify-between text-white">
-                        <span class="text-xs font-bold uppercase tracking-wider">Riwayat Servis Kendaraan</span>
+                <!-- Card Riwayat Servis & Perbaikan Bengkel -->
+                <div class="bg-white border border-[#E9EFEF] rounded-2xl overflow-hidden shadow-2xs">
+                    <div class="p-4 sm:p-5 border-b border-[#E9EFEF] flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <div class="w-7 h-7 rounded-lg bg-[#0A0E2E]/5 border border-[#E9EFEF] flex items-center justify-center text-[#0A0E2E]">
+                                <x-heroicon-o-clipboard-document-list class="w-4 h-4" />
+                            </div>
+                            <h3 class="text-sm font-bold text-[#0A0E2E]">Riwayat Servis Bengkel</h3>
+                        </div>
                         @if (in_array(auth()->user()->role, ['admin', 'teknisi', 'dosen_tendik']))
                             <button type="button" @click="servisModalOpen = true"
-                                class="px-2.5 py-1 bg-white text-[#120F8B] hover:bg-[#F7F8F9] text-xs font-semibold rounded shadow-sm flex items-center gap-1 transition-colors cursor-pointer">
+                                class="px-2.5 py-1 bg-[#ffa916] hover:bg-[#ffb738] text-[#0A0E2E] text-xs font-bold rounded-lg shadow-2xs flex items-center gap-1 transition-colors cursor-pointer">
                                 <span>+</span> Catat Servis
                             </button>
                         @endif
                     </div>
-                    <div class="p-3">
+                    <div class="p-4">
                         @if ($kendaraan->servis && $kendaraan->servis->count() > 0)
-                            <div>
-                                <div class="overflow-x-auto max-h-72 overflow-y-auto">
-                                    <table class="w-full text-xs text-left">
-                                        <thead class="bg-[#F7F8F9] text-[#495465] text-[11px] border-b border-[#DEE2E7]">
-                                            <tr>
-                                                <th class="px-2.5 py-1.5 font-semibold">Tgl</th>
-                                                <th class="px-2.5 py-1.5 font-semibold">Tindakan / Bengkel</th>
-                                                <th class="px-2.5 py-1.5 font-semibold text-right">Biaya (Rp)</th>
+                            <div class="overflow-x-auto max-h-72 overflow-y-auto">
+                                <table class="w-full text-xs text-left">
+                                    <thead class="bg-[#F8FAF9] text-[#6C7E75] text-[11px] font-bold uppercase tracking-wider border-b border-[#E9EFEF]">
+                                        <tr>
+                                            <th class="px-3 py-2">Tgl</th>
+                                            <th class="px-3 py-2">Tindakan / Bengkel</th>
+                                            <th class="px-3 py-2 text-right">Biaya (Rp)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-[#E9EFEF] text-[11px]">
+                                        @foreach ($kendaraan->servis as $s)
+                                            <tr class="hover:bg-[#F4F6F5]/50 transition-colors">
+                                                <td class="px-3 py-2.5 text-[#6C7E75] whitespace-nowrap align-top font-medium">
+                                                    {{ $s->tanggal_servis ? $s->tanggal_servis->format('d/m/Y') : '-' }}
+                                                </td>
+                                                <td class="px-3 py-2.5">
+                                                    <div class="font-bold text-[#0A0E2E]">{{ $s->jenis_servis ?: 'Servis' }}</div>
+                                                    @if ($s->odometer_km)
+                                                        <div class="text-[10px] text-[#6C7E75] mt-0.5">{{ number_format($s->odometer_km, 0, ',', '.') }} KM</div>
+                                                    @endif
+                                                    @if ($s->bengkel_pelaksana || $s->catatan)
+                                                        <div class="text-[10px] text-[#6C7E75] mt-0.5">
+                                                            {{ $s->bengkel_pelaksana ?: $s->catatan }}
+                                                        </div>
+                                                    @endif
+                                                </td>
+                                                <td class="px-3 py-2.5 text-right font-bold text-[#0A0E2E] whitespace-nowrap align-top">
+                                                    {{ number_format($s->biaya ?: 0, 0, ',', '.') }}
+                                                </td>
                                             </tr>
-                                        </thead>
-                                        <tbody class="divide-y divide-gray-100 text-[11px]">
-                                            @foreach ($kendaraan->servis as $s)
-                                                <tr class="hover:bg-[#F7F8F9]/50">
-                                                    <td class="px-2.5 py-2 text-[#495465] whitespace-nowrap align-top">
-                                                        {{ $s->tanggal_servis ? $s->tanggal_servis->format('d/m/Y') : '-' }}
-                                                    </td>
-                                                    <td class="px-2.5 py-2">
-                                                        <div class="font-semibold text-[#181B21]">{{ $s->jenis_servis ?: 'Servis' }}</div>
-                                                        @if ($s->odometer_km)
-                                                            <div class="text-[11px] text-[#495465] mt-0.5">{{ number_format($s->odometer_km, 0, ',', '.') }} KM</div>
-                                                        @endif
-                                                        @if ($s->bengkel_pelaksana || $s->catatan)
-                                                            <div class="text-[10px] text-[#9EA9B9] mt-0.5">
-                                                                {{ $s->bengkel_pelaksana ?: $s->catatan }}
-                                                            </div>
-                                                        @endif
-                                                    </td>
-                                                    <td class="px-2.5 py-2 text-right font-semibold text-[#181B21] whitespace-nowrap align-top">
-                                                        {{ number_format($s->biaya ?: 0, 0, ',', '.') }}
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="mt-3 pt-2.5 border-t border-[#DEE2E7] flex justify-between items-center text-xs font-bold text-[#181B21]">
-                                    <span class="text-[#495465]">Total Biaya Servis:</span>
-                                    <span class="text-sm text-[#120F8B]">Rp {{ number_format($kendaraan->servis->sum('biaya'), 0, ',', '.') }}</span>
-                                </div>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mt-3 pt-3 border-t border-[#E9EFEF] flex justify-between items-center text-xs font-bold text-[#0A0E2E]">
+                                <span class="text-[#6C7E75]">Total Akumulasi Biaya:</span>
+                                <span class="text-sm text-[#0A0E2E] font-extrabold">Rp {{ number_format($kendaraan->servis->sum('biaya'), 0, ',', '.') }}</span>
                             </div>
                         @else
-                            <div class="py-8 text-center text-[#9EA9B9] text-xs">
-                                Belum ada riwayat servis tercatat untuk kendaraan ini.
+                            <div class="py-10 text-center text-[#6C7E75] text-xs">
+                                <div class="w-10 h-10 rounded-xl bg-[#F4F6F5] border border-[#E9EFEF] flex items-center justify-center mx-auto text-[#6C7E75] mb-2">
+                                    <x-heroicon-o-wrench class="w-5 h-5 opacity-40" />
+                                </div>
+                                <p class="font-semibold text-[#0A0E2E]">Belum ada riwayat servis tercatat</p>
+                                <p class="text-[11px] text-[#6C7E75] mt-0.5">Gunakan tombol "+ Catat Servis" di atas untuk mencatat servis bengkel.</p>
                             </div>
                         @endif
                     </div>
@@ -321,23 +430,35 @@
             </div>
         </div>
 
-        {{-- Modal Catat Servis Cepat --}}
+        <!-- Modal Catat Servis ala Spark Admin -->
         <x-ui.modal open="servisModalOpen" maxWidth="md" zIndex="z-[60]">
-            <h2 class="text-lg font-bold mb-1 text-[#181B21]">Catat Servis Kendaraan</h2>
-            <p class="text-xs text-[#495465] mb-4">{{ $kendaraan->nama_kendaraan }} ({{ $kendaraan->plat_nomor }})</p>
+            <div class="flex items-center justify-between pb-3 mb-4 border-b border-[#E9EFEF]">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-xs">
+                        <x-heroicon-o-wrench-screwdriver class="w-4 h-4" />
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-[#0A0E2E]">Catat Servis Kendaraan</h2>
+                        <p class="text-xs text-[#6C7E75]">{{ $kendaraan->nama_kendaraan }} ({{ $kendaraan->plat_nomor }})</p>
+                    </div>
+                </div>
+                <button type="button" @click="servisModalOpen = false" class="text-[#6C7E75] hover:text-[#0A0E2E] p-1 rounded-lg">
+                    <x-heroicon-o-x-mark class="w-5 h-5" />
+                </button>
+            </div>
 
             <form method="POST" action="{{ route('transportasi.servis', $kendaraan->kendaraan_id) }}">
                 @csrf
-                <div class="space-y-3">
+                <div class="space-y-3.5">
                     <div>
                         <x-ui.input type="date" label="Tanggal Servis" name="tanggal_servis" value="{{ date('Y-m-d') }}" required />
                     </div>
 
                     <div>
-                        <x-ui.select label="Jenis Servis" name="jenis_servis" required>
-                            <option value="Servis Rutin">Servis Rutin</option>
-                            <option value="Ganti Oli">Ganti Oli</option>
-                            <option value="Perbaikan Mesin">Perbaikan Mesin</option>
+                        <x-ui.select label="Jenis Tindakan Servis" name="jenis_servis" required>
+                            <option value="Servis Rutin">Servis Rutin Berkala</option>
+                            <option value="Ganti Oli">Ganti Oli & Filter</option>
+                            <option value="Perbaikan Mesin">Perbaikan Mesin / Transmisi</option>
                             <option value="Ganti Ban/Aki">Ganti Ban / Aki</option>
                             <option value="Uji Emisi / KIR">Uji Emisi / KIR</option>
                             <option value="Lainnya">Lainnya</option>
@@ -349,7 +470,7 @@
                             <x-ui.input type="number" label="Kilometer (Odometer)" name="odometer_km" placeholder="Contoh: 45000" min="0" />
                         </div>
                         <div>
-                            <x-ui.input type="number" label="Biaya (Rp)" name="biaya" placeholder="0" min="0" />
+                            <x-ui.input type="number" label="Biaya Servis (Rp)" name="biaya" placeholder="0" min="0" />
                         </div>
                     </div>
 
@@ -358,35 +479,55 @@
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-[#495465] mb-1">Catatan</label>
+                        <label class="block text-xs font-semibold text-[#495465] mb-1">Catatan Pekerjaan / Suku Cadang</label>
                         <textarea name="catatan" rows="2"
-                            class="w-full text-sm rounded-lg border border-[#DEE2E7] px-3 py-2 text-[#181B21] focus:outline-none focus:border-[#120F8B]"
-                            placeholder="Detail perbaikan / suku cadang diganti..."></textarea>
+                            class="w-full text-xs rounded-xl border border-[#E9EFEF] px-3.5 py-2.5 text-[#0A0E2E] focus:outline-hidden focus:border-[#ffa916] bg-white placeholder-[#6C7E75]"
+                            placeholder="Rincian perbaikan atau suku cadang diganti..."></textarea>
                     </div>
                 </div>
 
-                <div class="flex justify-end gap-2 mt-5">
-                    <x-ui.button type="button" variant="outline" @click="servisModalOpen = false">Batal</x-ui.button>
-                    <x-ui.button type="submit">Simpan</x-ui.button>
+                <div class="flex justify-end gap-2.5 mt-5 pt-3.5 border-t border-[#E9EFEF]">
+                    <button type="button" @click="servisModalOpen = false"
+                        class="px-4 py-2 bg-white border border-[#E9EFEF] hover:bg-[#F4F6F5] text-[#495465] font-semibold text-xs rounded-xl transition-colors cursor-pointer">
+                        Batal
+                    </button>
+                    <button type="submit"
+                        class="px-4 py-2 bg-[#ffa916] hover:bg-[#ffb738] text-[#0A0E2E] font-bold text-xs rounded-xl shadow-xs transition-colors cursor-pointer">
+                        Simpan Catatan Servis
+                    </button>
                 </div>
             </form>
         </x-ui.modal>
 
-        {{-- Modal Edit Kendaraan --}}
+        <!-- Modal Edit Kendaraan ala Spark Admin -->
         <x-ui.modal open="editModalOpen" maxWidth="2xl" zIndex="z-[60]">
-            <h2 class="text-lg font-bold mb-4 text-[#181B21]">Edit Kendaraan</h2>
+            <div class="flex items-center justify-between pb-3 mb-4 border-b border-[#E9EFEF]">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-xl bg-[#0A0E2E] text-[#ffa916] flex items-center justify-center shrink-0">
+                        <x-heroicon-o-pencil class="w-4 h-4" />
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-[#0A0E2E]">Edit Data Kendaraan Dinas</h2>
+                        <p class="text-xs text-[#6C7E75]">Perbarui identitas, perolehan, atau jadwal operasional</p>
+                    </div>
+                </div>
+                <button type="button" @click="editModalOpen = false" class="text-[#6C7E75] hover:text-[#0A0E2E] p-1 rounded-lg">
+                    <x-heroicon-o-x-mark class="w-5 h-5" />
+                </button>
+            </div>
 
             <form method="POST" enctype="multipart/form-data" action="{{ route('transportasi.update', $kendaraan->kendaraan_id) }}">
                 @csrf
                 @method('PUT')
 
-                <div class="space-y-4 max-h-[70vh] overflow-y-auto pr-1">
-                    {{-- Section 1: Identitas Utama --}}
-                    <div>
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-[#120F8B] border-b border-[#DEE2E7] pb-1 mb-3">
-                            1. Identitas Kendaraan
+                <div class="space-y-5 max-h-[70vh] overflow-y-auto pr-1">
+                    <!-- Section 1: Identitas Kendaraan -->
+                    <div class="bg-[#F8FAF9] p-4 rounded-2xl border border-[#E9EFEF]">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-[#0A0E2E] mb-3 flex items-center gap-1.5">
+                            <span class="w-5 h-5 rounded-md bg-[#0A0E2E] text-[#ffa916] inline-flex items-center justify-center text-[10px]">1</span>
+                            <span>Identitas Kendaraan</span>
                         </h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                             <div class="sm:col-span-2">
                                 <x-ui.input label="Nama Kendaraan" name="nama_kendaraan"
                                      value="{{ $kendaraan->nama_kendaraan }}" required />
@@ -439,18 +580,19 @@
                             <div class="sm:col-span-2">
                                 <label class="block text-xs font-semibold text-[#495465] mb-1">Unggah / Ganti Foto Kendaraan</label>
                                 <input type="file" name="foto" accept="image/*"
-                                    class="w-full text-xs text-[#181B21] file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#120F8B] file:text-white hover:file:bg-[#0D0B63] border border-[#DEE2E7] rounded-lg cursor-pointer bg-white p-1" />
-                                <span class="text-[11px] text-[#9EA9B9] mt-0.5 block">Format: JPG, PNG, WEBP (Maksimal 3MB). Kosongkan jika tidak ingin mengubah foto.</span>
+                                    class="w-full text-xs text-[#0A0E2E] file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#0A0E2E] file:text-[#ffa916] hover:file:bg-[#120F8B] border border-[#E9EFEF] rounded-xl cursor-pointer bg-white p-1" />
+                                <span class="text-[11px] text-[#6C7E75] mt-1 block">Format: JPG, PNG, WEBP (Maksimal 3MB). Kosongkan jika tidak ingin mengubah foto.</span>
                             </div>
                         </div>
                     </div>
 
-                    {{-- Section 2: Nilai & Perolehan --}}
-                    <div>
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-[#120F8B] border-b border-[#DEE2E7] pb-1 mb-3">
-                            2. Nilai & Perolehan
+                    <!-- Section 2: Nilai & Perolehan -->
+                    <div class="bg-[#F8FAF9] p-4 rounded-2xl border border-[#E9EFEF]">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-[#0A0E2E] mb-3 flex items-center gap-1.5">
+                            <span class="w-5 h-5 rounded-md bg-[#0A0E2E] text-[#ffa916] inline-flex items-center justify-center text-[10px]">2</span>
+                            <span>Nilai & Data Perolehan</span>
                         </h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                             <div>
                                 <x-ui.input type="number" label="Tahun Perolehan" name="tahun_perolehan"
                                     value="{{ $kendaraan->tahun_perolehan }}" />
@@ -473,12 +615,13 @@
                         </div>
                     </div>
 
-                    {{-- Section 3: Operasional & Servis --}}
-                    <div>
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-[#120F8B] border-b border-[#DEE2E7] pb-1 mb-3">
-                            3. Operasional & Servis
+                    <!-- Section 3: Operasional & Servis -->
+                    <div class="bg-[#F8FAF9] p-4 rounded-2xl border border-[#E9EFEF]">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-[#0A0E2E] mb-3 flex items-center gap-1.5">
+                            <span class="w-5 h-5 rounded-md bg-[#0A0E2E] text-[#ffa916] inline-flex items-center justify-center text-[10px]">3</span>
+                            <span>Operasional & Servis Berkala</span>
                         </h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                             <div>
                                 <x-ui.select label="Kondisi Fisik" name="kondisi" required>
                                     <option value="Baik" @selected($kendaraan->kondisi === 'Baik')>Baik</option>
@@ -518,15 +661,21 @@
                             <div class="sm:col-span-2">
                                 <label class="block text-xs font-semibold text-[#495465] mb-1">Keterangan Tambahan</label>
                                 <textarea name="keterangan" rows="2"
-                                    class="w-full text-sm rounded-lg border border-[#DEE2E7] px-3 py-2 text-[#181B21] focus:outline-none focus:border-[#120F8B]">{{ $kendaraan->keterangan }}</textarea>
+                                    class="w-full text-xs rounded-xl border border-[#E9EFEF] px-3.5 py-2.5 text-[#0A0E2E] focus:outline-hidden focus:border-[#ffa916] bg-white placeholder-[#6C7E75]">{{ $kendaraan->keterangan }}</textarea>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex justify-end gap-2 mt-5 pt-3 border-t border-[#DEE2E7]">
-                    <x-ui.button type="button" variant="outline" @click="editModalOpen = false">Batal</x-ui.button>
-                    <x-ui.button type="submit">Simpan Perubahan</x-ui.button>
+                <div class="flex justify-end gap-2.5 mt-5 pt-3.5 border-t border-[#E9EFEF]">
+                    <button type="button" @click="editModalOpen = false"
+                        class="px-4 py-2 bg-white border border-[#E9EFEF] hover:bg-[#F4F6F5] text-[#495465] font-semibold text-xs rounded-xl transition-colors cursor-pointer">
+                        Batal
+                    </button>
+                    <button type="submit"
+                        class="px-4 py-2 bg-[#ffa916] hover:bg-[#ffb738] text-[#0A0E2E] font-bold text-xs rounded-xl shadow-xs transition-colors cursor-pointer">
+                        Simpan Perubahan
+                    </button>
                 </div>
             </form>
         </x-ui.modal>

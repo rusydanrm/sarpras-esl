@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ruangan;
 use App\Models\Gedung;
+use App\Models\Barang;
 use Illuminate\Http\Request;
 
 class PortalController extends Controller
@@ -30,7 +31,11 @@ class PortalController extends Controller
             return view('portal._grid', compact('ruanganList'));
         }
 
-        return view('portal.index', compact('ruanganList', 'gedungList'));
+        $totalRuangan = Ruangan::count();
+        $totalBarang = Barang::sum('jumlah');
+        $totalNilaiSeluruh = Barang::sum('total_harga');
+
+        return view('portal.index', compact('ruanganList', 'gedungList', 'totalRuangan', 'totalBarang', 'totalNilaiSeluruh'));
     }
 
     public function show(Request $request, Ruangan $ruangan)

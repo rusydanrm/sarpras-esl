@@ -35,21 +35,9 @@
             <div class="h-20 px-6 flex items-center justify-between border-b border-white/10 shrink-0">
                 <a href="{{ route('dashboard') }}"
                     @click="sidebarOpen = false; window.location.href = '{{ route('dashboard') }}'"
-                    class="flex items-center gap-3 cursor-pointer group transition-transform duration-150 active:scale-95">
-                    <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center p-1.5 shadow-sm group-hover:border-[#ffa916]/50 transition-colors">
-                        <img src="{{ asset('images/logo_esl.png') }}" alt="Logo ESL"
-                            class="h-full w-full object-contain pointer-events-none">
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-1.5">
-                            <span class="text-sm font-extrabold tracking-wide text-white">SARPRAS ESL</span>
-                            <!-- Spark Asterisk Accent -->
-                            <svg class="w-3.5 h-3.5 text-[#ffa916]" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07L19.07 4.93" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="text-[10px] text-slate-400 font-medium tracking-tight">IPB University</div>
-                    </div>
+                    class="flex items-center cursor-pointer group transition-transform duration-150 active:scale-95">
+                    <img src="{{ asset('images/logo_esl.png') }}" alt="Logo Departemen ESL"
+                        class="h-9 sm:h-10 w-auto max-w-[200px] object-contain pointer-events-none group-hover:opacity-90 transition-opacity">
                 </a>
                 <button @click="sidebarOpen = false"
                     class="md:hidden w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-colors">✕</button>
@@ -171,14 +159,7 @@
                         ☰
                     </button>
 
-                    <!-- Quick Action Button (+ Ajukan ala + Create Spark Admin) -->
-                    @if (in_array($user->role, ['admin', 'dosen_tendik']))
-                        <a href="{{ route('pengajuan.index') }}"
-                            class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0A0E2E] text-white hover:bg-[#120F8B] text-xs font-bold transition-all shadow-sm shadow-[#0A0E2E]/15 cursor-pointer">
-                            <x-heroicon-o-plus class="w-3.5 h-3.5 text-[#ffa916]" />
-                            <span>Ajukan</span>
-                        </a>
-                    @endif
+
                 </div>
 
                 <!-- Centered Search Pill Input (Spark Admin Style) -->

@@ -10,12 +10,36 @@ use Illuminate\Http\Request;
 
 class MasterDataController extends Controller
 {
-    // Peta tipe URL -> [Model class, nama kolom utama, aturan validasi tambahan]
+    // Peta tipe URL -> [Model class, nama kolom utama, aturan validasi tambahan, icon, deskripsi]
     private array $peta = [
-        'gedung' => ['model' => Gedung::class, 'kolom' => 'nama_gedung', 'label' => 'Gedung'],
-        'jenis-barang' => ['model' => JenisBarang::class, 'kolom' => 'nama_jenis', 'label' => 'Jenis Barang'],
-        'vendor' => ['model' => Vendor::class, 'kolom' => 'nama_vendor', 'label' => 'Vendor'],
-        'unit' => ['model' => UnitBagian::class, 'kolom' => 'nama_unit', 'label' => 'Unit/Bagian'],
+        'gedung' => [
+            'model' => Gedung::class,
+            'kolom' => 'nama_gedung',
+            'label' => 'Gedung',
+            'icon' => 'building-office-2',
+            'deskripsi' => 'Gedung dan lokasi perkuliahan/laboratorium ESL',
+        ],
+        'jenis-barang' => [
+            'model' => JenisBarang::class,
+            'kolom' => 'nama_jenis',
+            'label' => 'Jenis Barang',
+            'icon' => 'tag',
+            'deskripsi' => 'Kategori inventaris & masa pakai standar aset',
+        ],
+        'vendor' => [
+            'model' => Vendor::class,
+            'kolom' => 'nama_vendor',
+            'label' => 'Vendor',
+            'icon' => 'building-storefront',
+            'deskripsi' => 'Daftar penyedia servis & rekanan pengadaan',
+        ],
+        'unit' => [
+            'model' => UnitBagian::class,
+            'kolom' => 'nama_unit',
+            'label' => 'Unit/Bagian',
+            'icon' => 'user-group',
+            'deskripsi' => 'Struktur divisi kerja & unit internal departemen',
+        ],
     ];
 
     public function index(Request $request)
@@ -28,13 +52,48 @@ class MasterDataController extends Controller
         }
 
         $konfig = $this->peta[$tab];
-        $data = $konfig['model']::orderBy($konfig['kolom'])->paginate(10)->withQueryString();
+        $query = $konfig['model']::query();
+
+        // Eager count relasi terkait untuk tabel informasi
+        if ($tab === 'gedung') {
+            $query->withCount('ruangan');
+        } elseif ($tab === 'jenis-barang') {
+            $query->withCount('barang');
+        } elseif ($tab === 'vendor') {
+            $query->withCount('pemeliharaan');
+        } elseif ($tab === 'unit') {
+            $query->withCount('users');
+        }
+
+        // Filter pencarian kata kunci
+        if ($request->filled('q')) {
+            $q = trim($request->q);
+            $query->where($konfig['kolom'], 'like', "%{$q}%");
+            if ($tab === 'vendor') {
+                $query->orWhere('kontak', 'like', "%{$q}%");
+            }
+        }
+
+        $data = $query->orderBy($konfig['kolom'])->paginate(10)->withQueryString();
+
+        // Hitung total tiap entitas master data untuk tab badge & KPI Bento cards
+        $tabCounts = [
+            'gedung' => Gedung::count(),
+            'jenis-barang' => JenisBarang::count(),
+            'vendor' => Vendor::count(),
+            'unit' => UnitBagian::count(),
+        ];
+
+        if ($request->ajax()) {
+            return view('master-data._table', compact('tab', 'data', 'konfig'));
+        }
 
         return view('master-data.index', [
             'tab' => $tab,
             'data' => $data,
             'konfig' => $konfig,
             'daftarTab' => $this->peta,
+            'tabCounts' => $tabCounts,
         ]);
     }
 

@@ -158,20 +158,6 @@
                         class="md:hidden w-10 h-10 rounded-xl border border-[#E9EFEF] flex items-center justify-center text-slate-600 hover:bg-[#F4F6F5] text-lg cursor-pointer">
                         ☰
                     </button>
-
-
-                </div>
-
-                <!-- Centered Search Pill Input (Spark Admin Style) -->
-                <div class="hidden md:flex flex-1 max-w-md mx-6">
-                    <div class="w-full relative flex items-center bg-[#F4F6F5] border border-[#E9EFEF] rounded-full px-4 py-2 focus-within:border-[#ffa916] focus-within:ring-2 focus-within:ring-[#ffa916]/20 transition-all shadow-[0_2px_6px_rgba(11,19,15,0.02)]">
-                        <input type="text" placeholder="Search anything in Sarpras ESL..."
-                            class="bg-transparent border-none text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-0 p-0 w-full"
-                            onkeydown="if(event.key === 'Enter'){ window.location.href = '{{ route('barang.index') }}?q=' + encodeURIComponent(this.value); }">
-                        <button type="button" class="text-slate-400 hover:text-[#120F8B] ml-2 shrink-0">
-                            <x-heroicon-o-magnifying-glass class="w-4 h-4" />
-                        </button>
-                    </div>
                 </div>
 
                 <div class="flex items-center gap-3">

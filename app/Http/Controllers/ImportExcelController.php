@@ -16,8 +16,9 @@ class ImportExcelController extends Controller
         $this->authorizeRole();
 
         $ruanganList = \App\Models\Ruangan::with('gedung')->orderBy('nama_ruang')->get();
+        $recentLogs = ImportLog::with('user')->latest('tanggal_upload')->take(5)->get();
 
-        return view('impor.index', compact('ruanganList'));
+        return view('impor.index', compact('ruanganList', 'recentLogs'));
     }
 
     public function preview(Request $request)

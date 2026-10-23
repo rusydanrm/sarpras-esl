@@ -17,6 +17,13 @@ class LaporanBarangExport implements FromCollection, WithHeadings, WithMapping
     {
         $query = Barang::with(['ruangan.gedung']);
 
+        if (!empty($this->filter['q'])) {
+            $query->where(function ($q) {
+                $q->where('nama_barang', 'like', '%' . $this->filter['q'] . '%')
+                  ->orWhere('kode_barang', 'like', '%' . $this->filter['q'] . '%')
+                  ->orWhere('merek_tipe', 'like', '%' . $this->filter['q'] . '%');
+            });
+        }
         if (!empty($this->filter['gedung_id'])) {
             $query->whereHas('ruangan', fn($q) => $q->where('gedung_id', $this->filter['gedung_id']));
         }

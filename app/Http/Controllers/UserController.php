@@ -21,6 +21,10 @@ class UserController extends Controller
             $query->where('role', $request->role);
         }
 
+        if ($request->filled('unit_id')) {
+            $query->where('unit_id', $request->unit_id);
+        }
+
         if ($request->filled('cari')) {
             $query->where(function ($q) use ($request) {
                 $q->where('nama', 'like', '%' . $request->cari . '%')
@@ -36,12 +40,30 @@ class UserController extends Controller
 
         $unitList = UnitBagian::orderBy('nama_unit')->get();
         $jumlahPending = User::where('status', 'pending')->count();
+        $totalPengguna = User::count();
+        $totalAktif = User::where('status', 'aktif')->count();
+        $totalNonaktif = User::where('status', 'nonaktif')->count();
+
+        $roleCounts = [
+            'admin' => User::where('role', 'admin')->count(),
+            'dosen_tendik' => User::where('role', 'dosen_tendik')->count(),
+            'teknisi' => User::where('role', 'teknisi')->count(),
+            'pimpinan' => User::where('role', 'pimpinan')->count(),
+        ];
 
         if ($request->ajax()) {
             return view('pengguna._table', compact('pengguna'));
         }
 
-        return view('pengguna.index', compact('pengguna', 'unitList', 'jumlahPending'));
+        return view('pengguna.index', compact(
+            'pengguna',
+            'unitList',
+            'jumlahPending',
+            'totalPengguna',
+            'totalAktif',
+            'totalNonaktif',
+            'roleCounts'
+        ));
     }
 
     public function store(Request $request)

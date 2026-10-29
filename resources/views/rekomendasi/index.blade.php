@@ -314,7 +314,7 @@
 
                     <x-ui.select label="Barang yang Diservis" name="barang_id" id="barang_id_select" required>
                         <option value="">- Pilih Barang -</option>
-                        @foreach ($barangList ?? [] as $b)
+                        @foreach ($barangList as $b)
                             <option value="{{ $b->barang_id }}">{{ $b->nama_barang }}
                                 ({{ $b->ruangan?->nama_ruang ?? 'Tanpa Ruangan' }})</option>
                         @endforeach
@@ -332,13 +332,13 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <x-ui.select label="Petugas Teknisi Internal" name="teknisi_id">
                             <option value="">- Pilih Teknisi -</option>
-                            @foreach ($teknisiList ?? [] as $t)
+                            @foreach ($teknisiList as $t)
                                 <option value="{{ $t->user_id }}">{{ $t->nama }}</option>
                             @endforeach
                         </x-ui.select>
                         <x-ui.select label="Vendor / Servis Eksternal" name="vendor_id">
                             <option value="">- Tidak ada (Internal) -</option>
-                            @foreach ($vendorList ?? [] as $v)
+                            @foreach ($vendorList as $v)
                                 <option value="{{ $v->vendor_id }}">{{ $v->nama_vendor }}</option>
                             @endforeach
                         </x-ui.select>

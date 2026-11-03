@@ -1,8 +1,11 @@
-<x-guest-layout>
+<x-guest-layout :show-header-logo="false">
     <div class="mb-6 text-center">
-        <!-- Spark Icon Badge -->
-        <div class="w-12 h-12 rounded-2xl bg-[#0A0E2E] text-[#ffa916] flex items-center justify-center mx-auto mb-3.5 shadow-xs">
-            <x-heroicon-o-arrow-right-on-rectangle class="w-6 h-6" />
+        <!-- Logo Departemen ESL -->
+        <div class="flex justify-center mb-5">
+            <a href="{{ route('portal.index') }}" class="inline-flex items-center justify-center group transition-transform active:scale-98">
+                <img src="{{ asset('images/logo_esl.png') }}" alt="Departemen Ekonomi Sumberdaya & Lingkungan"
+                    class="h-12 sm:h-14 w-auto max-w-[260px] sm:max-w-[300px] object-contain drop-shadow-xs group-hover:opacity-90 transition-opacity">
+            </a>
         </div>
         <h1 class="text-xl sm:text-2xl font-extrabold text-[#0A0E2E] tracking-tight">Masuk ke Akun</h1>
         <p class="text-xs text-[#6C7E75] font-medium mt-1">Gunakan akun civitas untuk mengakses sistem sarpras ESL</p>

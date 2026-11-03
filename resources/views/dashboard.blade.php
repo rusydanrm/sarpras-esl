@@ -219,7 +219,7 @@
             </div>
             <!-- END: LEFT AREA -->
 
-            <!-- RIGHT AREA: Total View Performance Donut + Promo CTA Card -->
+            <!-- RIGHT AREA: Total View Performance Donut -->
             <div class="lg:col-span-4 space-y-6">
 
                 <!-- Donut Chart: Total View Performance Style -->
@@ -260,30 +260,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Promo Banner CTA Card (Spark Admin Style) -->
-                <div class="promo-banner-card">
-                    <!-- Inline SVG geometric decoration (Amber 6-pointed star with rounded caps) -->
-                    <svg class="promo-banner-bg-shape" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g transform="translate(50,50)">
-                            <rect x="-6" y="-45" width="12" height="90" rx="6" ry="6" fill="#ffa916" />
-                            <rect x="-6" y="-45" width="12" height="90" rx="6" ry="6" fill="#ffa916" transform="rotate(60)" />
-                            <rect x="-6" y="-45" width="12" height="90" rx="6" ry="6" fill="#ffa916" transform="rotate(120)" />
-                        </g>
-                    </svg>
-
-                    <h3 class="promo-title">Perlu perbaikan atau pengadaan fasilitas baru?</h3>
-                    <p class="promo-desc">Ajukan sarpras dan fasilitas ruangan Anda dengan alur verifikasi resmi dan mudah dipantau.</p>
-                    @if (in_array(auth()->user()->role, ['admin', 'dosen_tendik']))
-                        <a href="{{ route('pengajuan.index') }}" class="btn-promo w-full">
-                            Ajukan Sarpras Sekarang
-                        </a>
-                    @else
-                        <a href="{{ route('barang.index') }}" class="btn-promo w-full">
-                            Eksplor Data Barang
-                        </a>
-                    @endif
                 </div>
 
             </div>

@@ -1,3 +1,4 @@
+@props(['showHeaderLogo' => true])
 <!DOCTYPE html>
 <html lang="id">
 
@@ -25,16 +26,18 @@
         <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-[#120F8B]/5 rounded-full blur-3xl"></div>
     </div>
 
-    <!-- Header Branding ala Spark -->
-    <header class="relative z-10 text-center mt-2 sm:mt-4">
-        <a href="{{ route('portal.index') }}" class="inline-flex items-center justify-center group transition-transform active:scale-98">
-            <img src="{{ asset('images/logo_esl.png') }}" alt="Departemen Ekonomi Sumberdaya & Lingkungan"
-                class="h-12 sm:h-14 w-auto max-w-[280px] sm:max-w-[320px] object-contain drop-shadow-xs group-hover:opacity-90 transition-opacity">
-        </a>
-    </header>
+    @if ($showHeaderLogo)
+        <!-- Header Branding ala Spark -->
+        <header class="relative z-10 text-center mt-2 sm:mt-4">
+            <a href="{{ route('portal.index') }}" class="inline-flex items-center justify-center group transition-transform active:scale-98">
+                <img src="{{ asset('images/logo_esl.png') }}" alt="Departemen Ekonomi Sumberdaya & Lingkungan"
+                    class="h-12 sm:h-14 w-auto max-w-[280px] sm:max-w-[320px] object-contain drop-shadow-xs group-hover:opacity-90 transition-opacity">
+            </a>
+        </header>
+    @endif
 
     <!-- Auth Card Container -->
-    <main class="relative z-10 w-full sm:max-w-md my-6">
+    <main class="relative z-10 w-full sm:max-w-md my-auto py-4">
         <div class="bg-white border border-[#E9EFEF] rounded-3xl shadow-[0_8px_30px_rgba(10,14,46,0.06)] p-6 sm:p-8 relative overflow-hidden">
             <!-- Decorative Spark Corner Accent -->
             <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#ffa916]/10 via-transparent to-transparent pointer-events-none rounded-tr-3xl"></div>

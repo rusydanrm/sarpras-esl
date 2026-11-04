@@ -101,14 +101,14 @@
                             <div class="flex items-center justify-center gap-1.5">
                                 @if ($isPending)
                                     <button type="button"
-                                        @click='editUser({{ Illuminate\Support\Js::from($p) }})'
+                                        @click="editUser({{ Illuminate\Support\Js::from($p) }})"
                                         class="px-2.5 py-1 rounded-xl bg-[#ffa916] text-[#0A0E2E] hover:bg-[#ffb738] text-xs font-bold shadow-2xs flex items-center gap-1 transition-all active:scale-95 cursor-pointer">
                                         <x-heroicon-o-check-badge class="w-3.5 h-3.5" />
                                         <span>Tinjau</span>
                                     </button>
                                 @else
                                     <button type="button"
-                                        @click='editUser({{ Illuminate\Support\Js::from($p) }})'
+                                        @click="editUser({{ Illuminate\Support\Js::from($p) }})"
                                         class="table-btn-action"
                                         title="Edit Pengguna">
                                         <x-heroicon-o-pencil-square class="w-4 h-4" />
@@ -118,10 +118,9 @@
                                 @if ($p->user_id !== auth()->id())
                                     <x-ui.confirm-delete-form action="{{ route('pengguna.destroy', $p) }}"
                                         title="Hapus Pengguna"
-                                        message="Akun '{{ $p->nama }}' akan dihapus permanen dan tidak bisa login lagi.">
-                                        <button type="submit" class="table-btn-action delete" title="Hapus Pengguna">
-                                            <x-heroicon-o-trash class="w-4 h-4" />
-                                        </button>
+                                        message="Akun '{{ $p->nama }}' akan dihapus permanen dan tidak bisa login lagi."
+                                        buttonClass="table-btn-action delete">
+                                        <x-heroicon-o-trash class="w-4 h-4" />
                                     </x-ui.confirm-delete-form>
                                 @endif
                             </div>
@@ -141,8 +140,9 @@
             </tbody>
         </table>
     </div>
-</div>
 
-<div class="mt-5">
-    {{ $pengguna->links() }}
+    <!-- Table Footer / Pagination -->
+    <div class="p-4 sm:p-5 border-t border-[#E9EFEF] bg-white">
+        {{ $pengguna->links() }}
+    </div>
 </div>

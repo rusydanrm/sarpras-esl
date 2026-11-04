@@ -17,9 +17,6 @@
             </thead>
             <tbody>
                 @forelse ($barang as $b)
-                    @php
-                        $initial = strtoupper(mb_substr($b->nama_barang, 0, 1));
-                    @endphp
                     <tr>
                         <td class="text-center text-[#6C7E75] text-xs font-semibold">
                             {{ $loop->iteration + ($barang->currentPage() - 1) * $barang->perPage() }}
@@ -27,22 +24,19 @@
 
                         <!-- Barang & Identitas -->
                         <td>
-                            <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 rounded-xl bg-[#0A0E2E]/5 border border-[#E9EFEF] flex items-center justify-center text-xs font-extrabold text-[#0A0E2E] shrink-0">
-                                    {{ $initial }}
+                            <div class="min-w-0 max-w-[220px]">
+                                <div class="font-bold text-[#0A0E2E] text-xs sm:text-sm truncate" title="{{ $b->nama_barang }}">
+                                    {{ $b->nama_barang }}
                                 </div>
-                                <div class="min-w-0">
-                                    <div class="font-bold text-[#0A0E2E] text-sm truncate max-w-[220px]" title="{{ $b->nama_barang }}">
-                                        {{ $b->nama_barang }}
-                                    </div>
-                                    <div class="flex items-center gap-1.5 mt-0.5">
-                                        @if ($b->kode_barang)
-                                            <span class="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-mono font-bold bg-[#0A0E2E] text-[#ffa916]">
-                                                {{ $b->kode_barang }}
-                                            </span>
-                                        @endif
-                                        @if ($b->nup)
-                                            <span class="text-xs text-[#6C7E75] font-mono">
+                                <div class="flex items-center gap-1.5 mt-0.5">
+                                    @if ($b->kode_barang)
+                                        <span class="text-[11px] font-mono text-[#6C7E75]">
+                                            {{ $b->kode_barang }}
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </td>
                                                 NUP: {{ $b->nup }}
                                             </span>
                                         @endif

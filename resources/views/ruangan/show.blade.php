@@ -187,30 +187,22 @@
                     </thead>
                     <tbody>
                         @forelse ($ruangan->barang as $b)
-                            @php
-                                $initial = strtoupper(mb_substr($b->nama_barang, 0, 1));
-                            @endphp
                             <tr>
                                 <td class="text-center text-[#6C7E75] text-xs font-semibold">
                                     {{ $loop->iteration }}
                                 </td>
                                 <td>
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-9 h-9 rounded-xl bg-[#0A0E2E]/5 border border-[#E9EFEF] flex items-center justify-center text-xs font-bold text-[#0A0E2E] shrink-0">
-                                            {{ $initial }}
-                                        </div>
-                                        <div class="min-w-0">
-                                            <a href="{{ route('rekomendasi.show', $b->barang_id) }}"
-                                                class="font-bold text-[#0A0E2E] hover:text-[#ffa916] transition-colors text-sm truncate block"
-                                                title="{{ $b->nama_barang }}">
-                                                {{ $b->nama_barang }}
-                                            </a>
-                                            @if ($b->merek_tipe)
-                                                <div class="text-xs text-[#6C7E75] truncate max-w-[180px]">
-                                                    {{ $b->merek_tipe }}
-                                                </div>
-                                            @endif
-                                        </div>
+                                    <div class="min-w-0 max-w-[240px]">
+                                        <a href="{{ route('rekomendasi.show', $b->barang_id) }}"
+                                            class="font-bold text-[#0A0E2E] hover:text-[#ffa916] transition-colors text-xs sm:text-sm truncate block"
+                                            title="{{ $b->nama_barang }}">
+                                            {{ $b->nama_barang }}
+                                        </a>
+                                        @if ($b->merek_tipe && !str_contains(strtolower($b->nama_barang), strtolower($b->merek_tipe)))
+                                            <div class="text-[11px] text-[#6C7E75] truncate mt-0.5">
+                                                {{ $b->merek_tipe }}
+                                            </div>
+                                        @endif
                                     </div>
                                 </td>
                                 <td>
@@ -267,7 +259,7 @@
                                         <button type="button"
                                             class="table-btn-action"
                                             title="Edit Barang"
-                                            @click='modalOpen = true; editData = {{ Illuminate\Support\Js::from($b) }}'>
+                                            @click="modalOpen = true; editData = {{ Illuminate\Support\Js::from($b) }}">
                                             <x-heroicon-o-pencil class="w-4 h-4" />
                                         </button>
 

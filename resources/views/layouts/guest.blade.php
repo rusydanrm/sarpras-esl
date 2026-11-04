@@ -1,4 +1,3 @@
-@props(['showHeaderLogo' => true])
 <!DOCTYPE html>
 <html lang="id">
 
@@ -26,7 +25,7 @@
         <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-[#120F8B]/5 rounded-full blur-3xl"></div>
     </div>
 
-    @if ($showHeaderLogo)
+    @if (($showHeaderLogo ?? true) && !request()->routeIs('login'))
         <!-- Header Branding ala Spark -->
         <header class="relative z-10 text-center mt-2 sm:mt-4">
             <a href="{{ route('portal.index') }}" class="inline-flex items-center justify-center group transition-transform active:scale-98">

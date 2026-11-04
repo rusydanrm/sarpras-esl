@@ -2,7 +2,6 @@
     <div x-data="{
         modalOpen: {{ $errors->any() ? 'true' : 'false' }},
         editData: null,
-        statusAktif: '{{ request('status', '') }}',
         editUser(user) {
             this.editData = user;
             this.modalOpen = true;
@@ -10,11 +9,6 @@
         tambahUser() {
             this.editData = null;
             this.modalOpen = true;
-        },
-        pilihStatus(st) {
-            this.statusAktif = st;
-            document.getElementById('inputStatus').value = st;
-            this.terapkanFilter();
         },
         async terapkanFilter() {
             const form = document.getElementById('filterForm');
@@ -26,9 +20,10 @@
         },
         resetFilter() {
             document.getElementById('inputCari').value = '';
+            document.getElementById('selectStatus').value = '';
             document.getElementById('selectRole').value = '';
             document.getElementById('selectUnit').value = '';
-            this.pilihStatus('');
+            this.terapkanFilter();
         },
         handleTableClick(e) {
             const link = e.target.closest('#tabelWrapper a.page-link, #tabelWrapper nav a');
@@ -201,64 +196,9 @@
             </div>
         </div>
 
-        <!-- Segmented Status Tabs ala Spark Admin -->
-        <div class="mb-4 overflow-x-auto pb-1 -mx-1 px-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden select-none">
-            <div class="flex items-center gap-2 min-w-max p-0.5">
-                <button type="button" @click="pilihStatus('')"
-                    :class="statusAktif === '' 
-                        ? 'bg-[#0A0E2E] text-white shadow-xs font-semibold' 
-                        : 'bg-white border border-[#E9EFEF] text-[#495465] hover:bg-[#F4F6F5] hover:text-[#0A0E2E] font-medium'"
-                    class="px-3.5 py-2 rounded-xl text-xs transition-all flex items-center gap-2 cursor-pointer shadow-2xs">
-                    <span>Semua Status</span>
-                    <span :class="statusAktif === '' ? 'bg-[#ffa916] text-[#0A0E2E] font-bold' : 'bg-[#F4F6F5] text-[#6C7E75] font-semibold'"
-                        class="text-[11px] px-2 py-0.5 rounded-full transition-colors">
-                        {{ $totalPengguna }}
-                    </span>
-                </button>
-
-                <button type="button" @click="pilihStatus('pending')"
-                    :class="statusAktif === 'pending' 
-                        ? 'bg-[#0A0E2E] text-white shadow-xs font-semibold' 
-                        : 'bg-white border border-[#E9EFEF] text-[#495465] hover:bg-[#F4F6F5] hover:text-[#0A0E2E] font-medium'"
-                    class="px-3.5 py-2 rounded-xl text-xs transition-all flex items-center gap-2 cursor-pointer shadow-2xs">
-                    <span>Menunggu Persetujuan</span>
-                    <span :class="statusAktif === 'pending' ? 'bg-[#ffa916] text-[#0A0E2E] font-bold' : 'bg-amber-100 text-amber-700 font-bold'"
-                        class="text-[11px] px-2 py-0.5 rounded-full transition-colors">
-                        {{ $jumlahPending }}
-                    </span>
-                </button>
-
-                <button type="button" @click="pilihStatus('aktif')"
-                    :class="statusAktif === 'aktif' 
-                        ? 'bg-[#0A0E2E] text-white shadow-xs font-semibold' 
-                        : 'bg-white border border-[#E9EFEF] text-[#495465] hover:bg-[#F4F6F5] hover:text-[#0A0E2E] font-medium'"
-                    class="px-3.5 py-2 rounded-xl text-xs transition-all flex items-center gap-2 cursor-pointer shadow-2xs">
-                    <span>Aktif</span>
-                    <span :class="statusAktif === 'aktif' ? 'bg-[#ffa916] text-[#0A0E2E] font-bold' : 'bg-[#F4F6F5] text-[#6C7E75] font-semibold'"
-                        class="text-[11px] px-2 py-0.5 rounded-full transition-colors">
-                        {{ $totalAktif }}
-                    </span>
-                </button>
-
-                <button type="button" @click="pilihStatus('nonaktif')"
-                    :class="statusAktif === 'nonaktif' 
-                        ? 'bg-[#0A0E2E] text-white shadow-xs font-semibold' 
-                        : 'bg-white border border-[#E9EFEF] text-[#495465] hover:bg-[#F4F6F5] hover:text-[#0A0E2E] font-medium'"
-                    class="px-3.5 py-2 rounded-xl text-xs transition-all flex items-center gap-2 cursor-pointer shadow-2xs">
-                    <span>Nonaktif</span>
-                    <span :class="statusAktif === 'nonaktif' ? 'bg-[#ffa916] text-[#0A0E2E] font-bold' : 'bg-[#F4F6F5] text-[#6C7E75] font-semibold'"
-                        class="text-[11px] px-2 py-0.5 rounded-full transition-colors">
-                        {{ $totalNonaktif }}
-                    </span>
-                </button>
-            </div>
-        </div>
-
         <!-- Filter Toolbar ala Spark Admin Header Control -->
         <div class="bg-white rounded-2xl border border-[#E9EFEF] p-3.5 sm:p-4 mb-5 shadow-[0_2px_12px_rgba(10,14,46,0.03)]">
             <form id="filterForm" method="GET" @submit.prevent class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-                <input type="hidden" name="status" id="inputStatus" value="{{ request('status') }}">
-
                 <!-- Search Input Box -->
                 <div class="relative flex-1 min-w-[240px]">
                     <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#6C7E75]">
@@ -271,6 +211,17 @@
                 </div>
 
                 <div class="flex flex-wrap items-center gap-2.5">
+                    <!-- Filter Status -->
+                    <div class="w-full sm:w-44">
+                        <select name="status" id="selectStatus" x-on:change="terapkanFilter()"
+                            class="w-full px-3 py-2 bg-[#F4F6F5] border border-transparent focus:border-[#ffa916] focus:bg-white rounded-xl text-xs font-medium text-[#0A0E2E] transition-all outline-hidden cursor-pointer">
+                            <option value="">Semua Status ({{ $totalPengguna }})</option>
+                            <option value="pending" @selected(request('status') === 'pending')>Menunggu Persetujuan ({{ $jumlahPending }})</option>
+                            <option value="aktif" @selected(request('status') === 'aktif')>Aktif ({{ $totalAktif }})</option>
+                            <option value="nonaktif" @selected(request('status') === 'nonaktif')>Nonaktif ({{ $totalNonaktif }})</option>
+                        </select>
+                    </div>
+
                     <!-- Filter Role -->
                     <div class="w-full sm:w-44">
                         <select name="role" id="selectRole" x-on:change="terapkanFilter()"
@@ -283,6 +234,29 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <!-- Filter Unit -->
+                    <div class="w-full sm:w-48">
+                        <select name="unit_id" id="selectUnit" x-on:change="terapkanFilter()"
+                            class="w-full px-3 py-2 bg-[#F4F6F5] border border-transparent focus:border-[#ffa916] focus:bg-white rounded-xl text-xs font-medium text-[#0A0E2E] transition-all outline-hidden cursor-pointer">
+                            <option value="">Semua Unit/Bagian</option>
+                            @foreach ($unitList as $u)
+                                <option value="{{ $u->unit_id }}" @selected(request('unit_id') == $u->unit_id)>
+                                    {{ $u->nama_unit }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Reset Button -->
+                    <button type="button" @click="resetFilter()"
+                        class="px-3 py-2 rounded-xl text-xs font-semibold text-[#6C7E75] hover:text-[#0A0E2E] hover:bg-[#F4F6F5] border border-[#E9EFEF] transition-colors flex items-center gap-1 cursor-pointer">
+                        <x-heroicon-o-arrow-path class="w-3.5 h-3.5" />
+                        <span>Reset</span>
+                    </button>
+                </div>
+            </form>
+        </div>
 
                     <!-- Filter Unit -->
                     <div class="w-full sm:w-48">

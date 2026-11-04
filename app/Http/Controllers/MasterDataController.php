@@ -26,20 +26,6 @@ class MasterDataController extends Controller
             'icon' => 'tag',
             'deskripsi' => 'Kategori inventaris & masa pakai standar aset',
         ],
-        'vendor' => [
-            'model' => Vendor::class,
-            'kolom' => 'nama_vendor',
-            'label' => 'Vendor',
-            'icon' => 'building-storefront',
-            'deskripsi' => 'Daftar penyedia servis & rekanan pengadaan',
-        ],
-        'unit' => [
-            'model' => UnitBagian::class,
-            'kolom' => 'nama_unit',
-            'label' => 'Unit/Bagian',
-            'icon' => 'user-group',
-            'deskripsi' => 'Struktur divisi kerja & unit internal departemen',
-        ],
     ];
 
     public function index(Request $request)
@@ -59,19 +45,12 @@ class MasterDataController extends Controller
             $query->withCount('ruangan');
         } elseif ($tab === 'jenis-barang') {
             $query->withCount('barang');
-        } elseif ($tab === 'vendor') {
-            $query->withCount('pemeliharaan');
-        } elseif ($tab === 'unit') {
-            $query->withCount('users');
         }
 
         // Filter pencarian kata kunci
         if ($request->filled('q')) {
             $q = trim($request->q);
             $query->where($konfig['kolom'], 'like', "%{$q}%");
-            if ($tab === 'vendor') {
-                $query->orWhere('kontak', 'like', "%{$q}%");
-            }
         }
 
         $data = $query->orderBy($konfig['kolom'])->paginate(10)->withQueryString();
@@ -80,8 +59,6 @@ class MasterDataController extends Controller
         $tabCounts = [
             'gedung' => Gedung::count(),
             'jenis-barang' => JenisBarang::count(),
-            'vendor' => Vendor::count(),
-            'unit' => UnitBagian::count(),
         ];
 
         if ($request->ajax()) {

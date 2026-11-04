@@ -49,7 +49,7 @@
                     </span>
                     <h1 class="text-2xl font-bold tracking-tight text-[#0A0E2E]">Master Data Referensi</h1>
                 </div>
-                <p class="text-xs text-[#6C7E75] font-medium">Pusat pengaturan data rujukan gedung, kategori aset, vendor rekanan, dan unit bagian ESL</p>
+                <p class="text-xs text-[#6C7E75] font-medium">Pusat pengaturan data rujukan gedung dan jenis kategori aset sarpras ESL</p>
             </div>
 
             <div class="flex items-center gap-2.5">
@@ -86,8 +86,8 @@
             </div>
         @endif
 
-        <!-- 4 Bento Metric Cards ala Spark Admin (1 for each Master Entity) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <!-- 2 Bento Metric Cards ala Spark Admin (Gedung & Jenis Barang) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
             @foreach ($daftarTab as $key => $meta)
                 @php
                     $isAktif = ($tab === $key);
@@ -215,14 +215,6 @@
                                     x-bind:value="editData ? editData.masa_pakai_tahun : 5" min="1" max="50"
                                     placeholder="Contoh: 5" required />
                                 <p class="text-[11px] text-[#6C7E75] mt-1">Digunakan untuk acuan perhitungan rekomendasi pemeliharaan/peremajaan aset.</p>
-                            </div>
-                        @endif
-
-                        @if ($tab === 'vendor')
-                            <div>
-                                <x-ui.input label="Kontak / No. Telepon / Email" name="kontak"
-                                    x-bind:value="editData ? editData.kontak : ''"
-                                    placeholder="Contoh: 0812-3456-7890 / info@vendor.co.id" />
                             </div>
                         @endif
                     </div>

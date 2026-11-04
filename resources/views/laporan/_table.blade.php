@@ -15,45 +15,31 @@
             </thead>
             <tbody>
                 @forelse ($preview as $b)
-                    @php
-                        $initial = strtoupper(mb_substr($b->nama_barang, 0, 1));
-                    @endphp
                     <tr>
                         <td class="text-center text-[#6C7E75] text-xs font-semibold">
                             {{ $loop->iteration + ($preview->currentPage() - 1) * $preview->perPage() }}
                         </td>
                         <td>
-                            <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 rounded-xl bg-[#0A0E2E]/5 border border-[#E9EFEF] flex items-center justify-center text-xs font-bold text-[#0A0E2E] shrink-0">
-                                    {{ $initial }}
+                            <div class="min-w-0 max-w-[240px]">
+                                <div class="font-bold text-[#0A0E2E] text-xs sm:text-sm truncate" title="{{ $b->nama_barang }}">
+                                    {{ $b->nama_barang }}
                                 </div>
-                                <div class="min-w-0">
-                                    <div class="font-bold text-[#0A0E2E] text-sm truncate max-w-xs" title="{{ $b->nama_barang }}">
-                                        {{ $b->nama_barang }}
-                                    </div>
-                                    <div class="flex flex-wrap items-center gap-1.5 mt-0.5 text-xs text-[#6C7E75]">
-                                        @if ($b->kode_barang)
-                                            <span class="font-mono text-[11px] bg-[#F4F6F5] px-1.5 py-0.5 rounded text-[#495465] font-semibold border border-[#E9EFEF]/60">
-                                                {{ $b->kode_barang }}
-                                            </span>
-                                        @endif
-                                        @if ($b->nup)
-                                            <span class="text-[10px] text-[#9EA9B9]">NUP: {{ $b->nup }}</span>
-                                        @endif
-                                        @if ($b->merek_tipe)
-                                            <span class="text-[#6C7E75] truncate max-w-[140px]">• {{ $b->merek_tipe }}</span>
-                                        @endif
-                                    </div>
-                                </div>
+                                @if ($b->kode_barang)
+                                    <span class="text-[11px] font-mono text-[#6C7E75] block mt-0.5">
+                                        {{ $b->kode_barang }}
+                                    </span>
+                                @endif
                             </div>
                         </td>
                         <td>
-                            @if ($b->ruangan)
-                                <div class="font-semibold text-xs text-[#0A0E2E]">{{ $b->ruangan->nama_ruang }}</div>
-                                <div class="text-[11px] text-[#6C7E75]">{{ $b->ruangan->gedung?->nama_gedung ?? '-' }}</div>
-                            @else
-                                <span class="text-[#9EA9B9] text-xs">-</span>
-                            @endif
+                            <div class="max-w-[210px] xl:max-w-[260px]">
+                                @if ($b->ruangan)
+                                    <div class="font-semibold text-xs text-[#0A0E2E] truncate" title="{{ $b->ruangan->nama_ruang }}">{{ $b->ruangan->nama_ruang }}</div>
+                                    <div class="text-[11px] text-[#6C7E75] truncate">{{ $b->ruangan->gedung?->nama_gedung ?? '-' }}</div>
+                                @else
+                                    <span class="text-[#9EA9B9] text-xs">-</span>
+                                @endif
+                            </div>
                         </td>
                         <td class="text-center font-bold text-xs text-[#0A0E2E]">
                             {{ number_format($b->jumlah, 0, ',', '.') }} <span class="text-[11px] font-normal text-[#6C7E75]">{{ $b->satuan ?? 'Unit' }}</span>
@@ -110,8 +96,9 @@
             </tbody>
         </table>
     </div>
-</div>
 
-<div class="mt-5">
-    {{ $preview->links() }}
+    <!-- Table Footer / Pagination -->
+    <div class="p-4 sm:p-5 border-t border-[#E9EFEF] bg-white">
+        {{ $preview->links() }}
+    </div>
 </div>

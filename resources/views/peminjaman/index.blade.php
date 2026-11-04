@@ -5,13 +5,7 @@
         tolakModalOpen: false,
         tolakPeminjamanId: null,
         selectedPeminjaman: null,
-        statusAktif: '{{ request('status', '') }}',
         jenis: 'Ruangan',
-        pilihStatus(s) {
-            this.statusAktif = s;
-            document.getElementById('inputStatus').value = s;
-            this.terapkanFilter();
-        },
         async terapkanFilter() {
             const form = document.getElementById('filterForm');
             const params = new URLSearchParams(new FormData(form)).toString();
@@ -22,8 +16,9 @@
         },
         resetFilter() {
             document.getElementById('inputCari').value = '';
+            document.getElementById('selectStatus').value = '';
             document.getElementById('selectJenis').value = '';
-            this.pilihStatus('');
+            this.terapkanFilter();
         },
         bukaDetail(data) {
             this.selectedPeminjaman = data;
@@ -99,44 +94,9 @@
             </div>
         @endif
 
-        {{-- Status Tabs / Pills ala Spark Admin --}}
-        <div class="mb-4 overflow-x-auto pb-1 -mx-1 px-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden select-none">
-            <div class="flex items-center gap-2 min-w-max p-0.5">
-                <button type="button"
-                    @click="pilihStatus('')"
-                    :class="statusAktif === '' 
-                        ? 'bg-[#0A0E2E] text-white shadow-xs font-semibold' 
-                        : 'bg-white border border-[#E9EFEF] text-[#495465] hover:bg-[#F4F6F5] hover:text-[#0A0E2E] font-medium'"
-                    class="px-3.5 py-2 rounded-xl text-xs transition-all flex items-center gap-2 cursor-pointer shadow-2xs">
-                    <span>Semua Status</span>
-                    <span :class="statusAktif === '' ? 'bg-[#ffa916] text-[#0A0E2E] font-bold' : 'bg-[#F4F6F5] text-[#6C7E75] font-semibold'"
-                        class="text-[11px] px-2 py-0.5 rounded-full transition-colors">
-                        {{ $totalSemua }}
-                    </span>
-                </button>
-
-                @foreach (['Diajukan', 'Disetujui', 'Dikembalikan', 'Ditolak'] as $st)
-                    <button type="button"
-                        @click="pilihStatus('{{ $st }}')"
-                        :class="statusAktif === '{{ $st }}' 
-                            ? 'bg-[#0A0E2E] text-white shadow-xs font-semibold' 
-                            : 'bg-white border border-[#E9EFEF] text-[#495465] hover:bg-[#F4F6F5] hover:text-[#0A0E2E] font-medium'"
-                        class="px-3.5 py-2 rounded-xl text-xs transition-all flex items-center gap-2 cursor-pointer shadow-2xs">
-                        <span>{{ $st }}</span>
-                        <span :class="statusAktif === '{{ $st }}' ? 'bg-[#ffa916] text-[#0A0E2E] font-bold' : 'bg-[#F4F6F5] text-[#6C7E75] font-semibold'"
-                            class="text-[11px] px-2 py-0.5 rounded-full transition-colors">
-                            {{ $statusCounts[$st] ?? 0 }}
-                        </span>
-                    </button>
-                @endforeach
-            </div>
-        </div>
-
         <!-- Filter Toolbar ala Spark Admin Header Control -->
         <div class="bg-white rounded-2xl border border-[#E9EFEF] p-3.5 sm:p-4 mb-5 shadow-[0_2px_12px_rgba(10,14,46,0.03)]">
             <form id="filterForm" method="GET" @submit.prevent class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-                <input type="hidden" name="status" id="inputStatus" value="{{ request('status') }}">
-
                 <!-- Search Box -->
                 <div class="relative flex-1 max-w-sm">
                     <x-heroicon-o-magnifying-glass class="w-4 h-4 text-[#6C7E75] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -146,8 +106,20 @@
                         class="w-full pl-10 pr-4 py-2.5 text-xs bg-[#FDFDFD] border border-[#E9EFEF] rounded-xl text-[#0A0E2E] placeholder-[#9EA9B9] focus:outline-none focus:border-[#0A0E2E] focus:ring-2 focus:ring-[#ffa916]/30 transition-all font-medium" />
                 </div>
 
-                <!-- Dropdown Jenis & Reset -->
+                <!-- Dropdown Status, Jenis & Reset -->
                 <div class="flex flex-wrap items-center gap-2.5">
+                    <div class="w-full sm:w-48">
+                        <select name="status" id="selectStatus" x-on:change="terapkanFilter()"
+                            class="w-full px-3 py-2.5 text-xs bg-white border border-[#E9EFEF] rounded-xl text-[#495465] focus:outline-none focus:border-[#0A0E2E] focus:ring-2 focus:ring-[#ffa916]/30 transition-all font-medium cursor-pointer">
+                            <option value="">Semua Status ({{ $totalSemua }})</option>
+                            @foreach (['Diajukan', 'Disetujui', 'Dikembalikan', 'Ditolak'] as $st)
+                                <option value="{{ $st }}" @selected(request('status') === $st)>
+                                    {{ $st }} ({{ $statusCounts[$st] ?? 0 }})
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="w-full sm:w-48">
                         <select name="jenis" id="selectJenis" x-on:change="terapkanFilter()"
                             class="w-full px-3 py-2.5 text-xs bg-white border border-[#E9EFEF] rounded-xl text-[#495465] focus:outline-none focus:border-[#0A0E2E] focus:ring-2 focus:ring-[#ffa916]/30 transition-all font-medium cursor-pointer">

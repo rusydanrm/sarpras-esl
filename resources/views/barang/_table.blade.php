@@ -17,49 +17,45 @@
                     @php
                         $bolehEdit = auth()->user()->role === 'admin'
                             || (auth()->user()->role === 'dosen_tendik' && $b->ruangan?->dikoordinasiOleh(auth()->id()));
-                        $initial = strtoupper(mb_substr($b->nama_barang, 0, 1));
                     @endphp
                     <tr>
                         <td class="text-center text-[#6C7E75] text-xs font-semibold">
                             {{ $loop->iteration + ($barang->currentPage() - 1) * $barang->perPage() }}
                         </td>
                         <td>
-                            <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 rounded-xl bg-[#0A0E2E]/5 border border-[#E9EFEF] flex items-center justify-center text-xs font-bold text-[#0A0E2E] shrink-0">
-                                    {{ $initial }}
-                                </div>
-                                <div class="min-w-0">
-                                    <a href="{{ route('rekomendasi.show', $b->barang_id) }}"
-                                        class="font-bold text-[#0A0E2E] hover:text-[#ffa916] transition-colors text-sm truncate block"
-                                        title="{{ $b->nama_barang }}">
-                                        {{ $b->nama_barang }}
-                                    </a>
-                                    <div class="flex flex-wrap items-center gap-2 mt-0.5 text-xs text-[#6C7E75]">
-                                        <span class="font-mono text-[11px] bg-[#F4F6F5] px-1.5 py-0.5 rounded text-[#495465] font-semibold border border-[#E9EFEF]/60">
-                                            {{ $b->kode_barang ?? '-' }}
+                            <div class="min-w-0 max-w-[240px]">
+                                <a href="{{ route('rekomendasi.show', $b->barang_id) }}"
+                                    class="font-bold text-[#0A0E2E] hover:text-[#ffa916] transition-colors text-xs sm:text-sm truncate block"
+                                    title="{{ $b->nama_barang }}">
+                                    {{ $b->nama_barang }}
+                                </a>
+                                <div class="flex items-center gap-1.5 mt-0.5 text-xs text-[#6C7E75]">
+                                    @if ($b->kode_barang)
+                                        <span class="font-mono text-[11px] text-[#6C7E75]">
+                                            {{ $b->kode_barang }}
                                         </span>
-                                        @if ($b->merek_tipe)
-                                            <span class="truncate max-w-[150px] text-[#6C7E75]">• {{ $b->merek_tipe }}</span>
-                                        @endif
-                                        @if ($b->nup)
-                                            <span class="text-[10px] text-[#9EA9B9]">NUP: {{ $b->nup }}</span>
-                                        @endif
-                                    </div>
+                                    @endif
+                                    @if ($b->merek_tipe && !str_contains(strtolower($b->nama_barang), strtolower($b->merek_tipe)))
+                                        <span class="truncate max-w-[120px] text-[#9EA9B9]">· {{ $b->merek_tipe }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </td>
                         <td>
-                            @if ($b->ruangan)
-                                <a href="{{ route('ruangan.show', $b->ruangan) }}"
-                                    class="text-xs font-semibold text-[#0A0E2E] hover:text-[#120F8B] hover:underline block">
-                                    {{ $b->ruangan->nama_ruang }}
-                                </a>
-                                <span class="text-[11px] text-[#6C7E75]">
-                                    {{ $b->ruangan->gedung?->nama_gedung ?? '-' }}
-                                </span>
-                            @else
-                                <span class="text-[#9EA9B9] text-xs italic">Tanpa Ruangan</span>
-                            @endif
+                            <div class="max-w-[210px] xl:max-w-[260px]">
+                                @if ($b->ruangan)
+                                    <a href="{{ route('ruangan.show', $b->ruangan) }}"
+                                        class="text-xs font-semibold text-[#0A0E2E] hover:text-[#120F8B] hover:underline block truncate"
+                                        title="{{ $b->ruangan->nama_ruang }}">
+                                        {{ $b->ruangan->nama_ruang }}
+                                    </a>
+                                    <span class="text-[11px] text-[#6C7E75] block truncate">
+                                        {{ $b->ruangan->gedung?->nama_gedung ?? '-' }}
+                                    </span>
+                                @else
+                                    <span class="text-[#9EA9B9] text-xs italic">Tanpa Ruangan</span>
+                                @endif
+                            </div>
                         </td>
                         <td class="text-center">
                             <span class="inline-flex items-center px-2.5 py-1 rounded-xl bg-[#F4F6F5] border border-[#E9EFEF] text-xs font-bold text-[#0A0E2E]">
@@ -106,7 +102,7 @@
                                     <button type="button"
                                         class="table-btn-action"
                                         title="Edit Data Barang"
-                                        @click='modalOpen = true; editData = {{ Illuminate\Support\Js::from($b) }}'>
+                                        @click="modalOpen = true; editData = {{ Illuminate\Support\Js::from($b) }}">
                                         <x-heroicon-o-pencil class="w-4 h-4" />
                                     </button>
 

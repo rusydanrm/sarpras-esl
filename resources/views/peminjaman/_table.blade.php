@@ -97,7 +97,7 @@
                                 <button type="button"
                                     class="table-btn-action"
                                     title="Lihat Detail Peminjaman"
-                                    @click='bukaDetail({{ Illuminate\Support\Js::from($p) }})'>
+                                    @click="bukaDetail({{ Illuminate\Support\Js::from($p) }})">
                                     <x-heroicon-o-eye class="w-4 h-4" />
                                 </button>
 

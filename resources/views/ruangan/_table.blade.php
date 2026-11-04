@@ -16,29 +16,23 @@
                 @forelse ($ruangan as $r)
                     @php 
                         $bolehEdit = auth()->user()->role === 'admin' || $r->dikoordinasiOleh(auth()->id()); 
-                        $initial = strtoupper(mb_substr($r->nama_ruang, 0, 1));
                     @endphp
                     <tr>
                         <td class="text-center text-[#6C7E75] text-xs font-semibold">
                             {{ $loop->iteration + ($ruangan->currentPage() - 1) * $ruangan->perPage() }}
                         </td>
                         <td>
-                            <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 rounded-xl bg-[#0A0E2E]/5 border border-[#E9EFEF] flex items-center justify-center text-xs font-bold text-[#0A0E2E] shrink-0">
-                                    {{ $initial }}
-                                </div>
-                                <div class="min-w-0">
-                                    <a href="{{ route('ruangan.show', $r) }}"
-                                        class="font-bold text-[#0A0E2E] hover:text-[#ffa916] transition-colors text-sm truncate block"
-                                        title="{{ $r->nama_ruang }}">
-                                        {{ $r->nama_ruang }}
-                                    </a>
-                                    <div class="flex flex-wrap items-center gap-1.5 mt-0.5 text-xs text-[#6C7E75]">
-                                        <span class="font-mono text-[11px] bg-[#F4F6F5] px-1.5 py-0.5 rounded text-[#495465] font-semibold border border-[#E9EFEF]/60">
-                                            {{ $r->kode_ruang ?? '-' }}
-                                        </span>
-                                        <span class="text-[#6C7E75]">• {{ $r->gedung->nama_gedung }}</span>
-                                    </div>
+                            <div class="min-w-0 max-w-[240px]">
+                                <a href="{{ route('ruangan.show', $r) }}"
+                                    class="font-bold text-[#0A0E2E] hover:text-[#ffa916] transition-colors text-xs sm:text-sm truncate block"
+                                    title="{{ $r->nama_ruang }}">
+                                    {{ $r->nama_ruang }}
+                                </a>
+                                <div class="flex items-center gap-1.5 mt-0.5 text-xs text-[#6C7E75]">
+                                    <span class="font-mono text-[11px] text-[#6C7E75]">
+                                        {{ $r->kode_ruang ?? '-' }}
+                                    </span>
+                                    <span class="text-[#9EA9B9]">· {{ $r->gedung->nama_gedung }}</span>
                                 </div>
                             </div>
                         </td>
@@ -95,7 +89,7 @@
                                     <button type="button"
                                         class="table-btn-action"
                                         title="Edit Ruangan"
-                                        @click='modalOpen = true; editData = {{ Illuminate\Support\Js::from($dataEdit) }}'>
+                                        @click="modalOpen = true; editData = {{ Illuminate\Support\Js::from($dataEdit) }}">
                                         <x-heroicon-o-pencil class="w-4 h-4" />
                                     </button>
                                 @endif

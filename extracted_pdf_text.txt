@@ -1,0 +1,3825 @@
+ 
+ 
+ 
+ 
+INSTITUT PERTANIAN BOGOR
+ 
+ 
+ 
+ 
+PEMBUATAN SISTEM INFORMASI INVENTARISASI 
+SARANA DAN PRASARANA BERBASIS 
+LARAVEL
+ 
+ 
+PADA DEPARTEMEN ESL FEM IPB
+ 
+ 
+ 
+SKRIPSI
+ 
+ 
+ 
+ 
+ 
+RAFI MUHAMMAD RUSYDAN
+ 
+J0403231147
+ 
+ 
+ 
+ 
+ 
+SEKOLAH VOKASI
+ 
+TEKNOLOGI REKAYASA PERANGKAT LUNAK
+ 
+BOGOR
+ 
+20
+26
+ 
+ 
+ 
+ 
+ 
+J
+udul
+ 
+Skripsi
+ 
+:
+ 
+Pembuatan Sistem Informasi Inventarisasi
+ 
+Sarana dan Prasarana 
+Berbasis Laravel pada Departemen ESL FEM IPB University
+ 
+Nama
+ 
+:
+ 
+Rafi Muhammad Rusydan
+ 
+NIM
+ 
+:
+ 
+J0403231147
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Disetujui oleh
+ 
+ 
+Pembimbing 1:
+ 
+Atika Istiqomah, S.Kom., 
+M.T.
+ 
+__________________
+ 
+ 
+ 
+Diketahui oleh
+ 
+ 
+ 
+Ketua Program Studi
+ 
+Teknologi R
+ekayasa 
+Perangkat Lunak
+:
+ 
+Dr. Medhanita Dewi Renanti, S.K
+om., 
+M.Kom.
+ 
+N
+PI. 20180719
+83305122001
+ 
+__________________
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Tanggal 
+Kolokium
+:
+ 
+ 
+                                          
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+DAFTAR ISI
+ 
+DAFTAR ISI
+ 
+................................
+................................
+................................
+..........
+ 
+iii
+ 
+DAFTAR TABEL 
+\(jika tabel hanya satu tidak perlu dibuat daftar\
+ 
+......................
+ 
+iv
+ 
+DAFTAR GAMBAR \(jika gambar hanya satu tidak perlu dibuat daftar\
+ 
+.............
+ 
+iv
+ 
+DAFTAR LAMPIRAN \(jika lampiran hanya satu tidak perlu dibuat daftar\
+ 
+.......
+ 
+iv
+ 
+I
+ 
+PENDAHULUAN
+ 
+................................
+................................
+............................
+ 
+1
+ 
+1.1
+ 
+Latar Belakang
+ 
+1
+ 
+1.2
+ 
+Rumusan Masalah
+ 
+2
+ 
+1.3
+ 
+Tujuan
+ 
+2
+ 
+1.4
+ 
+Manfaat
+ 
+3
+ 
+II
+ 
+TINJAUAN PUSTAKA
+ 
+................................
+................................
+...................
+ 
+4
+ 
+2.1
+ 
+Penelitian Terdahulu
+ 
+4
+ 
+2.2
+ 
+Sistem Informasi
+ 
+6
+ 
+2.3
+ 
+Inventarisasi Sarana dan Prasarana
+ 
+7
+ 
+2.4
+ 
+Aplikasi Berbasis Web \(Website\
+ 
+7
+ 
+2.5
+ 
+PHP \(Hypertext Preprocessor\
+ 
+8
+ 
+2.6
+ 
+Framework Laravel
+ 
+8
+ 
+2.7
+ 
+Basis Data MySQL
+ 
+9
+ 
+2.8
+ 
+Tailwind CSS dan Alpine.js
+ 
+9
+ 
+2.9
+ 
+Prototyping Process Model
+ 
+10
+ 
+2.10
+ 
+Blackbox Testing
+ 
+11
+ 
+III
+ 
+METODE
+ 
+................................
+................................
+................................
+.......
+ 
+12
+ 
+3.1
+ 
+Waktu dan Tempat
+ 
+12
+ 
+3.2
+ 
+Teknik Pengumpulan Data
+ 
+12
+ 
+3.3
+ 
+Prosedur Kerja
+ 
+12
+ 
+IV
+ 
+HASIL DAN PEMBAHASAN \(terpisah atau gabung\
+ 
+................................
+.
+ 
+18
+ 
+4.1
+ 
+Hasil
+ 
+18
+ 
+4.2
+ 
+Pembahasan
+ 
+20
+ 
+V
+ 
+SIMPULAN DAN SARAN
+ 
+................................
+................................
+...........
+ 
+22
+ 
+5.1
+ 
+Simpulan
+ 
+22
+ 
+5.2
+ 
+Saran
+ 
+22
+ 
+DAFTAR PUSTAKA
+ 
+................................
+................................
+...........................
+ 
+24
+ 
+LAMPIRAN
+ 
+................................
+................................
+................................
+..........
+ 
+27
+ 
+RIWAYAT HIDUP
+ 
+................................
+................................
+...............................
+ 
+31
+ 
+ 
+ 
+ 
+ 
+DAFTAR TABEL
+ 
+\(jika tabel hanya satu tidak perlu dibuat daftar\
+ 
+ 
+Judul tabel biasanya pendek tanpa diakhiri tanda titik
+ 
+18
+ 
+ 
+Tingkat kekerasan dan kandungan gula buah pisang ambon pada suhu 
+simpan yang berbeda dan pemberian putresina 
+ 
+19
+ 
+ 
+ 
+DAFTAR GAMBAR
+ 
+\(jika gambar hanya satu tidak perlu dibuat daftar\
+ 
+ 
+Mikrograf mukosa lambung trenggiling \(
+Manis javanica
+\
+Error! Bookmark 
+not defined.
+ 
+ 
+Pemilihan warna dan motif batang pada diagram batang yang jelas 
+menunjukkan keterbacaan 
+error bar
+ 
+19
+ 
+ 
+ 
+DAFTAR 
+LAMPIRAN
+ 
+\(jika 
+lampiran
+ 
+hanya satu tidak perlu dibuat daftar\
+ 
+ 
+Rata
+-
+rata dan simpangan baku beberapa sifat físik dan kimia tanah dari 
+78 contoh tanah di Kebun Percobaan Ciheuleut
+ 
+28
+ 
+ 
+Penguasaan pulau berpenghuni di Kepulauan Seribu
+ 
+29
+ 
+ 
+ 
+ 
+I
+ 
+PENDAHULUAN
+  
+ 
+1.1
+ 
+L
+atar Belakang
+ 
+Pengelolaan sarana dan prasarana merupakan salah satu indikator pendukung 
+utama dalam kelancaran tri dharma perguruan tinggi, di mana fasilitas yang 
+terkelola dengan baik harus mampu 
+menunjang kegiatan operasional perkuliahan, 
+riset, dan administrasi. Ekspektasi tata kelola institusi pendidikan tinggi kini tidak 
+lagi terbatas pada pencatatan administratif semata, melainkan telah meluas ke aspek 
+kecepatan pemantauan kondisi aset, pemeli
+haraan berkala, manajemen transportasi 
+operasional, hingga akuntabilitas peminjaman fasilitas
+ 
+\(Kusumojati dan Mediawati 
+2024\
+.
+ 
+Oleh karena itu, ketersediaan sistem yang mampu memusatkan serta 
+menyajikan data inventaris secara mutakhir dan transparan menjadi kebutuhan 
+mendesak bagi unit pengelola sarana dan prasarana dalam mendukung efektivitas 
+pengambilan keputusan institusi.
+ 
+Departemen Ekonomi Sumberdaya dan Lingkungan \(ESL\, Fakultas 
+Ekonomi dan Manajemen \(FEM\IPB University mengelola beragam aset sarana 
+dan prasarana yang tersebar di berbagai ruangan perkuliahan, laboratorium, ruang 
+dosen, ruang administrasi, serta fasilita
+s penunjang seperti kendaraan operasional. 
+Namun, proses pencatatan inventaris sarana dan prasarana saat ini masih bersifat 
+semi
+-
+manual menggunakan berkas lembar kerja \(
+spreadsheet
+\seperti format Daftar 
+Inventaris Ruangan \(DIR\dan Daftar Barang Ruangan \(
+DBR\ Mekanisme ini 
+menyebabkan pemantauan fisik barang yang tersebar di berbagai ruangan menjadi 
+kurang terstruktur, sehingga pengelola departemen membutuhkan waktu lebih lama 
+untuk merekap data barang secara menyeluruh. Selain itu, keterbatasan visibilit
+as 
+kondisi barang secara real
+-
+time menyebabkan identifikasi sarana yang mengalami 
+kerusakan serta keterlambatan pemeliharaan berkala kendaraan operasional sering 
+kali terlambat untuk ditindaklanjuti.
+ 
+Praktik pencatatan berbasis 
+spreadsheet
+ 
+mandiri di tiap ruangan 
+menimbulkan inkonsistensi data serta menyulitkan pembaruan informasi ketika 
+terjadi mutasi atau perpindahan barang antaruangan
+ 
+\(Muftinisa 
+et al.
+ 
+2017\
+. 
+Selain 
+itu, alur penanganan perbaikan dan pemeliharaan sarana prasarana yang masih 
+berjalan melalui permohonan konvensional atau komunikasi pesan informal 
+memerlukan waktu serta koordinasi tenaga yang besar, sehingga proses disposisi 
+penanganan dinilai bel
+um optimal. Ketiadaan 
+sistem 
+rekaman 
+r
+iwayat
+ 
+dan 
+pem
+antauan pemeliharaan 
+ 
+aset, serta ketiadaan validasi jadwal peminjaman sarana 
+dan ruangan juga kerap memicu terjadinya tumpang tindih penggunaan fasilitas 
+\(
+schedule overlap
+\
+ 
+\(Gurnita 
+et al.
+ 
+2026\
+.
+ 
+Sistem informasi inventarisasi berbasis web merupakan solusi perangkat 
+lunak yang dirancang untuk mendigitalkan dan memusatkan seluruh siklus tata 
+kelola aset fisik dalam suatu organisasi
+ 
+\(Susanti 
+et al.
+ 
+2026\
+. Teknologi berbasis 
+web telah banyak dikaji dan diterapkan sebagai solusi efektif dalam manajemen 
+sarana dan prasarana institusi pendidikan. Penelitian terdahulu menunjukkan bahwa 
+sistem inventarisasi berbasis web dapat membantu mengurangi waktu pencarian
+ 
+data aset, mempermudah pemantauan kondisi fisik barang \(Baik, Rusak Ringan, 
+Rusak Berat\memberikan 
+pencatatan riwayat pemeliharaan secara terstruktur
+, 
+serta menyediakan akses terpusat yang dapat dijangkau kapan saja tanpa terbatas 
+perangkat tertentu
+ 
+\(Balaji 
+et al.
+ 
+2024\
+. Pemanfaatan sistem web juga meringankan 
+ 
+2
+ 
+beban kerja staf administrasi sekaligus meningkatkan koordinasi antara dosen, 
+tenaga kependidikan penanggung jawab ruangan, teknisi, dan pimpinan.
+ 
+Pengelolaan inventaris konvensional, yakni sistem pencatatan berbasis 
+dokumen terpisah tanpa keterhubungan basis data relasional terpusat, kerap kali 
+terbatas dalam menyajikan informasi status aset secara dinamis. Keterbatasan ini 
+menjadi semakin krusial d
+alam lingkup departemen akademik; keakuratan data 
+fasilitas sangat menentukan kelancaran kegiatan belajar mengajar dan efisiensi 
+anggaran pengadaan
+ 
+\(Pampana 
+et al.
+ 
+2022\
+. Pemanfaatan teknologi web modern 
+dengan 
+Framework Laravel
+ 
+yang mengusung arsitektur 
+Model
+-
+View
+-
+Controller
+ 
+\(MVC\serta basis data terpusat membuka peluang besar dalam membangun sistem 
+inventarisasi yang adaptif, memungkinkan integrasi multi
+-
+peran pengguna, 
+otomatisasi pengingat jadwal pemeliharaan, modul pemantauan kendaraan 
+operasional, fitur impor data fleks
+ibel via Excel/clipboard, 
+serta 
+alur verifikasi 
+pengajuan bertahap
+ 
+\(Rahmasari dan Parlika 2026\
+.
+ 
+Penelitian ini bertujuan merancang dan membuat Sistem Informasi 
+Inventarisasi Sarana dan Prasarana Berbasis Web Menggunakan 
+Framework 
+Laravel
+ 
+pada Departemen ESL FEM IPB University. Pengembangan sistem 
+difokuskan untuk mengintegrasikan seluruh tata kelola aset departemen, yang 
+mencakup pencatatan data barang dan ruangan berbasis penugasan koordinator, 
+pemantauan kelayakan dan riwayat servis ken
+daraan dinas operasional, otomasi 
+pengingat jadwal pemeliharaan preventif, fitur 
+smart import
+ 
+data dari lembar kerj
+a 
+Excel \(format DIR/DBR\maupun 
+clipboard
+, alur persetujuan pengajuan sarpras 
+bertingkat dua tahap,
+ 
+serta
+ 
+sistem peminjaman fasilitas dengan pencegahan bentrok 
+jadwal
+. 
+Selanjutnya, sistem informasi yang dibangun akan dievaluasi secara 
+komprehensif menggunakan metode 
+Black Box Testing
+ 
+guna menguji ketepatan 
+fungsionalitas dan keandalan setiap modul sebelum diterapkan dalam operasional 
+tata kelola Departemen ESL FEM IPB University.
+ 
+1.2
+ 
+Rumusan
+ 
+Masalah
+ 
+Berdasarkan latar belakang yang telah diuraikan, rumusan masalah dalam 
+penelitian ini adalah:
+ 
+1.
+ 
+Bagaimana merancang dan membuat Sistem Informasi Inventarisasi Sarana 
+dan Prasarana berbasis web menggunakan 
+Framework Laravel
+ 
+pada 
+Departemen ESL FEM IPB University yang mengintegrasikan pencatatan 
+aset barang, pemantauan kendaraan operasional, 
+pemeliharaan sarana
+, alur 
+pengajuan bertahap, serta peminjaman fasilitas?
+ 
+2.
+ 
+Bagaimana menguji dan mengevaluasi performa fungsionalitas sistem 
+informasi yang dibuat agar seluruh modul bekerja sesuai dengan kebutuhan 
+operasional tata kelola sarpras Departemen ESL FEM IPB University?
+ 
+1.3
+ 
+T
+ujuan
+ 
+Berdasarkan rumusan masalah di atas, tujuan penelitian ini adalah sebagai 
+berikut:
+ 
+1.
+ 
+Merancang dan membuat Sistem Informasi Inventarisasi Sarana dan 
+Prasarana berbasis web menggunakan 
+Framework Laravel
+ 
+pada 
+Departemen ESL FEM IPB University yang 
+mengintegrasikan pencatatan 
+aset barang, pemantauan kendaraan operasional, 
+pemeliharaan sarana
+, 
+alur 
+pengajuan bertahap, serta peminjaman fasilitas.
+ 
+ 
+3
+ 
+2.
+ 
+M
+enguji dan mengevaluasi performa fungsionalitas sistem informasi yang 
+dibuat menggunakan metode 
+Black Box Testing
+ 
+guna memastikan seluruh 
+modul bekerja sesuai dengan kebutuhan operasional tata kelola sarpras 
+Departemen ESL FEM IPB University.
+ 
+1.4
+ 
+Manfaat
+ 
+Penelitian ini diharapkan dapat memberikan manfaat sebagai berikut:
+ 
+1.
+ 
+M
+anfaat Teoritis
+ 
+Menjadi referensi akademik dan kontribusi keilmuan dalam bidang Rekayasa 
+Perangkat Lunak, khususnya dalam 
+perancangan dan penerapan sistem 
+informasi manajemen aset dan inventarisasi berbasis web pada unit kerja 
+perguruan tinggi.
+ 
+2.
+ 
+M
+anfaat Praktis
+ 
+a.
+ 
+Bagi Departemen ESL FEM IPB University, sistem ini dapat 
+m
+eningkatkan akuntabilitas tata kelola aset, mempercepat pelaporan 
+inventaris dan ekspor dokumen \(DIR/DBR\mencegah bentrok 
+peminjaman fasilitas, serta 
+mempermudah 
+pemantauan riwayat servis 
+dan evaluasi kelayakan fisik aset secara terstruktur
+.
+ 
+b.
+ 
+Bagi Dosen dan Tenaga Kependidikan, sistem ini 
+m
+empermudah 
+pemantauan fisik barang di ruangan masing
+-
+masing, mempercepat 
+pengajuan perbaikan fasilitas, serta mempermudah peminjaman 
+sarana.
+ 
+c.
+ 
+Bagi peneliti lain, penelitian ini dapat menjadi acuan pengembangan 
+sistem informasi manajemen sarana dan prasarana di institusi 
+pendidikan lainnya.
+ 
+ 
+ 
+II
+ 
+T
+INJAUAN PUSTAKA
+ 
+2.1
+ 
+Penelitian Terdahulu
+ 
+Penelitian terdahulu menjadi rujukan 
+fundamental dalam mengidentifikasi 
+ruang lingkup, keunggulan, serta celah \(
+gap
+\pengembangan sistem yang akan 
+dibangun. Berbagai penelitian terkait sistem informasi manajemen inventaris sarana 
+dan prasarana pada institusi pendidikan telah banyak dilakukan menggunakan 
+Framework Laravel
+ 
+dengan berbagai fokus dan batasan fungsional. 
+Arvanullah dan 
+Kurniawati \(2024\
+ 
+ 
+serta 
+Handoyo et al. \(2024\
+ 
+ 
+mengembangkan sistem informasi 
+inventaris berbasis Laravel untuk digitalisasi pendataan barang, namun sistem 
+tersebut belum mencakup inventaris per ruangan berbasis koordinator ruangan 
+serta 
+belum memiliki alur persetujuan bertingkat dua tahap. Pada aspek pemeliharaan 
+dan peminjaman fasilitas, penelitian oleh 
+Adia dan Huda \(2025\
+ 
+ 
+serta 
+Kuncoro et 
+al. \(2025\
+ 
+berhasil mendigitalkan pengadaan aset dan peminjaman ruang sidang, 
+namun belum memfasilitasi modul 
+Maintenance & Repair
+ 
+\(MR\yang mencatat 
+riwayat servis terstruktur, manajemen kendaraan dinas, serta validasi pencegahan 
+bentrok jadwal secara otomatis. Sementara itu, 
+Salwa dan Ahmad \(2026\
+ 
+ 
+mengembangkan sistem inventaris laboratorium komputer dengan pembedaan hak 
+akses multi
+-
+peran, namun belum mengakomodasi mekanisme impor data cerdas 
+dari lembar kerja \(
+spreadsheet
+\untuk migrasi data awal. Rangkuman perbandingan 
+disajikan pada Tabel 
+1.
+ 
+Tabel
+ 
+1. Research Gap
+ 
+No.
+ 
+Penulis & 
+Tahun
+ 
+Judul 
+Penelitian
+ 
+Fokus 
+Penelitian
+ 
+Kekurangan 
+Sis
+tem
+ 
+1.
+ 
+\(Arvanullah 
+dan 
+Kurniawati 
+2024\
+ 
+Perancangan 
+Sistem 
+Informasi 
+Persediaan 
+Barang Berbasis 
+Web dengan 
+Framework 
+Laravel \(Studi 
+Kasus pada 
+Direktorat 
+Sarana 
+Prasarana 
+Universitas 
+Kristen 
+Maranatha\
+ 
+Digitalisasi 
+inventaris pada 
+direktorat sarpras 
+perguruan tinggi 
+menggunakan 
+Laravel dan 
+MySQL.
+ 
+Terfokus pada 
+persediaan barang 
+umum; belum 
+mencakup 
+inventaris per 
+ruangan berbasis 
+koordinator 
+\(DIR/DBR\modul 
+MR/riwayat servis, 
+peminjaman 
+fasilitas, dan 
+manajemen 
+transportasi dinas.
+ 
+2.
+ 
+\(Handoyo 
+et 
+al.
+ 
+2024\
+ 
+Rancang 
+Bangun Sistem 
+Informasi 
+Inventaris 
+Menggunakan 
+Framework 
+Laravel 8.0 di 
+Digitalisasi 
+pencatatan dan 
+pelaporan aset 
+sekolah berbasis 
+web dengan 
+pengujian 
+black
+-
+box
+.
+ 
+Belum memiliki 
+alur persetujuan 
+pengajuan dua 
+tahap \(Admin & 
+Pimpinan\, 
+pencegahan jadwal 
+bentrok 
+ 
+5
+ 
+SDN 1 
+Dawuhan
+ 
+peminjaman, 
+riwayat servis aset, 
+dan impor massal 
+Excel.
+ 
+3.
+ 
+\(Adia dan 
+Huda 2025\
+ 
+Rancang 
+Bangun Sistem 
+Informasi 
+Manajemen 
+Inventaris 
+Sekolah di SMA 
+Negeri 6 Solok 
+Selatan
+ 
+Sistem inventaris 
+sekolah berbasis
+ 
+Laravel untuk 
+pemantauan 
+kondisi aset, 
+pengadaan, dan 
+ekspor laporan.
+ 
+Belum 
+mengakomodasi 
+pemetaan aset per 
+ruangan dengan 
+koordinator 
+ruangan, 
+pencatatan log 
+servis terstruktur 
+pada modul MR, 
+peminjaman anti
+-
+bentrok, dan 
+manajemen 
+kendaraan 
+operasional.
+ 
+4.
+ 
+\(Kuncoro 
+et 
+al.
+ 
+2025\
+ 
+Rancang 
+Bangun Aplikasi 
+Peminjaman 
+Ruang Sidang 
+Berbasis Web 
+Menggunakan 
+Framework 
+Laravel \(Studi 
+Kasus: FT 
+Universitas 
+Muhammadiyah 
+Tangerang\
+ 
+Sistem 
+peminjaman 
+ruang sidang 
+fakultas berbasis 
+web dengan 
+pengajuan
+ 
+daring 
+dan jadwal 
+dinamis.
+ 
+Hanya menangani 
+peminjaman ruang 
+sidang; belum 
+terintegrasi dengan 
+inventarisasi 
+barang ruangan, 
+validasi bentrok 
+jadwal otomatis, 
+alur verifikasi dua 
+tahap, maupun 
+modul 
+pemeliharaan.
+ 
+5.
+ 
+\(Salwa dan 
+Ahmad 
+2026\
+ 
+Pengembangan 
+Sistem 
+Inventaris 
+Perangkat 
+Laboratorium 
+Komputer 
+Berbasis Web 
+Menggunakan 
+Metode 
+Waterfall
+ 
+Digitalisasi 
+inventaris 
+perangkat lab 
+komputer dengan 
+pendataan 
+kondisi dan hak 
+akses multi
+-
+peran.
+ 
+Ruang lingkup 
+terbatas pada lab 
+komputer; belum 
+memiliki alur 
+approval
+ 
+dua tahap, 
+peminjaman sarana 
+anti
+-
+bentrok, log 
+servis kendaraan, 
+dan fitur impor data 
+Excel/clipboard.
+ 
+6.
+ 
+Penelitian ini 
+\(2026\
+ 
+Pembuatan 
+Sistem 
+Informasi 
+Inventarisasi 
+Sarana dan 
+Prasarana 
+Berbasis Web 
+Menggunakan 
+Sistem 
+inventarisasi 
+terpadu berbasis 
+Laravel yang 
+mengintegrasikan 
+pencatatan aset 
+per ruangan, 
+modul 
+Sistem yang 
+dikembangkan 
+melengkapi 
+keterbatasan di atas 
+dengan fitur 
+Smart 
+Excel Import
+ 
+2 
+mode, 
+Scheduled 
+Reminder
+ 
+harian, 
+ 
+6
+ 
+Framework 
+Laravel pada 
+Departemen 
+ESL FEM IPB 
+University
+ 
+Maintenance & 
+Repair
+ 
+\(MR\
+transportasi 
+operasional, alur 
+pengajuan dua 
+tahap, dan 
+peminjaman anti
+-
+bentrok.
+ 
+validasi 
+pencegahan jadwal 
+bentrok, alur 
+verifikasi Admin & 
+Pimpinan, serta 
+modul armada 
+dinas.
+ 
+ 
+Berdasarkan perbandingan pada Tabel 2.1, kebaruan dan kontribusi sistem 
+yang dikembangkan pada penelitian ini terletak pada integrasi menyeluruh proses 
+bisnis tata kelola sarpras internal departemen. Sistem ini memadukan inventarisasi 
+barang ruangan \(forma
+t DIR/DBR\berbasis relasi 
+many
+-
+to
+-
+many
+ 
+koordinator 
+ruangan, modul 
+Maintenance & Repair
+ 
+\(MR\untuk pemantauan kondisi fisik dan 
+riwayat servis aset, modul pengelolaan transportasi dan servis kendaraan 
+operasional, alur persetujuan pengajuan bertingkat dua tahap \(Admin dan 
+Pimpinan\, serta mekanisme pencegahan bentrok jadwal peminjaman fasili
+tas 
+secara terpusat. Keunggulan fungsional ini dilengkapi dengan fitur 
+Smart Excel 
+Import
+ 
+\(unggah berkas dan tempel 
+clipboard
+\serta pengingat otomatis harian 
+\(
+scheduled reminder
+\ yang dirancang khusus untuk memenuhi kebutuhan 
+operasional Departemen ESL FEM IPB University.
+ 
+2.2
+ 
+Sistem Info
+rmasi
+ 
+Sistem informasi merupakan kombinasi terorganisasi dari perangkat keras 
+\(
+hardware
+\perangkat lunak \(
+software
+\infrastruktur jaringan komunikasi, sumber 
+daya manusia, serta prosedur data yang saling berinteraksi untuk mengumpulkan, 
+memproses, menyimpan, dan mendistribusikan informasi dalam suatu organisasi
+ 
+\(Laudon dan Laudon 2022\
+ 
+. Setiap komponen memiliki keterkaitan erat dalam 
+memastikan aliran data dari tingkat operasional dapat ditransformasikan menjadi 
+informasi yang terstruktur dan bermakna. Ketiadaan salah satu komponen, seperti 
+tidak adanya prosedur kerja yang terstandarisa
+si atau antarmuka perangkat lunak 
+yang memadai, dapat menyebabkan ketidakefektifan pemrosesan data 
+\(
+Septeragil 
+et al.
+ 
+2026\
+. Oleh karena itu, perancangan sistem informasi modern diarahkan pada 
+integrasi menyeluruh antarkomponen guna memberikan efisiensi nyata pada proses 
+bisnis yang dijalankan.
+ 
+Dalam lingkungan institusi pendidikan tinggi, sistem informasi memegang 
+peranan vital sebagai media sentralisasi data operasional untuk menghilangkan 
+fragmentasi informasi antardivisi 
+\(Kusumojati dan Mediawati 2024\
+. Pengelolaan 
+data operasional yang masih mengandalkan dokumen terpisah atau lembar kerja 
+mandiri sering kali memicu redundansi data, tingginya risiko galat manusia \(
+human 
+error
+\serta hambatan dalam sinkronisasi data antarunit kerja. Selain memfasilitasi 
+efisiensi operasional harian, sistem informasi juga berfungsi strategis dalam 
+mendukung proses pengambilan keputusan manajemen \(
+decision
+-
+making process
+\
+\(Amiruddin 
+et al.
+ 
+2023\
+. Melalui pemrosesan data transaksi mentah menjadi 
+laporan analitik yang terstruktur seperti visualisasi kondisi fisik sarana, riwayat 
+biaya perbaikan, dan rekapitulasi inventaris berkala, pimpinan departemen dapat 
+merencanakan prioritas pemeliharaan preve
+ntif maupun alokasi anggaran 
+pengadaan aset secara tepat sasaran.
+ 
+ 
+7
+ 
+2.3
+ 
+Inventarisasi Sarana dan Prasarana
+ 
+Inventarisasi sarana dan prasarana merupakan kegiatan pencatatan, penataan, 
+dan pengelompokan seluruh aset milik instansi secara sistematis, tertib, dan 
+berkesinambungan berdasarkan pedoman tata kelola yang berlaku 
+\(Apriliani 
+et al.
+ 
+2025\
+. Sarana merujuk pada seluruh peralatan, perkakas, dan perlengkapan 
+bergerak yang digunakan secara langsung dalam mendukung operasional 
+perkuliahan maupun perkantoran, seperti komputer laboratorium, proyektor, meja 
+kursi, hingga sarana transportasi operasi
+onal atau kendaraan dinas. Sementara itu, 
+prasarana merupakan fasilitas dasar tidak bergerak yang menjadi penunjang 
+terselenggaranya kegiatan institusi, meliputi bangunan gedung, ruang perkuliahan, 
+ruang rapat, dan laboratorium. Melalui inventarisasi yang 
+terstruktur, organisasi 
+dapat memastikan kepastian fisik dan legalitas kepemilikan aset, mengontrol 
+persebaran barang pada setiap unit kerja, serta mencegah terjadinya kehilangan atau 
+duplikasi pencatatan fasilitas secara berulang.
+ 
+Tata kelola inventarisasi modern tidak terbatas pada kegiatan pendataan awal 
+aset semata, melainkan mencakup pemantauan berkala terhadap siklus hidup \(
+asset 
+lifecycle
+\ barang yang sedang digunakan 
+\(Susanti 
+et al.
+ 
+2026\
+. Aspek fundamental 
+dalam pemantauan ini adalah klasifikasi kondisi fisik barang yang terbagi ke dalam 
+kategori Baik, Rusak Ringan \(RR\dan Rusak Berat \(RB\sebagai standar 
+penyusunan dokumen Daftar Inventaris Ruangan \(DIR\dan Daftar Barang 
+Ruangan \(DBR\
+. Perubahan kondisi fisik tersebut menjadi parameter dasar dalam 
+menentukan tindakan pemeliharaan \(
+Maintenance & Repair
+ 
+/ MR\baik servis 
+preventif berkala maupun perbaikan kuratif saat terjadi gangguan fungsi, termasuk 
+pencatatan riwayat servis kendaraan operasional dinas. Selain itu, integrasi data 
+inventaris dengan mekanisme peminjaman memungkinkan sistem memvalidasi 
+k
+etersediaan barang dan ruangan secara akurat guna mencegah tumpang tindih 
+jadwal peminjaman fasilitas
+ 
+\(Kuncoro 
+et al.
+ 
+2025\
+.
+ 
+2.4
+ 
+Aplikasi Berba
+sis Web \(Website\
+ 
+Aplikasi berbasis web \(
+web
+-
+based application
+\merupakan perangkat lunak 
+yang dieksekusi pada peladen \(
+web server
+\ dan diakses oleh pengguna melalui 
+aplikasi peramban \(
+web browser
+\melalui jaringan internet maupun intranet 
+menggunakan protokol komunikasi standar seperti HTTP atau HTTPS 
+\(Sommerville 2021\
+. Dalam arsitektur 
+client
+-
+server
+ 
+ini, peramban bertindak 
+sebagai sisi klien \(
+front
+-
+end
+\yang bertugas mengirimkan permintaan \(
+request
+\serta 
+merender antarmuka grafis kepada pengguna, sedangkan peladen web \(
+back
+-
+end
+\
+bertugas memproses logika bisnis aplikasi dan mengelola transaksi pada sistem 
+manajemen basis data. Model arsitektur ini memisahkan secara tegas antara 
+representasi visual di sisi klien dan beban komputasi di sisi peladen. Pendekatan 
+tersebut mempermudah
+ 
+pemeliharaan sistem informasi berskala institusi agar dapat 
+dikembangkan secara modular dan terstruktur.
+ 
+Platform berbasis web memiliki sejumlah keunggulan komparatif yang 
+signifikan jika dibandingkan dengan aplikasi berbasis desktop konvensional 
+\(Handoyo 
+et al.
+ 
+2024\
+. Keunggulan fundamental terletak pada sifatnya yang lintas 
+platform \(
+cross
+-
+platform
+\di mana pengguna dapat mengakses aplikasi secara 
+fleksibel dari berbagai sistem operasi tanpa memerlukan instalasi aplikasi mandiri 
+pada setiap komputer \(
+zero
+-
+client installation
+\Pemeliharaan dan pembaruan 
+sistem pun dapat dilakukan secara terpusat langsung pada peladen \(
+centralized 
+deployment
+\sehingga setiap perbaikan fitur atau pembaruan basis data dapat 
+ 
+8
+ 
+langsung dinikmati oleh seluruh pengguna tanpa risiko terjadinya inkonsistensi 
+versi aplikasi antarkomputer. Berbagai penelitian terkini menegaskan bahwa 
+migrasi ke sistem informasi berbasis web terbukti memangkas waktu penelusuran 
+aset secara signifikan s
+erta meningkatkan efisiensi dan transparansi koordinasi 
+kerja antarpetugas tanpa terhalang sekat fisik ruangan kerja 
+\(Arvanullah dan 
+Kurniawati 2024\
+.
+ 
+2.5
+ 
+PHP \(Hypertext Preprocess
+or\
+ 
+PHP \(Hypertext Preprocessor\
+ 
+merupakan bahasa pemrograman skrip sisi 
+peladen \(
+server
+-
+side scripting
+\berlisensi terbuka \(
+open
+-
+source
+\yang dirancang 
+khusus untuk membangun aplikasi web dinamis dan terhubung secara erat dengan 
+sistem manajemen basis data 
+\(Nixon 2021\
+. Skrip PHP dieksekusi secara langsung 
+pada mesin peladen \(
+web server
+\kemudian hasil interpretasi komputasi tersebut 
+dikirimkan kepada peramban pengguna dalam format dokumen HTML standar. 
+Dalam perkembangannya, PHP 8 menghadirkan peningkatan kinerja komputasi 
+melalui kompilator 
+Just
+-
+In
+-
+Time
+ 
+\(JIT\pengetikan data yang lebih ketat \(
+strict 
+typing
+\serta penanganan galat \(
+error handling
+\ yang jauh lebih terstruktur 
+\(Powers 
+2022\
+. Karakteristik ini menjadikan PHP sebagai fondasi peladen yang andal, aman, 
+dan efisien untuk menopang sistem informasi berskala institusi.
+ 
+Keunggulan utama PHP terletak pada ekosistem pengembangan yang sangat 
+matang, dokumentasi komunitas global yang melimpah, serta kompatibilitas tingkat 
+tinggi terhadap berbagai sistem basis data relasional melalui ekstensi PDO \(
+PHP 
+Data Objects
+\
+\(Powers 2022\
+. Dukungan manajer paket dependensi 
+Composer
+ 
+juga 
+mempermudah integrasi pustaka pihak ketiga untuk pengolahan lembar kerja 
+spreadsheet
+ 
+dan pembuatan dokumen resmi portabel \(PDF\Dalam penelitian ini, 
+PHP \(versi 8.4\ digunakan untuk menopang seluruh logika bisnis sistem Sarpras 
+ESL, meliputi validasi transaksi data aset, kalkulasi nilai barang, alur persetujuan 
+pengajuan dua tahap, serta
+ 
+eksekusi algoritma pencegahan bentrok jadwal 
+peminjaman ruangan. Di samping itu, PHP bertindak sebagai pemroses perintah 
+konsol \(
+CLI command
+\pada 
+scheduler
+ 
+otomatis harian untuk memindai jatuh 
+tempo servis pemeliharaan preventif, sekaligus menjalankan fungsi 
+parser
+ 
+cerdas 
+untuk memetakan format kolom DIR/DBR dari berkas maupun 
+clipboard
+ 
+Excel.
+ 
+2.6
+ 
+F
+ramework L
+aravel
+ 
+Laravel
+ 
+merupakan kerangka kerja \(
+framework
+\aplikasi web sumber terbuka 
+berbasis PHP yang mengadopsi pola arsitektur 
+Model
+-
+View
+-
+Controller
+ 
+\(MVC\
+untuk memisahkan secara tegas antara struktur manipulasi data \(
+Model
+\
+representasi antarmuka pengguna \(
+View
+\dan alur pengendali proses bisnis 
+\(
+Controller
+\
+\(Stauffer 2023\
+. Filosofi desain Laravel berfokus pada penyediaan 
+sintaks yang ekspresif, elegan, dan terstandarisasi guna mempermudah 
+pengembang dalam menyelesaikan tugas
+-
+tugas rekayasa perangkat lunak umum 
+tanpa mengorbankan fleksibilitas sistem. Penerapan arsitektur M
+VC menjadikan 
+basis kode program jauh lebih terstruktur, modular, dan mudah dikelola 
+\(
+maintainable
+\saat menangani alur operasional yang kompleks. Keberadaan 
+antarmuka baris perintah 
+Artisan Console
+ 
+juga mempercepat efisiensi 
+pengembangan melalui otomasi pembuatan berkas migrasi, model, pengendali, 
+hingga pemantauan rute sistem secara langsung.
+ 
+Jika dibandingkan dengan kerangka kerja PHP lainnya seperti CodeIgniter, 
+Laravel memiliki keunggulan kompetitif yang nyata dalam hal kelengkapan fitur 
+ 
+9
+ 
+bawaan \(
+batteries
+-
+included
+\dan ekosistem modern 
+\(Sejati 2025\
+. Salah satu 
+keunggulannya terletak pada fitur 
+Eloquent Object
+-
+Relational Mapping
+ 
+\(ORM\
+yang sangat ekspresif dalam menangani relasi basis data kompleks
+ 
+seperti relasi 
+many
+-
+to
+-
+many
+ 
+penugasan koordinator ruangan melalui tabel pivot
+ 
+serta penyediaan 
+sistem keamanan bawaan berupa proteksi 
+Cross
+-
+Site Request Forgery
+ 
+\(CSRF\ 
+Role Middleware
+, dan 
+prepared statements
+. Berbagai penelitian membuktikan 
+bahwa adopsi Laravel mampu mereduksi kompleksitas integrasi antarmodul dan 
+mempercepat pemrosesan data inventaris secara terstruktur 
+\(Arvanullah dan 
+Kurniawati 2024\
+. 
+Dalam penelitian ini, Laravel 13 dioptimalkan untuk menopang 
+transaksi inventaris barang per ruangan, mengamankan alur verifikasi pengajuan 
+dua tahap, membungkus penyimpanan massal dalam 
+database transaction
+, serta 
+mengeksekusi 
+Task Scheduling
+ 
+pengingat servis otomatis.
+ 
+2.7
+ 
+B
+asis Data MySQL
+ 
+MySQL
+ 
+merupakan sistem manajemen basis data relasional \(
+Relational 
+Database Management System
+ 
+/ RDBMS\sumber terbuka yang menggunakan 
+bahasa standar 
+Structured Query Language
+ 
+\(SQL\ untuk menyimpan, mengelola, 
+dan memanipulasi data dalam struktur tabel berelasi 
+\(Elmasri dan Navathe 2021\
+. 
+Setiap entitas data dihubungkan melalui relasi kunci primer \(
+primary key
+\dan kunci 
+asing \(
+foreign key
+\yang secara ketat menegakkan integritas referensial antarentitas. 
+Pada mesin penyimpanan defaultnya, yaitu InnoDB, MySQL mendukung penuh 
+prinsip 
+Atomicity, Consistency, Isolation, and Durability
+ 
+\(ACID\serta menerapkan 
+mekanisme 
+row
+-
+level locking
+ 
+untuk menjaga konsistensi transaksi saat data diakses 
+secara bersamaan oleh banyak penggun
+a
+. Karakteristik transaksional ini 
+menjadikan MySQL sebagai fondasi basis data yang andal untuk mengelola data 
+operasional institusi pendidikan.
+ 
+Dalam konteks pengelolaan inventaris sarana dan prasarana, model relasional 
+MySQL memiliki keunggulan mendasar dalam menangani data yang memerlukan 
+keterikatan skema yang ketat dan terdefinisi dengan jelas 
+\(Elmasri dan Navathe 
+2021\
+. Selain itu, MySQL menyediakan fitur 
+Stored Generated Columns
+ 
+yang 
+memungkinkan kolom turunan dihitung dan disimpan secara fisik di tingkat basis 
+data secara otomatis \(Oracle Corporation\Fitur ini mengeliminasi kebutuhan 
+pembuatan pemicu \(
+trigger
+\manual yang kompleks, sekaligus mempercepat 
+kinerja pembacaan data agregat melalui pengindeksan langsung pada kolom 
+komputasi tersebut. Pemanfaatan MySQL terbukti efektif dalam memfasilitasi 
+pencatatan aset terpusat dan pengelompokan kondisi fisik barang
+ 
+secara konsisten 
+\(Adia dan Huda 2025\
+, di mana pada penelitian ini fitur 
+stored generated column
+ 
+diimplementasikan untuk mengotomasi kalkulasi matematis luas ruangan dan total 
+nilai perolehan aset barang secara instan di tingkat basis data.
+ 
+2.8
+ 
+T
+ailwi
+nd CSS dan Alpine
+.js
+ 
+Tailwind CSS
+ 
+merupakan kerangka kerja CSS yang menggunakan 
+pendekatan 
+utility
+-
+first
+, yaitu penyusunan tampilan antarmuka melalui kombinasi 
+kelas
+-
+kelas utilitas di dalam 
+markup
+ 
+HTML untuk mengatur tipografi, warna, jarak, 
+tata letak, serta perilaku responsif pada berbagai ukuran layar 
+\(Rappin 2022\
+. 
+Pendekatan ini memberikan fleksibilitas tinggi bagi pengembang untuk 
+membangun antarmuka yang konsisten dan terbebas dari aturan gaya komponen 
+yang kaku, didukung mekanisme pembersihan kelas otomatis pada Tailwind 3 yang 
+menghasilkan berkas akhir yang sa
+ngat ringan. Di sisi interaktivitas, 
+Alpine.js
+ 
+hadir 
+ 
+10
+ 
+sebagai kerangka kerja JavaScript minimalis yang memungkinkan penambahan 
+perilaku dinamis secara deklaratif langsung di dalam 
+markup
+ 
+HTML melalui atribut 
+seperti 
+x
+-
+data
+, 
+x
+-
+show
+, dan 
+x
+-
+on
+ 
+\(Wiguna 
+et al.
+ 
+2025\
+. Karakteristik ini 
+memungkinkan pengembangan antarmuka reaktif tanpa beban konfigurasi dan 
+build pipeline
+ 
+yang kompleks layaknya kerangka kerja SPA besar.
+ 
+Sinergi penerapan Tailwind CSS dan Alpine.js bersama Laravel telah 
+ditunjukkan oleh 
+Wiguna et al. \(2025\
+ 
+dalam menghadirkan antarmuka sistem 
+administrasi berbasis web yang responsif, terpusat, dan interaktif. Dalam penelitian 
+ini, Tailwind CSS digunakan untuk menegakkan konsistensi visual aplikasi Sarpras 
+ESL melalui palet warna identitas institusi \(biru 
+navy
+ 
+#120F8B
+\serta memastikan 
+tata letak dasbor adaptif pada berbagai ukuran layar komputer maupun gawai. 
+Sementara itu, Alpine.js diimplementasikan untuk mengelola interaksi formulir 
+modal dialog mengambang \(
+floating modal
+\pada penambahan data barang dan 
+servis, serta pemfilteran tabel inventaris tanpa pemuatan ulang halaman penuh 
+melalui permintaan AJAX \(
+partial view swap
+\Kombinasi teknologi ini 
+menghasilkan antarmuka sistem yang modern, berkinerja gesit, serta mudah 
+dipelihara oleh staf pengelola departemen.
+ 
+2.9
+ 
+P
+rototyping Process Model
+ 
+Prototyping Process Model
+ 
+merupakan pendekatan pengembangan perangkat 
+lunak yang memanfaatkan purwarupa kerja \(
+working prototype
+\untuk memperjelas 
+kebutuhan serta memperoleh umpan balik dari pengguna secara berulang 
+\(Pressman 
+dan Maxim 2020\
+. Proses ini diawali dengan komunikasi \(
+communication
+\antara 
+pengembang dan pemangku kepentingan untuk mengidentifikasi kebutuhan awal, 
+dilanjutkan dengan perencanaan cepat \(
+quick plan
+\pemodelan perancangan cepat 
+\(
+modeling quick design
+\ serta konstruksi purwarupa \(
+construction of prototype
+\ 
+Purwarupa selanjutnya diserahkan kepada pengguna untuk dievaluasi pada tahap 
+penyerahan dan umpan balik \(
+deployment delivery and feedback
+\di mana masukan 
+yang dihimpun menjadi dasar penyempurnaan pada siklus berikutnya, sebagaimana 
+diilustrasikan pada Gambar 
+1.
+ 
+ 
+ 
+Gambar 
+1 
+Prototyping Process Model
+ 
+\(Pressman dan Maxim 2020\
+ 
+Dibandingkan dengan model sekuensial seperti 
+Waterfall
+ 
+yang membekukan 
+spesifikasi di awal pengembangan, 
+prototyping
+ 
+jauh lebih adaptif untuk sistem yang 
+alur operasionalnya memerlukan penyesuaian bertahap bersama pengguna nyata di 
+lapangan
+. Efektivitas pendekatan ini telah dibuktikan oleh 
+\(Kuncoro 
+et al.
+ 
+2025\
+ 
+dalam mempermudah penyesuaian alur persetujuan dan pengelolaan fasilitas 
+ 
+11
+ 
+kampus secara interaktif. Dalam penelitian ini, 
+Prototyping Process Model
+ 
+dipilih 
+untuk memfasilitasi penyempurnaan sistem Sarpras ESL secara bertahap bersama 
+staf pengelola Departemen ESL. Siklus purwarupa ini memastikan pemetaan kolom 
+impor DIR/DBR dari Excel, alur persetujuan dua tahap \(Admin dan Pimpinan\, 
+otomasi pengingat
+ 
+servis pemeliharaan, serta validasi bentrok jadwal peminjaman 
+dapat disempurnakan secara presisi agar sesuai dengan kebutuhan operasional 
+departemen.
+ 
+2.10
+ 
+Blackbox Testing
+ 
+Black Box Testing
+ 
+atau pengujian kotak hitam merupakan pendekatan 
+pengujian perangkat lunak yang mengevaluasi fungsionalitas sistem berdasarkan 
+spesifikasi kebutuhan tanpa memeriksa struktur kode internal maupun 
+implementasi algoritmanya
+ 
+\(Alshamaa dan Saleem 2025\
+. Pengujian dilakukan 
+dengan menyusun serta mengeksekusi serangkaian kasus uji \(
+test cases
+\yang 
+memuat kondisi awal, skenario masukan, langkah pengujian, dan keluaran yang 
+diharapkan, kemudian membandingkan hasil aktual dengan hasil yang diharapkan. 
+Berbeda dengan pengujian struktural internal, 
+black
+-
+box testing
+ 
+menitikberatkan 
+evaluasi pada perilaku sistem yang dapat diamati dari sudut pandang pengguna 
+akhir
+ 
+\(Hendartie 
+et al.
+ 
+2023\
+. Dalam penelitian ini, tingkat keberhasilan 
+fungsionalitas sistem dievaluasi secara kuantitatif menggunakan persentase kasus 
+uji yang lulus sebagaimana dirumuskan pada 
+persamaan berik
+ut
+:
+ 
+ 
+ 
+ 
+Keterangan:
+ 
+P
+ 
+= nilai persentase keberhasilan fungsionalitas sistem \(%\
+ 
+  
+= 
+jumlah kasus uji dengan hasil aktual sesuai hasil yang diharapkan
+ 
+ 
+= 
+jumlah
+ 
+total seluruh skenario kasus uji yang dieksekusi
+ 
+ 
+Penerapan 
+black
+-
+box testing
+ 
+pada sistem informasi inventaris di lingkungan 
+pendidikan terbukti efektif memverifikasi kesesuaian fitur aplikasi terhadap 
+kebutuhan bisnis organisasi
+ 
+\(Handoyo 
+et al.
+ 
+2024\
+. Dalam penelitian ini, pengujian 
+kotak hitam diimplementasikan untuk memverifikasi seluruh modul sistem Sarpras 
+ESL, mencakup pembatasan akses berdasarkan peran \(
+Role Middleware
+\validasi 
+pencegahan jadwal bentrok peminjaman, keakuratan penguraian data Excel pada 
+fitur 
+Smart Import
+, serta alur persetujuan pengajuan dua tahap. Setiap 
+ketidaksesuaian fungsionalitas yang ditemukan selama pengujian dicatat secara 
+sistematis untuk diperbaiki pada siklus iterasi prototipe sebelum sistem diterapkan 
+secara permanen di lingkungan Departemen 
+ESL FEM IPB University.
+ 
+ 
+ 
+ 
+ 
+12
+ 
+III
+ 
+METODE
+ 
+3.1
+ 
+Waktu dan Tempat
+ 
+Penelitian dan pengembangan sistem informasi ini dilaksanakan di 
+Departemen Ekonomi Sumberdaya dan Lingkungan \(ESL\, Fakultas Ekonomi dan 
+Manajemen \(FEM\ IPB University, yang beralamat di Kampus IPB Dramaga, 
+Jalan Agatis, Babakan, Kecamatan Dramaga, Kabup
+aten Bogor, Jawa Barat. 
+Pengambilan data observasi, wawancara alur kerja, serta pengujian sistem 
+dilakukan langsung pada unit kerja tata usaha dan pengelolaan sarana prasarana 
+Departemen ESL FEM IPB University. Waktu penelitian berlangsung selama 
+empat bul
+an, dimulai dari bulan Juli hingga Oktober 2026, mencakup seluruh fase 
+pengembangan mulai dari analisis kebutuhan, perancangan arsitektur, 
+implementasi sistem, hingga evaluasi akhir perangkat lunak.
+ 
+3.2
+ 
+Teknik 
+Pengumpulan Data
+ 
+Teknik pengumpulan data yang digunakan dalam penelitian ini bersifat 
+purposif dan terstruktur, disesuaikan dengan kebutuhan analisis tata kelola sarana 
+dan prasarana. Terdapat dua metode utama yang diterapkan, yaitu sebagai berikut.
+ 
+ 
+Studi Literatur
+ 
+Studi literatur dilakukan untuk membangun landasan teoritis dan teknis 
+dalam rekayasa perangkat lunak sistem informasi manajemen inventaris. 
+Sumber kepustakaan yang dikaji mencakup buku teks, artikel jurnal ilmiah, 
+prosiding nasional/internasional, serta d
+okumentasi teknis resmi 
+terkait
+ 
+Framework Laravel
+, arsitektur
+ 
+Model
+-
+View
+-
+Controller
+ 
+\(MVC\basis 
+data relasional
+ 
+MySQL
+,
+ 
+Tailwind CSS
+,
+ 
+Alpine.js
+, pustaka pengolah lembar 
+kerja
+ 
+Maatwebsite Excel
+, dan generator dokumen
+ 
+Laravel DomPDF
+. Selain itu, 
+studi litera
+tur juga mencakup penelaahan terhadap regulasi dan format standar 
+pengelolaan aset di lingkungan IPB University, khususnya format Daftar 
+Inventaris Ruangan \(DIR\n Daftar Barang Ruangan \(DBR\
+ 
+ 
+Wawancara dan Observasi
+ 
+Wawancara terstruktur dilakukan bersama Staf Administrasi/Tata Usaha 
+dan Pengelola Sarpras Departemen ESL FEM IPB University untuk 
+mengidentifikasi proses bisnis yang sedang berjalan, permasalahan utama 
+pencatatan manual berbasis
+ 
+spreadsheet
+, kendala keterlambatan servis 
+pemeliharaan, serta alur disposisi persetujuan pengadaan dan perbaikan sarpras. 
+Selain wawancara, dilakukan observasi langsung terhadap berkas
+-
+berkas 
+pencatatan fisik, struktur kolom pada arsip Excel DIR/DBR departemen, kartu
+ 
+inventaris rua
+ngan, buku peminjaman fasilitas, serta alur pengajuan nota 
+perbaikan kendaraan operasional. Data hasil wawancara dan observasi ini 
+digunakan sebagai acuan dasar dalam menyusun daftar kebutuhan fungsional 
+sistem informasi yang akan dikembangkan.
+ 
+ 
+3.3
+ 
+Prosedur Kerja
+ 
+ 
+Prosedur kerja dalam penelitian ini mengacu pada tahapan
+ 
+Prototyping 
+Process Model
+ 
+menurut 
+Pressman dan Maxim 
+\(
+2020\
+ 
+yang dilakukan secara 
+iteratif.
+ 
+ 
+ 
+13
+ 
+Prosedur kerja 
+penelitian ini mengikuti pendekatan
+ 
+prototype model
+ 
+yang 
+merupakan salah satu metode pengembangan perangkat lunak di mana sistem 
+dibangun secara bertahap melalui siklus yang berulang \(
+iterative
+\Pendekatan ini 
+dipilih karena karakteristik sistem informasi inventarisasi sarpras memerlukan 
+penyesuaian alur kerja operasional secara bertahap bersama pengguna, seperti 
+validasi format impor DIR/DBR, verifikasi pengajuan bertingkat, serta penyesuaian 
+hak akses multi
+-
+peran \(Pressman 
+& Maxim, 
+20
+20
+\Tahapan prosedu
+r kerja 
+penelitian ini terdiri atas lima fase utama sebagaimana dijelaskan berikut.
+ 
+ 
+Communication
+ 
+Pada tahap
+ 
+communication
+ 
+dilakukan pengumpulan kebutuhan sistem 
+melalui studi literatur, observasi berkas, dan wawancara langsung dengan pihak 
+pengelola sarpras Departemen ESL FEM IPB University. Pada tahap ini, peneliti 
+mengidentifikasi masalah utama yang dihadapi, yaitu fragment
+asi data 
+arsip
+ 
+spreadsheet
+ 
+di tiap ruangan tanpa basis data terpusat, alur pengajuan 
+perbaikan yang tidak terdokumentasi secara transparan, ketiadaan sistem 
+peringatan dini servis preventif berkala, 
+serta 
+potensi bentrok jadwal 
+pem
+injaman ruangan terhadap fasilitas ruangan. Hasil dari tahap ini adalah daftar 
+kebutuhan awal sistem informasi inventarisasi sarpras beserta identifikasi peran 
+pengguna \(
+user personas
+\
+ 
+ 
+Quick Plan
+ 
+Pada tahap
+ 
+quick plan
+, dilakukan identifikasi kebutuhan fungsional sistem 
+secara terstruktur yang disajikan pada Tabel 2. Tahapan ini krusial karena hasil 
+identifikasi kebutuhan tersebut nantinya akan menjadi landasan fundamental 
+dalam merumuskan arsitektur sistem dan skema ba
+sis data relasional. Agar 
+proses implementasi kode program dapat berjalan selaras dengan spesifikasi 
+yang ditentukan, ditetapkan pula lingkungan pengembangan dan tumpukan 
+teknologi \(
+technology stack
+\yang digunakan, sebagaimana disajik
+an pada Tabel 
+2
+.
+ 
+Tabel 2. 
+Technology Stac
+k
+ 
+No.
+ 
+Nama
+ 
+Keterangan
+ 
+1
+ 
+Visual Studio 
+Code
+ 
+Editor kode utama untuk pengembangan kode 
+program
+ 
+backend
+ 
+dan
+ 
+frontend
+.
+ 
+2
+ 
+PHP 8.4
+ 
+Bahasa pemrograman utama 
+sisi peladen \(
+server
+-
+side scripting
+\ka bisnis sistem.
+ 
+3
+ 
+Framework 
+Laravel 13
+ 
+Kerangka kerja MVC berbasis PHP untuk 
+mengelola
+ 
+routing
+, autentikasi,
+ 
+middleware
+, dan 
+logika aplikasi.
+ 
+4
+ 
+MySQL
+ 
+Basis data relasional \(RDBMS\untuk menyimpan 
+data master, aset, transaksi pengajuan, dan log 
+servis.
+ 
+5
+ 
+Tailwind CSS
+ 
+Kerangka kerja
+ 
+utility
+-
+first CSS
+ 
+untuk membangun 
+antarmuka web modern, responsif, dan konsisten.
+ 
+6
+ 
+Alpine.js
+ 
+Pustaka JavaScript deklaratif untuk menangani 
+interaktivitas antarmuka 
+dinamis \(
+floating modal
+, 
+AJAX
+ 
+filter
+\
+ 
+ 
+14
+ 
+7
+ 
+Maatwebsite 
+Excel
+ 
+Pustaka PHP untuk ekspor rekapitulasi laporan 
+dan
+ 
+parsing
+ 
+impor data inventaris dari berkas
+ 
+.xlsx.
+ 
+8
+ 
+Barryvdh Laravel 
+DomPDF
+ 
+Pustaka pembuat dokumen PDF resmi berstandar 
+universitas lengkap dengan kop surat dan kolom 
+pengesahan.
+ 
+9
+ 
+Figma
+ 
+Perangkat lunak desain berbasis web untuk 
+merancang purwarupa visual \(
+wireframe/mockup
+\
+sebelum
+ 
+coding
+.
+ 
+10
+ 
+Web Browser 
+\(Google Chrome\
+ 
+Peramban web untuk pengujian tampilan 
+antarmuka, fungsionalitas tombol
+, dan konsol 
+jaringan AJAX.
+ 
+ 
+Tabel
+ 
+3. Kebutuhan Fungsional Sistem
+ 
+No.
+ 
+Kode
+ 
+Kebutuhan Fungsional
+ 
+Prioritas
+ 
+1
+ 
+KF
+-
+01
+ 
+Pengguna dapat melakukan login, pendaftaran 
+akun mandiri, serta admin dapat mengaktivasi 
+akun dan menetapkan
+ 
+role
+.
+ 
+Tinggi
+ 
+2
+ 
+KF
+-
+02
+ 
+Sistem menampilkan dasbor analitik berupa 
+ringkasan KPI aset, grafik kondisi barang, 
+kalender agenda, dan alur tiket.
+ 
+Tinggi
+ 
+3
+ 
+KF
+-
+03
+ 
+Admin dapat mengelola master data gedung, 
+ruangan, jenis barang, unit bagian, vendor, dan 
+koordinator ruangan.
+ 
+Tinggi
+ 
+4
+ 
+KF
+-
+04
+ 
+Pengguna \(Admin dan Koordinator Ruangan\ 
+dapat mencatat, memperbarui, dan melihat detail 
+barang inventaris per ruangan.
+ 
+Tinggi
+ 
+5
+ 
+KF
+-
+05
+ 
+Sistem menyediakan fitur impor data barang 
+fleksibel melalui unggah berkas Excel \(.xlsx\ 
+dan tempel \(
+paste
+\ari
+ 
+clipboard
+.
+ 
+Tinggi
+ 
+6
+ 
+KF
+-
+06
+ 
+Pengguna dapat mengajukan permohonan 
+sarpras \(pengadaan/perbaikan\ melalui alur 
+verifikasi bertahap \(Admin dan Pimpinan\
+ 
+Tinggi
+ 
+7
+ 
+KF
+-
+07
+ 
+Teknisi dan Admin dapat mencatat tindakan 
+pemeliharaan serta sistem otomatis 
+menjalankan
+ 
+scheduler
+ 
+pengingat servis 
+berkala.
+ 
+Tinggi
+ 
+8
+ 
+KF
+-
+08
+ 
+Pengguna dapat mengajukan peminjaman 
+ruangan/alat dengan validasi pencegahan jadwal 
+bentrok \(
+conflict detection
+\
+ 
+Tinggi
+ 
+9
+ 
+KF
+-
+09
+ 
+Sistem menyediakan modul 
+Maintenance & 
+Repair \(MR\untuk pemantauan kondisi fisik 
+aset dan pencatatan riwayat 
+pemeliharaan/servis
+.
+ 
+Sedang
+ 
+10
+ 
+KF
+-
+10
+ 
+Admin dapat mengelola data inventaris 
+transportasi, memantau jatuh tempo 
+Sedang
+ 
+ 
+15
+ 
+pajak/STNK, dan riwayat servis kendaraan 
+operasional.
+ 
+11
+ 
+KF
+-
+11
+ 
+Pengguna dapat 
+menyaring dan mengekspor 
+laporan inventaris sarpras ke dalam format cetak 
+resmi PDF dan format Microsoft Excel.
+ 
+Tinggi
+ 
+ 
+ 
+Mod
+eling Quick 
+Design
+ 
+Pada tahap
+ 
+modeling quick design
+, hasil analisis kebutuhan fungsional 
+diterjemahkan ke dalam bentuk representasi visual dan pemodelan arsitektur 
+sistem. Pemodelan dilakukan melalui beberapa artefak desain, yaitu:
+ 
+1.
+ 
+Use Case Diagram: Menggambarkan interaksi antara aktor pengguna 
+\(Admin, Dosen/Tendik selaku Koordinator Ruangan, Teknisi, 
+serta 
+Pimpinan\ dengan 
+fungsi
+-
+fungsi utama sistem.
+ 
+2.
+ 
+Activity Diagram: Menggambarkan alur aktivitas proses bisnis utama, 
+meliputi alur pengajuan sarpras bertingkat, alur validasi pencegahan 
+bentrok peminjaman ruangan, alur pemrosesan pemeliharaan aset, serta 
+alur penguraian data \(
+parsing
+\ri lembar kerja Excel.
+ 
+3.
+ 
+Entity Relationship Diagram \(ERD\: Menggambarkan skema relasi 
+basis data terpusat, mencakup entitas users, Gedung, ruangan, 
+ruangan_koordinator, jenis_barang, barang, pengajuan, pemeliharaan, 
+peminjaman, 
+kendaraan, servis_kendaraan, notifikasi, dan import_logs.
+ 
+4.
+ 
+Desain Antarmuka \(
+Wireframing & Mockup
+\Merancang tata letak 
+antarmuka aplikasi menggunakan Figma dengan mengadopsi palet 
+warna institusi \(biru
+ 
+navy
+ 
+#120F8B\serta pola komponen interaktif 
+berbasis modal dialog mengambang \(
+floating modal
+\
+ 
+ 
+Const
+ru
+c
+tion of Prototype
+ 
+Tahap
+ 
+construction of prototype
+ 
+merupakan tahap realisasi desain ke 
+dalam bentuk kode program fungsional. Pembangunan prototipe dilakukan 
+melalui penerapan arsitektur
+ 
+Model
+-
+View
+-
+Controller
+ 
+\(MVC\ 
+menggunakan
+ 
+Framework Laravel
+:
+ 
+1.
+ 
+Lapisan Basis Data & Model \(
+Backend
+\Membuat skema tabel melalui 
+fitur
+ 
+Laravel Migration
+, mendefinisikan
+ 
+stored generated 
+column
+ 
+\(luas_m2
+ 
+dan
+ 
+total_harga\mengonfigurasi relasi antar
+-
+tabel 
+\(
+one
+-
+to
+-
+many
+,
+ 
+many
+-
+to
+-
+many
+ 
+pivot\pada
+ 
+Eloquent ORM
+, serta 
+membuat
+ 
+scheduler console command
+ 
+untuk pemindaian jatuh tempo 
+servis harian.
+ 
+2.
+ 
+Lapisan Kendali & Logika Bisnis \(
+Controller & Middleware
+\ 
+Menyusun logika validasi formulir, otorisasi hak akses 
+berbasis
+ 
+role
+ 
+\(
+Role Middleware
+\algoritma pengecekan bentrok 
+rentang tanggal peminjaman, serta
+ 
+parser
+ 
+cerdas untuk memetakan 
+kolom DIR/DBR dari
+ 
+clipboard
+ 
+Excel.
+ 
+3.
+ 
+Lapisan Antarmuka \(
+View & Frontend
+\Membangun tampilan modular 
+menggunakan
+ 
+Blade Templating
+, merancang elemen
+ 
+visual responsif 
+menggunakan
+ 
+Tailwind CSS
+, serta mengimplementasikan interaktivitas 
+reaktif menggunakan
+ 
+Alpine.js
+ 
+\(seperti modal formulir dinamis dan 
+pemfilteran tabel interaktif berbasis AJAX tanpa memuat ulang 
+halaman secara penuh\
+ 
+ 
+16
+ 
+ 
+Deplo
+yment 
+Delivery and Feedback
+ 
+Pada tahap
+ 
+deployment delivery and feedback
+, prototipe sistem yang telah 
+selesai dibangun diuji dan dievaluasi secara bertahap:
+ 
+1.
+ 
+Pengujian Fungsional \(
+Black Box Testing
+\Pengujian dilakukan untuk 
+memverifikasi bahwa seluruh kebutuhan fungsional \(KF
+-
+01 hingga KF
+-
+1
+1
+\dapat berjalan dengan benar sesuai spesifikasi masukan dan 
+keluaran yang diharapkan tanpa kegagalan sistem.
+ 
+2.
+ 
+Umpan Balik Pengguna \(
+User Feedback
+\Prototipe diserahkan kepada 
+pihak pengelola sarpras Departemen ESL FEM IPB University untuk 
+diujicobakan dalam skenario operasional nyata. Umpan balik yang 
+diperoleh mengenai kesesuaian alur kerja, kemudahan tata letak 
+antarmuka, dan validasi berkas lap
+oran dicatat sebagai dasar iterasi 
+penyempurnaan pada siklus pengembangan berikutnya.
+ 
+ 
+ 
+ 
+IV
+ 
+HASIL DAN PEMBAHASAN \(terpisah atau gabung\
+ 
+Dalam penulisan hasil dan pembahasan dapat dipisah sebagai bab Hasil dan 
+bab Pembahasan, atau digabung menjadi bab Hasil dan Pembahasan. 
+Bila Hasil dan 
+Pembahasan disatukan dalam satu bab, data/temuan disajikan dahulu, diberi 
+penjelasan yang cukup untuk temuan yang penting, dilanjutkan dengan penafsi
+ran, 
+kemudian dengan pembahasan
+.
+ 
+4.1
+ 
+Hasil
+ 
+ 
+Hasil
+ 
+menampilkan
+ 
+data/temuan
+ 
+dan
+ 
+dapat
+ 
+dibagi
+ 
+dalam
+ 
+beberapa
+ 
+subbab
+ 
+sesuai
+ 
+dengan
+ 
+tujuan
+. 
+Data dapat disajikan dengan ilustrasi dalam bentuk Tabel atau 
+Gambar \(peta, denah, foto, diagram\ 
+Ilustrasi harus mampu berdiri sendiri, artinya 
+mudah dipahami pembaca tanpa harus merujuk teks. Tujuannya adalah membantu 
+pembaca memahami data dan menarik informasi penting dengan cepat \(
+storytelling 
+with data
+\
+ 
+Semua
+ 
+ilustrasi
+ 
+harus
+ 
+diletakkan
+ 
+sedekat
+-
+dekatnya
+ 
+dengan
+ 
+teks
+ 
+yang
+ 
+menyatakan
+ 
+keberadaannya
+. P
+erujukan pada ilustrasi dinyatakan di dalam paragraf 
+bila diikuti dengan nomor. Nomor tabel atau gambar berurut sesuai dengan urutan 
+ke
+munculannya dalam tubuh tulisan
+. Contohnya adalah sebagai berikut:
+ 
+ 
+... seperti ditunjukkan pada Gambar 5.
+ 
+ 
+... mendekati bentuk sigmoid \(Gambar 5\
+ 
+ 
+... meningkat dengan pesat \(Tabel 3\
+ 
+...\(
+lihat
+ 
+Lampiran 1\
+ 
+Perujukan pada ilustrasi yang tidak disertai dengan keterangan harus dihindari.
+ 
+ 
+Misalnya:
+ 
+ 
+ 
+ 
+Pernyataan yang lebih baik ialah
+ 
+ 
+ 
+ 
+Tabel 
+1
+ 
+Judul 
+tabel
+ 
+biasanya pendek tanpa diakhiri tanda titik
+a
+ 
+Judul kolom 
+pertama
+ 
+ 
+Judul kolom
+b
+ 
+ 
+Judul kolom
+b
+ 
+ 
+Subjudul 
+kolom
+ 
+ 
+Subjudul 
+kolom
+ 
+ 
+Subjudul 
+kolom
+ 
+ 
+Subjudul 
+kolom
+ 
+ 
+ 
+ 
+[area informasi]
+ 
+ 
+Judul baris
+c
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Subjudul baris
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Subjudul baris
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Judul baris
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Subjudul baris
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Subjudul baris
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+[area informasi]
+ 
+ 
+a
+ 
+[catatan kaki] Sumber [jika ada]: xxxx xxxx.[titik] 
+b
+ 
+[catatan kaki] xxxx xxxx.[titik] 
+c
+ 
+[catatan kaki] 
+xxxx xxxx.[titik]
+ 
+ 
+Catatan kaki diketik dengan fon
+t
+ 
+Times New Roman 10 pt. Antara baris pertama catatan
+ 
+kaki dan 
+garis dasar tabel diberi jarak 3 pt.
+ 
+ 
+19
+ 
+Tabel 
+2
+ 
+Tingkat kekerasan dan kandungan gula buah pisang ambon pada suhu 
+simpan yang
+ 
+berbeda dan pemberian putresina
+ 
+\(Jika judul 
+tabel
+ 
+lebih 
+dari satu baris, maka baris selanjutnya
+ 
+sejajar dengan kata pertama 
+pada judul tabel\
+ 
+Perlakuan
+ 
+Kekerasan buah dan kandungan gula pada hari ke
+-
+ 
+0
+ 
+7
+ 
+14
+ 
+ 
+Kekerasan buah \(mm 50 g
+-
+1
+ 
+detik
+-
+1
+\
+a
+ 
+Suhu simpan
+ 
+ 
+ 
+ 
+   
+15 ºC
+ 
+10,
+20
+a
+ 
+13,
+40
+a
+ 
+11,
+83
+a
+ 
+   
+28 ºC
+ 
+10,
+64
+a
+ 
+14,
+22
+a
+ 
+88,
+43
+b
+ 
+Putresina
+ 
+ 
+ 
+ 
+   
+Dengan putresina
+ 
+11,
+07
+a
+ 
+13,
+23
+a
+ 
+21,
+19
+a
+ 
+   
+Tanpa putresina
+ 
+10,
+76
+a
+ 
+14,
+40
+a
+ 
+41,
+82
+b
+ 
+ 
+Gula \(%\
+a
+ 
+Suhu simpan
+ 
+ 
+ 
+ 
+   
+15 ºC
+ 
+  
+0,
+38
+a
+ 
+  
+0,
+56
+a
+ 
+  
+0,
+73
+a
+ 
+   
+28 ºC
+ 
+  
+0,
+55
+a
+ 
+  
+1
+,
+82
+a
+ 
+14,
+41
+b
+ 
+Putresina
+ 
+ 
+ 
+ 
+   
+Dengan putresina
+ 
+  
+0,
+53
+a
+ 
+  
+0,
+87
+a
+ 
+  
+6,
+98
+a
+ 
+   
+Tanpa 
+putresina
+ 
+  
+0,
+40
+a
+ 
+  
+1,
+52
+a
+ 
+  
+6,
+91
+a
+ 
+a
+Angka
+-
+angka pada kolom yang sama yang diikuti oleh huruf yang sama tidak berbeda nyata pada 
+taraf uji 5% \(uji selang berganda Duncan\.
+ 
+ 
+ 
+ 
+Gambar 
+1
+ 
+Pemilihan warna dan motif batang
+ 
+pada diagram batang yang jelas 
+menunjukkan keterbacaan 
+error bar
+, \(a\dua batang dengan penanda 
+signifikansi \(*\, \(b\ beberapa batang dengan variasi warna yang ramah 
+buta warna dan motif yang berbeda namun mudah dibaca. Penanda 
+statistika \(asteriks atau huruf\dapat diletakkan langsung di atas balok. 
+Notasi pada tiap b
+atang sudah jelas sehingga legenda tidak dicantumkan. 
+Legenda atau keterangan lain dapat dicantumkan di judul gambar. Data 
+pada diagram adalah random dan dibuat dengan Microsoft Excel fo
+r
+ 
+Mac
+ 
+Version 16.89. 
+ 
+ 
+20
+ 
+Penempatan ilustrasi \(tabel dan gambar\di dalam teks memerlukan perhatian 
+khusus untuk memastikan kualitas visualisasi ilmiah, keterbacaan, dan estetika. 
+Pengaturan yang tepat menjamin pembaca dapat dengan mudah menghubungkan 
+teks dengan ilustrasi yang di
+sajikan. Berikut adalah panduan umum tentang 
+penempatan ilustrasi.
+ 
+ 
+a.
+ 
+Kedekatan dengan teks rujukan: Setiap ilustrasi ditempatkan sedekat mungkin 
+setelah kalimat di dalam teks yang merujuk atau membahas ilustrasi tersebut. 
+Hal ini akan meminimalkan gangguan alur baca dan memudahkan pembaca 
+mengaitkan informasi.
+ 
+ 
+b.
+ 
+Posisi peletakan ideal: Ilustrasi diletakkan di tengah halaman secara horizontal, 
+memanfaatkan ruang yang tersedia. Ilustrasi diposisikan sedemikian rupa 
+sehingga judul ilustrasi berada di satu halaman yang sama. Penting juga untuk 
+tidak meninggalkan ruang
+ 
+kosong setelah ilustrasi dan memastikan ada 
+teks/paragraf yang mengikutinya.
+ 
+ 
+c.
+ 
+Efisiensi ruang dan orientasi: Ilustrasi disajikan dan diatur agar muat dalam 
+satu halaman. Jika diperlukan, orientasi halaman bisa diubah menjadi lanskap 
+untuk mengakomodasi ilustrasi yang lebar. Untuk tabel, format yang pendek 
+dan lebar lebih disukai dar
+ipada yang panjang dan sempit. Apabila tabel 
+dengan baris yang banyak tidak dapat dihindari, judul kolom berulang \(
+repeat 
+header row
+\bisa digunakan, sehingga tiap halaman sambungan memiliki judul 
+kolom.
+ 
+ 
+4.2
+ 
+Pembahasan
+ 
+ 
+Pembahasan
+ 
+merupakan
+ 
+interpretasi
+ 
+atau
+ 
+penjelasan
+ 
+atas
+ 
+data
+ 
+hasil
+ 
+kegiatan
+ 
+tugas
+ 
+akhir.
+ 
+Dalam
+ 
+pembahasan,
+ 
+atau
+ 
+penjelasan
+ 
+tersebut
+ 
+harus
+ 
+dikaitkan
+ 
+dengan
+ 
+pustaka,
+ 
+terutama
+ 
+yang
+ 
+mutakhir,
+ 
+primer,
+ 
+dan
+ 
+kredibel.
+ 
+Pernyataan
+-
+pernyataan 
+dalam paragraf dikemas dengan baik, dimulai dari pendapat sendiri di awal paragraf, 
+diikuti dengan dukungan pustaka, dan diak
+hiri dengan kalimat penyimpulan
+. 
+Argumentasi dikemukakan secara singkat dan logis yang difokuskan untuk 
+menjawab tujuan dan menguji hipotesis \(jika ada\
+.
+ 
+Ar
+gumentasi dikemukakan 
+untuk menunjukkan persamaan, membahas perbedaan, dan penyebab timbulnya 
+perbedaan, dikaitkan dengan teori dan temuan
+-
+temuan sebelumnya yang relevan. 
+Pembahasan berupaya menunjukkan aspek
+-
+aspek baru yang ditemukan dan 
+merupakan satu ke
+satuan
+.
+ 
+Pembahasan
+ 
+juga
+ 
+dapat
+ 
+mengemukakan
+ 
+keterbatasan
+ 
+dalam
+ 
+kegiatan
+ 
+tugas
+ 
+akhir
+ 
+yang
+ 
+dilaksanakan
+.
+ 
+T
+erdapat tiga tingkatan kedalaman dalam pembahasan hasil penelitian, yaitu 
+menunjukkan kejadian, pola, dan struktur. Dalam menunjukkan kejadian, peneliti 
+hanya membaca fakta
+-
+fakta hasil penelitian/kajian yang diperoleh. Dalam 
+menunjukkan pola, peneliti memp
+erhatikan keteraturan atau kecenderungan dari 
+fakta
+-
+fakta hasil penelitian/kajian. Dalam menunjukkan struktur, peneliti 
+menjelaskan lebih lanjut dari pola dengan menjawab pertanyaan mengapa pola itu 
+terjadi, dan faktor apa yang menyebabkan pola itu terjadi
+. Pembahasan dengan 
+menunjukkan struktur memerlukan dukungan teori atau rujukan hasil
+-
+hasil 
+penelitian
+/kajian
+ 
+terdahulu yang telah teruji secara ilmiah.
+ 
+Pendapat peneliti 
+terdahulu yang sudah diringkas dalam bab Pendahuluan atau bab Tinjauan Pustaka 
+tidak perlu diulang lagi, tetapi diacu saja seperlunya
+. 
+Sebaiknya, dalam pembahasan 
+juga dapat diberikan implikasi penerapan temuan baru dan segi
+-
+segi lain yang perlu 
+diteliti lebih lanjut. 
+Pembahasan diakhiri dengan kalimat positif, tegas, dan kuat.
+ 
+ 
+ 
+ 
+V
+ 
+SIMPULAN
+ 
+DAN SARAN
+ 
+5.1
+ 
+Simpulan
+ 
+Simpulan ditulis dalam bentuk paragraf yang efektif sesuai dengan tujuan 
+penelitian.
+ 
+Simpulan merupakan jawaban dari tujuan yang sudah ditentukan dan 
+tidak dima
+ksudkan sebagai ringkasan hasil
+. S
+impulan merupakan hasil penelitian 
+yang boleh jadi telah dikemukakan dalam perumusan masalah dan telah diberi 
+jawaban sementara berupa hipotesis. Dalam menulis simpulan, penulis harus 
+membedakan dugaan, temuan, dan simpulan hasil studi. Pernyataan simpulan
+ 
+harus 
+dilakukan secara cermat dan hati
+-
+hati. Penyampaian simp
+ulan ini dapat dilakukan 
+sebanyak 3 kali, yakni dalam 
+p
+embahasan, 
+s
+impulan, dan 
+a
+bstrak sehingga 
+diperlukan kecermatan untuk menyajikannya dengan ungkapan yang berbeda
+-
+beda.
+ 
+5.2
+ 
+Saran
+ 
+Saran 
+sebaiknya
+ 
+mengarah ke implikasi atau tindakan lanjutan yang harus 
+dilakukan sehubungan denga
+n temuan atau simpulan penulis
+. 
+Saran yang 
+dikemukakan harus berkaitan dengan pelaksanaan atau hasil penelitian. Dengan 
+demikian saran ini mengemukakan hal
+-
+hal yang perlu diteliti lebih lanjut terutama 
+untuk memperbaiki kelemahan atau kekurangan dalam penelitian yang dilakukan
+ 
+atau perbaikan asumsi yang diambil sehingga didapatkan hasil yang lebih baik. Jadi, 
+saran tersebut 
+harus diuraikan secara spesifik
+. 
+Jang
+an menyarankan hal
+-
+hal yang 
+tidak dianalisis dan dibahas dalam penelitian serta terkesan menggurui at
+au 
+memuaskan keinginan peneliti
+. 
+Untuk penelitian yang berkaitan dengan 
+permasalahan kebijakan, tidak perlu menyarankan kebijakan yang tidak berkaitan 
+dengan hasil penelitian.
+ 
+ 
+ 
+DAFTAR PUSTAKA
+ 
+Adia A, Huda Y. 2025. Rancang Bangun Sistem Informasi Manajemen Inventaris 
+Sekolah di SMA Negeri 6 Solok Selatan. 
+MASALIQ
+. 5\(3\:1213
+1226.doi:10.58578/masaliq.v5i3.5871.
+ 
+literature review. 
+passer journal of basic and applied sciences
+. 7\(2\:1001
+1011.doi:10.24271/psr.2025.508216.1963.
+ 
+Amiruddin A, Nurhasanah S, Saraini I, Amalia C, Ningsih PR, Febriyan R. 2023. 
+Sistem Informasi Pendukung Pengambilan Keputusan Manajemen 
+Pendidikan. 
+MODELING: Jurnal Program Studi PGMI
+. 10\(3\
+371.doi:10.69896/modeling.v10i3.1669.
+ 
+Apriliani S, Setyaningsih K, Rohman A. 2025. Inventarisasi Sarana dan Prasarana 
+Pendidikan di SMPN 50 Palembang. 
+Indo
+-
+MathEdu Intellectuals Journal
+. 
+6\(1\:661
+669.doi:10.54373/imeij.v6i1.2556.
+ 
+Arvanullah, Kurniawati R. 2024. PERANCANGAN SISTEM INFORMASI 
+PERSEDIAAN BARANG BERBASIS WEB DENGAN FRAMEWORK 
+LARAVEL \(STUDI KASUS PADA DIREKTORAT SARANA 
+PRASARANA UNIVERSITAS KRISTEN MARANATHA\
+INFOKOM 
+\(Informatika & Komputer\
+. 12\(1\
+27.doi:10.56689/infokom.v12i1.1141.
+ 
+Balaji T, Hari V, Lathifunnisa S, Ganesh P, Arupya P. 2024. Optimizing Web
+-
+based 
+Inventory Management system using QR code Technology. Di dalam: 
+2024 
+7th International Conference on Circuit Power and Computing Technologies 
+\(ICCPCT\
+. IEEE. hlm. 751
+756.
+ 
+Elmasri R, Navathe SB. 2021. 
+Fundamentals of Database Systems
+. Ed ke
+-
+7. 
+Pearson.
+ 
+Gurnita RFA, Soesanto RP, Kurniawati A, Hasanudin FH. 2026. Improving 
+Preventive Maintenance Efficiency in University Laboratories Using Radio 
+Frequency Identification
+-
+Based Decision Support System and Rapid 
+Application Development Method. Di dalam: 
+IEEE ICCBE 2025
+. Basel 
+Switzerland: MDPI. hlm. 41.
+ 
+Handoyo MA, Jaya F, Shofan R R. 2024. RANCANG BANGUN SISTEM 
+INFORMASI INVENTARIS MENGGUNAKAN FRAMEWORK 
+LARAVEL 8.0 DI SDN 1 DAWUHAN. 
+CERMIN: Jurnal Penelitian
+. 
+8\(2\:443
+451.doi:10.36841/cermin_unars.v8i2.5500.
+ 
+Hendartie S, Jayanti S, Sutejo H. 2023. PENGUJIAN APLIKASI PENERIMAAN 
+MAHASISWA BARU \(PMB\STMIK PALANGKARAYA 
+MENGGUNAKAN BLACK BOX TESTING. 
+Jurnal Sains Komputer dan 
+Teknologi Informasi
+. 5\(2\:31
+40.doi:10.33084/jsakti.v5i2.5021.
+ 
+Kuncoro WD, Taufiq R, Priyanggodo DY, Sugiani Y. 2025. Rancang Bangun 
+Aplikasi Peminjaman Ruang Sidang Berbasis WEB Menggunakan 
+Framework Laravel. 
+Jurnal Sistem Informasi dan Teknologi Peradaban
+. 
+6\(1\:1
+10.doi:10.58436/jsitp.v6i1.2239.
+ 
+Kusumojati PP, Mediawati E. 2024. Web
+-
+Based Asset Management Information 
+Systems in Higher Education. 
+International Journal of Business, Law, and 
+Education
+. 5\(1\:398
+411.doi:10.56442/ijble.v5i1.382.
+ 
+ 
+25
+ 
+Laudon KC, Laudon JP. 2022. 
+Management Information Systems: Managing the 
+Digital Firm
+. Ed ke
+-
+17. Harlow: Pearson.
+ 
+Muftinisa A, Rosalina, Ginanjar R, Wahyu RB, Hadisukmana N. 2017. 
+Development and implementation of fixed asset management system. Di 
+dalam: 
+2017 Second International Conference on Informatics and Computing 
+\(ICIC\
+. IEEE. hlm. 1
+6.
+ 
+Nixon R. 2021. 
+Learning PHP, MySQL & JavaScript
+. Ed ke
+-
+ 
+Pampana AK, Jeon J, Yoon S, Weidner TJ, Hastak M. 2022. Data
+-
+Driven Analysis 
+for Facility Management in Higher Education Institution. 
+Buildings
+. 
+12\(12\10.3390/buildings12122094.
+ 
+Powers D. 2022. 
+PHP 8 Solutions: Dynamic Web Design and Development Made 
+Easy
+. Apress.
+ 
+Pressman RS., Maxim BR. 2020. 
+. 
+McGraw
+-
+Hill Education.
+ 
+Rahmasari CB, Parlika R. 2026. Design and Build a Web
+-
+Based State Asset 
+Monitoring Dashboard System at the State Wealth and Auction Office 
+\(KPKNL\ Using the Laravel Framework. 
+Jurnal Ilmiah Global Education
+. 
+7\(3\:2875
+2897.doi:10.55681/jige.v7i3.6721.
+ 
+Rappin N. 2022. 
+Modern CSS with Tailwind: Flexible Styling Without the Fuss
+. Ed 
+ke
+-
+2. The Pragmatic Bookshelf.
+ 
+Salwa T, Ahmad N. 2026. Pengembangan Sistem Inventaris Perangkat 
+Laboratorium Komputer Berbasis Web Menggunakan Metode Waterfall. 
+Coding: Jurnal Komputer dan Aplikasi
+. 14\(2\
+402.doi:c.
+ 
+Sejati MB. 2025. STUDI PERBANDINGAN FRAMEWORK LARAVEL DAN 
+CODEIGNITER 3: OPTIMALISASI PERFORMA APLIKASI WEB. 
+Jurnal 
+PROSISKO
+. 12\(2\
+96.
+ 
+Sistem Informasi Manajemen Rumah Sakit \(SIMRS\Dalam Meminimalisir 
+Human Error pada Pengelolaan Data di Rumah Sakit: Studi Literatur. 
+. 4\(4\:44
+60.doi:10.61132/merkurius.v4i4.1660.
+ 
+Sommerville I. 2021. 
+Software Engineering
+. Ed ke
+-
+10. Pearson.
+ 
+Stauffer M. 2023. 
+Laravel: Up & Running
+. Ed ke
+-
+ 
+Susanti E, Martalia D, Aradhea Ekatama R, Maruloh M. 2026. PROYEK SISTEM 
+INFORMASI INVENTARIS ASET KAMPUS INSTITUT TEKNOLOGI 
+INDONESIA BERBASIS WEB. 
+JATI \(Jurnal Mahasiswa Teknik 
+Informatika\
+. 10\(3\
+5274.doi:10.36040/jati.v10i3.18318.
+ 
+Wiguna MSA, Fadhilla MN, Purba GT, Al
+-
+Ghifari AD, Saputra YA, Hadarian D, 
+et al.
+ 
+2025. Sistem 
+Administrasi Penduduk Desa Adat Berbasis Web Di Desa Jimbaran Kuta 
+Selatan Badung. 
+Buletin Fisika
+. 26\(2\
+204. [diunduh 2026 Nov 1]
+ 
+ 
+ 
+ 
+ 
+LAMPIRAN
+ 
+ 
+ 
+ 
+28
+ 
+Lampiran 
+1
+ 
+Rata
+-
+rata dan simpangan baku beberapa sifat físik dan kimia tanah dari 
+78 contoh tanah di Kebun Percobaan 
+Ciheuleut
+ 
+Sifat
+ 
+Rata
+-
+rata
+ 
+Simpangan baku
+ 
+Pasir \(%\
+ 
+47,
+66
+ 
+23,
+81
+ 
+Lempung \(%\
+ 
+21,
+80
+ 
+11,
+94
+ 
+Liat \(%\
+ 
+30,
+72
+ 
+18,
+09
+ 
+C
+-
+organik \(%\
+ 
+  
+0,
+61
+ 
+  
+0,
+57
+ 
+Rapatan isi \(mg m
+-
+3
+\
+ 
+  
+1,
+43
+ 
+  
+0,
+16
+ 
+KTK \(mek 100 g
+-
+1
+ 
+tanah\
+a
+ 
+18,
+08
+ 
+17,
+09
+ 
+KAT pada KL \(g g
+-
+1
+\
+ 
+23,
+62
+ 
+10,
+80
+ 
+KAT pada TLP \(g g
+-
+1
+\
+ 
+11,
+11
+ 
+  
+9,
+05
+ 
+a
+Banyaknya 70 contoh tanah; KTK: kapasitas tukar kation, KAT: kadar air tanah, KL: 
+kapasitas lapang, TLP: titik layu permanen.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+29
+ 
+Lampiran 
+2
+ 
+Penguasaan pulau 
+berpenghuni di Kepulauan Seribu
+ 
+No.
+ 
+Nama
+ 
+pulau
+ 
+Kelurahan
+ 
+Luas
+ 
+\(ha\
+ 
+Penguasaan
+ 
+1
+ 
+Pulau
+ 
+Payung
+ 
+Pulau
+ 
+Tidung
+ 
+20,86
+ 
+Pemprov
+ 
+DKI
+ 
+2
+ 
+Pulau
+ 
+Tidung
+ 
+ 
+50,13
+ 
+Pemprov
+ 
+DKI
+ 
+3
+ 
+Pulau
+ 
+Lancang
+ 
+Pulau
+ 
+pari
+ 
+15,13
+ 
+Pemprov
+ 
+DKI
+ 
+4
+ 
+Pulau
+ 
+Pari
+ 
+ 
+41,32
+ 
+PT
+ 
+B
+PA
+ 
+5
+ 
+Pulau
+ 
+Untung
+ 
+Jawa
+ 
+Pulau
+ 
+Untung
+ 
+Jawa
+ 
+40,10
+ 
+Pemprov
+ 
+DKI
+ 
+6
+ 
+Pulau
+ 
+Panggang
+ 
+Pulau
+ 
+Panggang
+ 
+  
+9,00
+ 
+Pemprov
+ 
+DKI
+ 
+7
+ 
+Pulau
+ 
+Pramuka
+ 
+ 
+16,00
+ 
+Pemprov
+ 
+DKI
+ 
+8
+ 
+Pulau
+ 
+Kelapa
+ 
+Pulau
+ 
+Kelapa
+ 
+13,09
+ 
+Tidak
+ 
+ada
+ 
+data
+ 
+9
+ 
+Pulau
+ 
+Kelapa
+ 
+Dua
+ 
+ 
+  
+1,90
+ 
+Tidak
+ 
+ada
+ 
+data
+ 
+10
+ 
+Pulau
+ 
+Harapan
+ 
+Pulau
+ 
+Harapan
+ 
+  
+6,70
+ 
+Pemprov
+ 
+DKI
+ 
+11
+ 
+Pulau
+ 
+Sebira
+ 
+ 
+  
+8,82
+ 
+Pemprov
+ 
+DKI
+ 
+ 
+ 
+ 
+RIWAYAT HIDUP
+ 
+P
+enulis dilahirkan di 
+K
+dari ... bersaudara 
+dari pasangan 
+B
+I
+..., penulis diterima sebagai mahasiswa program sarjana \(S
+-
+1\di Program 
+ 
+Selama mengikuti program S
+-
+1, penulis aktif menjadi ... \(riwayat dan 
+pengalaman organisasi, asisten akademik, dan sebagainya\Penulis juga pernah 
+ 
+akademik\
+ 

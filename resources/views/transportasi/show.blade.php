@@ -119,8 +119,8 @@
                     @endif
 
                     <a href="{{ route('laporan.pdf') }}" target="_blank"
-                        class="px-3.5 py-2 bg-[#C8102E] hover:bg-[#A50D26] text-white text-xs font-semibold rounded-xl shadow-2xs flex items-center gap-1.5 transition-colors">
-                        <x-heroicon-o-document-text class="w-4 h-4" />
+                        class="px-4 py-2 bg-[#C8102E] hover:bg-[#A50D26] text-white rounded-xl text-xs font-bold transition-all shadow-[0_4px_12px_rgba(200,16,46,0.25)] hover:shadow-[0_6px_16px_rgba(200,16,46,0.35)] flex items-center gap-1.5 active:scale-95 cursor-pointer">
+                        <x-heroicon-o-document-text class="w-4 h-4 stroke-2" />
                         <span>Ekspor PDF</span>
                     </a>
                 </div>

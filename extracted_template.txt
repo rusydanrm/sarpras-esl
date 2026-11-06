@@ -1,0 +1,228 @@
+INSTITUT PERTANIAN BOGOR
+PEMBUATAN SISTEM INFORMASI INVENTARISASI SARANA DAN PRASARANA BERBASIS LARAVEL PADA DEPARTEMEN ESL FEM IPB UNIVERSITY
+PERANGKAT LUNAK
+RAFI MUHAMMAD RUSYDAN
+J0403231147
+SEKOLAH VOKASI
+TEKNOLOGI REKAYASA PERANGKAT LUNAK
+BOGOR
+2026
+Judul Perangkat Lunak: Pembuatan Sistem Informasi Inventarisasi Sarana dan Prasarana Berbasis Laravel pada Departemen ESL FEM IPB University
+Nama     : Rafi Muhammad Rusydan
+NIM     : J0403231147
+Disetujui oleh
+Pembimbing 1:
+Atika Istiqomah, S.Kom., M.T.
+__________________
+Diketahui oleh
+Ketua Program Studi Teknologi Rekayasa Perangkat Lunak
+Dr. Medhanita Dewi Renanti, S.Kom., M.Kom.
+NPI. 201807198305122001
+__________________
+Tanggal Kolokium:
+DAFTAR ISI
+DAFTAR TABEL x
+DAFTAR GAMBAR x
+DAFTAR LAMPIRAN x
+IDESKRIPSI PERANGKAT LUNAK1
+1.1Latar Belakang1
+1.2Rumusan Masalah1
+1.3Tujuan dan Sasaran1
+1.4Manfaat1
+1.5Batasan Masalah1
+1.6Metode Pengembangan Perangkat Lunak1
+1.7Uraian dan Klaim Keunggulan Perangkat Lunak2
+1.8Spesifikasi Konseptual/Indikator3
+1.9Validasi3
+IISIMPULAN DAN SARAN7
+2.1Simpulan7
+2.2Saran7
+DAFTAR PUSTAKA9
+LAMPIRAN11
+RIWAYAT HIDUP15
+DAFTAR TABEL(jika tabel hanya satu tidak perlu dibuat daftar)
+Judul tabel biasanya pendek tanpa diakhiri tanda titik3
+Tingkat kekerasan dan kandungan gula buah pisang ambon pada suhu simpan yang berbeda dan pemberian putresina4
+DAFTAR GAMBAR(jika gambar hanya satu tidak perlu dibuat daftar)
+Pemilihan warna dan motif batang pada diagram batang yang jelas menunjukkan keterbacaan error bar2
+Pemilihan warna dan motif batang pada diagram batang yang jelas menunjukkan keterbacaan error bar5
+DAFTAR LAMPIRAN(jika lampiran hanya satu tidak perlu dibuat daftar)
+Perbandingan sifat mekanik sebelum dan setelah getaran ultrasonik serta perbandingan dengan proses manufaktur lainnya termasuk FFF dan injection molding (IM)12
+Penguasaan pulau berpenghuni di Kepulauan Seribu13
+DESKRIPSI PERANGKAT LUNAK
+Latar Belakang
+Latar belakang berisi penjelasan tentang permasalahan yang melatarbelakangi pengembangan perangkat lunak, pentingnya tugas akhir ini dikembangkan lebih lanjut dari penelitian sebelumnya yang mendasari pengembangan perangkat lunak. Paparan tidak berbelit-belit atau dimulai dengan latar belakang yang umum. Pemaparan latar belakang harus sistematis, logis, serta disertai data, informasi, dan telaah pustaka dari sumber primer, mutakhir, dan relevan yang dapat dipertanggungjawabkan secara ilmiah.  Khusus untuk program Doktor, perangkat lunak dikembangkan harus menekankan temuan baru (novelty).
+Rumusan Masalah
+Rumusan masalah merupakan pernyataan ringkas mengenai masalah yang akan diselesaikan dan cara mengatasinya untuk menjawab tujuan perangkat lunak. Masalah yang diteliti dapat dirumuskan karena berbagai sebab, seperti adanya kesenjangan (gap), tantangan, kesangsian, ketidakjelasan, dan keingintahuan secara akademik yang berkaitan dengan fenomena alam, sosial, dan ekonomi. Dalam pernyataan ringkas tersebut harus tercakup pendekatan yang digunakan dalam perumusan masalah.
+Tujuan dan Sasaran
+Pernyataan tujuan tugas akhir ialah pernyataan singkat dan jelas tentang tujuan dan sasaran pengembangan perangkat lunak. Tujuan merupakan pemandu atau arah untuk merencanakan dan melaksanakan kajian tugas akhir. Tujuan dapat ditulis dengan memilih kata kerja yang hasilnya dapat diukur dan dilihat, seperti: menguraikan, menerangkan, membuktikan, menjajaki, menguji, membuktikan, atau menerapkan suatu gejala, konsep atau dugaan, atau bahkan membuat suatu prototipe. Jangan menggunakan kata kerja mengetahui atau memahami. Masalah dan tujuan harus terkait dan konsisten.
+Manfaat
+Manfaat merupakan dampak positif (kegunaan) dari hasil karya ilmiah perangkat lunak bagi bidang ipteks, pembangunan, dan masyarakat. Manfaat utama dari hasil tugas akhir adalah menambah khasanah ilmu pengetahuan dalam bentuk pustaka sebagai sumber acuan/referensi untuk pengembangan ipteks, manfaat perangkat lunak secara praktis dan dampak sosial, ekonomi. Manfaat dinyatakan dengan kata kerja yang lugas dan logis.
+Batasan Masalah
+Lingkup kerja dan aspek-aspek yang tidak dibahas dalam pengembangan perangkat lunak.
+Metode Pengembangan Perangkat Lunak
+Penjelasan metode yang digunakan  pengembangan perangkat lunak, mulai dari tahap perancangan, implementasi, hingga pengujian. Proses pengembangan perangkat lunak, model yang digunakan (misalnya, Agile, Waterfall), serta alat dan teknologi yang diterapkan.
+Judul Sub-subbab (Kata dalam judul diawali huruf kapital dan dicetak tidak tebal)
+Berikut adalah contoh uraian dengan deskripsi pada sub-subbab. Pada sub-subbab ini posisi paragraf lebih menjorok 0,5 cm dari paragraf di subbab. .................................................................................................................................................................................................................................................................................................................................................................................................
+a)    ....
+b)    ....
+c)    ....
+(1)    ....
+(2)    ....
+(3)    ....
+Judul Sub-subbab (Kata dalam judul diawali huruf kapital dan dicetak tidak tebal)
+Berikut adalah contoh uraian dengan deskripsi pada sub-subbab. Pada sub-subbab ini posisi paragraf lebih menjorok 0,5 cm dari paragraf di subbab. ..................................................................................................................
+Uraian dan Klaim Keunggulan Perangkat Lunak
+Uraian Perangkat Lunak (Kata dalam judul diawali huruf kapital dan dicetak tidak tebal)
+Uraian atau deskripsi perangkat lunak disampaikan dalam bentuk dokumentasi visual (Gambar, Ilustrasi, Sketsa, dll). Contoh perujukan gambar (Gambar 1).
+Gambar 1  Pemilihan warna dan motif batang pada diagram batang yang jelas menunjukkan keterbacaan error bar, (a) dua batang dengan penanda signifikansi (*), (b) beberapa batang dengan variasi warna yang ramah buta warna dan motif yang berbeda namun mudah dibaca. Penanda statistika (asteriks atau huruf) dapat diletakkan langsung di atas balok. Notasi pada tiap batang sudah jelas sehingga legenda tidak dicantumkan. Legenda atau keterangan lain dapat dicantumkan di judul gambar. Data pada diagram adalah random dan dibuat dengan Microsoft Excel for Mac Version 16.89.
+Klaim Keunggulan Perangkat Lunak (Kata dalam judul diawali huruf kapital dan dicetak tidak tebal)
+Penjelasan keunggulan produk dan lakukan komparasi dengan produk sejenis produk yang sudah ada di pasaran, dari segi fungsi, kelebihan, dan kekurangan serta dampak sosial dan ekonomi.
+a)    .... (lihat Lampiran 1).
+b)    ....
+c)    ....
+Spesifikasi Konseptual/Indikator
+Uraian spesifikasi konseptual/indikator rinci perangkat lunak. ...................................................................................................................................
+Validasi
+Penjelasan mengenai tahapan validasi perangkat lunak (uji fungsionalitas, uji pengguna, uji performa, atau uji keamanan) serta hasil yang diperoleh. Dalam membahas hasil validasi, penafsiran atau penjelasan tersebut harus dikaitkan dengan pustaka, terutama yang mutakhir (setidaknya 80% dalam 10 tahun terakhir), primer, dan kredibel. Pernyataan-pernyataan dalam paragraf dikemas dengan baik, dimulai dari pendapat sendiri di awal paragraf, diikuti dengan dukungan pustaka, dan diakhiri dengan kalimat penyimpulan.
+Judul Sub-subbab (Kata dalam judul diawali huruf kapital dan dicetak tidak tebal)
+Data pengujian dapat disajikan dengan ilustrasi dalam bentuk Tabel atau Gambar (foto, diagram). Setiap ilustrasi ditempatkan sedekat mungkin setelah kalimat di dalam teks yang merujuk atau membahas ilustrasi tersebut. Hal ini akan meminimalkan gangguan alur baca dan memudahkan pembaca mengaitkan informasi (Tabel 1).
+Tabel 1 Judul tabel biasanya pendek tanpa diakhiri tanda titika
+Judul kolom pertama
+Judul kolomb
+Judul kolomb
+Subjudul kolom
+Subjudul kolom
+Subjudul kolom
+Subjudul kolom
+[area informasi]
+Judul barisc
+Subjudul baris
+Subjudul baris
+Judul baris
+Subjudul baris
+Subjudul baris
+[area informasi]
+a [catatan kaki] Sumber [jika ada]: xxxx xxxx.[titik] b [catatan kaki] xxxx xxxx.[titik] c [catatan kaki] xxxx xxxx.[titik]
+Catatan kaki diketik dengan font Times New Roman 10 pt. Antara baris pertama catatan kaki dan garis dasar tabel diberi jarak 3 pt.
+Judul Sub-subbab (Kata dalam judul diawali huruf kapital dan dicetak tidak tebal)
+Berikut adalah contoh uraian hasil pada sub-subbab. Pada sub-subbab ini posisi paragraf lebih menjorok dari paragraf di subbab. Data pengujian dapat disajikan dengan ilustrasi dalam bentuk Tabel atau Gambar (foto, diagram). Setiap ilustrasi ditempatkan sedekat mungkin setelah kalimat di dalam teks yang merujuk atau membahas ilustrasi tersebut. Hal ini akan meminimalkan gangguan alur baca dan memudahkan pembaca mengaitkan informasi. Contoh perujukan dan penulisan tabel (Tabel 2).
+Tabel 2 Tingkat kekerasan dan kandungan gula buah pisang ambon pada suhu simpan yang berbeda dan pemberian putresina (Jika judul tabel lebih dari satu baris, maka baris selanjutnya sejajar dengan kata pertama pada judul tabel)
+Perlakuan
+Kekerasan buah dan kandungan gula pada hari ke-
+0
+7
+14
+Kekerasan buah (mm 50 g-1 detik-1)a
+Suhu simpan
+15 ºC
+10,20a
+13,40a
+11,83a
+28 ºC
+10,64a
+14,22a
+88,43b
+Putresina
+Dengan putresina
+11,07a
+13,23a
+21,19a
+Tanpa putresina
+10,76a
+14,40a
+41,82b
+Gula (%)a
+Suhu simpan
+15 ºC
+0,38a
+0,56a
+0,73a
+28 ºC
+0,55a
+1,82a
+14,41b
+Putresina
+Dengan putresina
+0,53a
+0,87a
+6,98a
+Tanpa putresina
+0,40a
+1,52a
+6,91a
+aAngka-angka pada kolom yang sama yang diikuti oleh huruf yang sama tidak berbeda nyata pada taraf uji 5% (uji selang berganda Duncan).
+Judul Sub-subbab (Kata dalam judul diawali huruf kapital dan dicetak tidak tebal)
+Berikut adalah contoh uraian hasil pada sub-subbab. Pada sub-subbab ini posisi paragraf lebih menjorok dari paragraf di subbab. Data pengujian dapat disajikan dengan ilustrasi dalam bentuk Tabel atau Gambar (foto, diagram). Setiap ilustrasi ditempatkan sedekat mungkin setelah kalimat di dalam teks yang merujuk atau membahas ilustrasi tersebut. Contoh hasil uji validasi perangkat lunak (Gambar 2).
+Gambar 2 Contoh gambar ikan hasil laut setelah tahap pra-pemrosesan
+Contoh penulisan formula
+Keterangan:
+Berikan deskripsi pada setiap notasi formula di atas
+DAFTAR PUSTAKA
+Arifin HS, Kaswanto. 2023. Manajemen Ruang Terbuka Biru untuk Pengendali Banjir. IPB Press.
+Aulia G, Rachman F, Untari F, Rasyid A, Hapsari Y. 2024. Utilizing the co-culture method to improve the investigation of secondary metabolites of marine bacteria. J Appl Pharm Sci. 14(1): 286–290. doi:10.7324/JAPS.2024.136305.
+Brett DF. 2025. Titles in archaeology research articles: A corpus-based comparison with other disciplines. J Engl Acad Purp. 77:1−11. doi:10.1016/j.jeap.2025.101545.
+Pezzino V, Berbary C, McKinney C, Sangiorgio C, Moriuchi E, et al.. 2026. Working alliance and subjective engagement with a digital avatar CBT platform (RITch®CBT: Comparing young adults with and without co-occuring substance use and depression. Behav Sci. 16(5):1−21. doi:10.3390/bs16050719.
+Rajam R, Subramanian P. 2022. Encapsulation of probiotics: past, present, and future. Beni-Suef Univ J Basic Appl Sci. 11(46):1–18. doi:10.1186/s43088-022-00228-w.
+LAMPIRAN
+Lampiran 1 Perbandingan sifat mekanik sebelum dan setelah getaran ultrasonik serta perbandingan dengan proses manufaktur lainnya termasuk FFF dan injection molding (IM): (a) tensile strength, (b) flexural strength, dan (c) compressive strength
+Lampiran 2 Penguasaan pulau berpenghuni di Kepulauan Seribu
+No.
+Nama pulau
+Kelurahan
+Luas (ha)
+Penguasaan
+1
+Pulau Payung
+Pulau Tidung
+20,86
+Pemprov DKI
+2
+Pulau Tidung
+50,13
+Pemprov DKI
+3
+Pulau Lancang
+Pulau pari
+15,13
+Pemprov DKI
+4
+Pulau Pari
+41,32
+PT BPA
+5
+Pulau Untung Jawa
+Pulau Untung Jawa
+40,10
+Pemprov DKI
+6
+Pulau Panggang
+Pulau Panggang
+9,00
+Pemprov DKI
+7
+Pulau Pramuka
+16,00
+Pemprov DKI
+8
+Pulau Kelapa
+Pulau Kelapa
+13,09
+Tidak ada data
+9
+Pulau Kelapa Dua
+1,90
+Tidak ada data
+10
+Pulau Harapan
+Pulau Harapan
+6,70
+Pemprov DKI
+11
+Pulau Sebira
+8,82
+Pemprov DKI
+RIWAYAT HIDUP
+Penulis dilahirkan di Kota…. pada tanggal bulan tahun sebagai anak ke … dari ... bersaudara dari pasangan Bapak … dan Ibu … Pendidikan sarjana ditempuh di Program Studi … , Fakultas … Universitas … , dan lulus pada tahun …. Pada tahun ..., penulis diterima sebagai mahasiswa program magister (S-2) di Program Studi … pada Sekolah Pascasarjana Universitas ... dan menamatkannya pada tahun .... (untuk mahasiswa S-2). Kesempatan untuk melanjutkan ke program doktor pada program studi … Sekolah Pascasarjana IPB diperoleh pada tahun ... dengan biaya sendiri/beasiswa pendidikan pascasarjana yang diperoleh dari … (untuk mahasiswa S-3).
+Penulis bekerja sebagai … di … sejak tahun ... dan ditempatkan di ... dan seterusnya (riwayat pekerjaan).
+Selama mengikuti program S-2, penulis aktif menjadi ... (riwayat dan pengalaman organisasi). Karya ilmiah berjudul … telah disajikan pada seminar/simposium ... dan/atau dipublikasi di jurnal … (riwayat publikasi) . Penulis juga pernah memperoleh atau pernah terpilih sebagai … (riwayat prestasi akademik). Karya-karya ilmiah tersebut merupakan bagian dari program S-2 penulis.

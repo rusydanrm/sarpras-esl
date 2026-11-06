@@ -8,8 +8,8 @@
         'danger' => 'bg-rose-600 text-white hover:bg-rose-700 shadow-sm shadow-rose-600/20 border border-transparent focus:ring-rose-500/20',
         'danger-light' => 'bg-rose-50 border border-rose-200/80 text-rose-700 hover:bg-rose-100/70 focus:ring-rose-500/20',
         'ghost' => 'bg-transparent text-[#120F8B] hover:bg-[#120F8B]/5 border border-transparent focus:ring-[#120F8B]/20',
-        'excel' => 'bg-[#1D6F42] text-white hover:bg-[#185C37] shadow-sm shadow-emerald-900/20 border border-transparent focus:ring-emerald-600/20',
-        'pdf' => 'bg-[#C8102E] text-white hover:bg-[#A50D26] shadow-sm shadow-rose-900/20 border border-transparent focus:ring-rose-600/20',
+        'excel' => 'bg-[#1D6F42] text-white hover:bg-[#155231] shadow-[0_4px_12px_rgba(29,111,66,0.25)] hover:shadow-[0_6px_16px_rgba(29,111,66,0.35)] border border-transparent focus:ring-emerald-600/30',
+        'pdf' => 'bg-[#C8102E] text-white hover:bg-[#A50D26] shadow-[0_4px_12px_rgba(200,16,46,0.25)] hover:shadow-[0_6px_16px_rgba(200,16,46,0.35)] border border-transparent focus:ring-rose-600/30',
         default => 'bg-[#120F8B] text-white',
     };
     $sizing = match ($size) {

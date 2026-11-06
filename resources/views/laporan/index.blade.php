@@ -52,15 +52,15 @@
             </div>
 
             <div class="flex flex-wrap items-center gap-2.5">
-                <a id="btnEksporExcel" href="{{ route('laporan.excel', $filter) }}">
-                    <x-ui.button variant="excel">
-                        <x-heroicon-o-table-cells class="w-4 h-4" /> Ekspor Excel
-                    </x-ui.button>
+                <a id="btnEksporExcel" href="{{ route('laporan.excel', $filter) }}"
+                    class="px-4 py-2 bg-[#1D6F42] hover:bg-[#155231] text-white rounded-xl text-xs font-bold transition-all shadow-[0_4px_12px_rgba(29,111,66,0.25)] hover:shadow-[0_6px_16px_rgba(29,111,66,0.35)] flex items-center gap-1.5 active:scale-95 cursor-pointer">
+                    <x-heroicon-o-table-cells class="w-4 h-4 stroke-2" />
+                    <span>Ekspor Excel</span>
                 </a>
-                <a id="btnEksporPdf" href="{{ route('laporan.pdf', $filter) }}">
-                    <x-ui.button variant="pdf">
-                        <x-heroicon-o-document-arrow-down class="w-4 h-4" /> Ekspor PDF
-                    </x-ui.button>
+                <a id="btnEksporPdf" href="{{ route('laporan.pdf', $filter) }}"
+                    class="px-4 py-2 bg-[#C8102E] hover:bg-[#A50D26] text-white rounded-xl text-xs font-bold transition-all shadow-[0_4px_12px_rgba(200,16,46,0.25)] hover:shadow-[0_6px_16px_rgba(200,16,46,0.35)] flex items-center gap-1.5 active:scale-95 cursor-pointer">
+                    <x-heroicon-o-document-arrow-down class="w-4 h-4 stroke-2" />
+                    <span>Ekspor PDF</span>
                 </a>
             </div>
         </div>

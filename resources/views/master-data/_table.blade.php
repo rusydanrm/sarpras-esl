@@ -66,7 +66,7 @@
                             <div class="flex items-center justify-center gap-1.5">
                                 <button type="button"
                                     @click="editMaster({{ Illuminate\Support\Js::from($item) }})"
-                                    class="table-btn-action"
+                                    class="table-btn-action edit"
                                     title="Edit {{ $konfig['label'] }}">
                                     <x-heroicon-o-pencil-square class="w-4 h-4" />
                                 </button>

@@ -10,6 +10,7 @@
         'ghost' => 'bg-transparent text-[#120F8B] hover:bg-[#120F8B]/5 border border-transparent focus:ring-[#120F8B]/20',
         'excel' => 'bg-[#1D6F42] text-white hover:bg-[#155231] shadow-[0_4px_12px_rgba(29,111,66,0.25)] hover:shadow-[0_6px_16px_rgba(29,111,66,0.35)] border border-transparent focus:ring-emerald-600/30',
         'pdf' => 'bg-[#C8102E] text-white hover:bg-[#A50D26] shadow-[0_4px_12px_rgba(200,16,46,0.25)] hover:shadow-[0_6px_16px_rgba(200,16,46,0.35)] border border-transparent focus:ring-rose-600/30',
+        'edit' => 'bg-[#2563EB] text-white hover:bg-[#1D4ED8] shadow-[0_4px_12px_rgba(37,99,235,0.25)] hover:shadow-[0_6px_16px_rgba(37,99,235,0.35)] border border-transparent focus:ring-blue-600/30',
         default => 'bg-[#120F8B] text-white',
     };
     $sizing = match ($size) {

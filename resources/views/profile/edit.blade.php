@@ -89,8 +89,8 @@
                     <!-- Detail Metadata List -->
                     <div class="w-full space-y-3 text-left">
                         <div class="flex items-center justify-between text-xs">
-                            <span class="text-[#6C7E75] font-medium">Unit / Divisi:</span>
-                            <span class="font-bold text-[#0A0E2E] text-right">{{ $user->unit?->nama_unit ?? 'Departemen ESL' }}</span>
+                            <span class="text-[#6C7E75] font-medium">Departemen:</span>
+                            <span class="font-bold text-[#0A0E2E] text-right">ESL IPB</span>
                         </div>
                         <div class="flex items-center justify-between text-xs">
                             <span class="text-[#6C7E75] font-medium">ID Pengguna:</span>
@@ -195,9 +195,9 @@
                                 </span>
                             </div>
                             <div class="p-3 bg-[#F8FAF9] rounded-xl border border-[#E9EFEF]">
-                                <span class="text-[11px] text-[#6C7E75] font-medium block">Unit / Divisi:</span>
+                                <span class="text-[11px] text-[#6C7E75] font-medium block">Departemen:</span>
                                 <span class="text-xs font-bold text-[#0A0E2E] mt-0.5 block">
-                                    {{ $user->unit?->nama_unit ?? 'Departemen ESL' }}
+                                    Departemen ESL IPB
                                 </span>
                             </div>
                         </div>

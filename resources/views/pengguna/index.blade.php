@@ -22,7 +22,6 @@
             document.getElementById('inputCari').value = '';
             document.getElementById('selectStatus').value = '';
             document.getElementById('selectRole').value = '';
-            document.getElementById('selectUnit').value = '';
             this.terapkanFilter();
         },
         handleTableClick(e) {
@@ -235,42 +234,6 @@
                         </select>
                     </div>
 
-                    <!-- Filter Unit -->
-                    <div class="w-full sm:w-48">
-                        <select name="unit_id" id="selectUnit" x-on:change="terapkanFilter()"
-                            class="w-full px-3 py-2 bg-[#F4F6F5] border border-transparent focus:border-[#ffa916] focus:bg-white rounded-xl text-xs font-medium text-[#0A0E2E] transition-all outline-hidden cursor-pointer">
-                            <option value="">Semua Unit/Bagian</option>
-                            @foreach ($unitList as $u)
-                                <option value="{{ $u->unit_id }}" @selected(request('unit_id') == $u->unit_id)>
-                                    {{ $u->nama_unit }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <!-- Reset Button -->
-                    <button type="button" @click="resetFilter()"
-                        class="px-3 py-2 rounded-xl text-xs font-semibold text-[#6C7E75] hover:text-[#0A0E2E] hover:bg-[#F4F6F5] border border-[#E9EFEF] transition-colors flex items-center gap-1 cursor-pointer">
-                        <x-heroicon-o-arrow-path class="w-3.5 h-3.5" />
-                        <span>Reset</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-
-                    <!-- Filter Unit -->
-                    <div class="w-full sm:w-48">
-                        <select name="unit_id" id="selectUnit" x-on:change="terapkanFilter()"
-                            class="w-full px-3 py-2 bg-[#F4F6F5] border border-transparent focus:border-[#ffa916] focus:bg-white rounded-xl text-xs font-medium text-[#0A0E2E] transition-all outline-hidden cursor-pointer">
-                            <option value="">Semua Unit/Bagian</option>
-                            @foreach ($unitList as $u)
-                                <option value="{{ $u->unit_id }}" @selected(request('unit_id') == $u->unit_id)>
-                                    {{ $u->nama_unit }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-
                     <!-- Reset Button -->
                     <button type="button" @click="resetFilter()"
                         class="px-3 py-2 rounded-xl text-xs font-semibold text-[#6C7E75] hover:text-[#0A0E2E] hover:bg-[#F4F6F5] border border-[#E9EFEF] transition-colors flex items-center gap-1 cursor-pointer">
@@ -338,23 +301,12 @@
                         </template>
                     </div>
 
-                    <!-- Section 2: Penugasan Unit & Hak Akses -->
+                    <!-- Section 2: Penugasan Hak Akses Peran -->
                     <div class="bg-[#F8FAF9] p-4 rounded-2xl border border-[#E9EFEF] space-y-3.5">
                         <h3 class="text-xs font-bold uppercase tracking-wider text-[#0A0E2E] flex items-center gap-1.5">
                             <span class="w-5 h-5 rounded-md bg-[#0A0E2E] text-[#ffa916] inline-flex items-center justify-center text-[10px]">2</span>
                             <span>Penugasan & Hak Akses Peran</span>
                         </h3>
-
-                        <div>
-                            <x-ui.select label="Unit / Divisi Kerja" name="unit_id">
-                                <option value="">- Tanpa Unit / Umum -</option>
-                                @foreach ($unitList as $u)
-                                    <option value="{{ $u->unit_id }}"
-                                        x-bind:selected="editData && editData.unit_id == {{ $u->unit_id }}">{{ $u->nama_unit }}
-                                    </option>
-                                @endforeach
-                            </x-ui.select>
-                        </div>
 
                         <div>
                             <x-ui.select label="Hak Akses (Role)" name="role" required>

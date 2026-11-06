@@ -178,7 +178,7 @@
                                 @if ($isAdmin)
                                     <button type="button"
                                         @click="modalOpen = true; editData = {{ Illuminate\Support\Js::from($k) }}"
-                                        class="table-btn-action"
+                                        class="table-btn-action edit"
                                         title="Edit Kendaraan">
                                         <x-heroicon-o-pencil class="w-4 h-4" />
                                     </button>

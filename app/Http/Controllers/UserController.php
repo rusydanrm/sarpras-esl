@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\UnitBagian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -11,7 +10,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $query = User::with('unit');
+        $query = User::query();
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
@@ -19,10 +18,6 @@ class UserController extends Controller
 
         if ($request->filled('role')) {
             $query->where('role', $request->role);
-        }
-
-        if ($request->filled('unit_id')) {
-            $query->where('unit_id', $request->unit_id);
         }
 
         if ($request->filled('cari')) {
@@ -38,7 +33,6 @@ class UserController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        $unitList = UnitBagian::orderBy('nama_unit')->get();
         $jumlahPending = User::where('status', 'pending')->count();
         $totalPengguna = User::count();
         $totalAktif = User::where('status', 'aktif')->count();
@@ -57,7 +51,6 @@ class UserController extends Controller
 
         return view('pengguna.index', compact(
             'pengguna',
-            'unitList',
             'jumlahPending',
             'totalPengguna',
             'totalAktif',
@@ -73,7 +66,6 @@ class UserController extends Controller
             'email' => 'required|email|max:150|unique:users,email',
             'password' => 'required|string|min:8',
             'role' => 'required|in:admin,dosen_tendik,teknisi,pimpinan',
-            'unit_id' => 'nullable|exists:unit_bagian,unit_id',
         ]);
 
         User::create([
@@ -81,7 +73,6 @@ class UserController extends Controller
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'role' => $validated['role'],
-            'unit_id' => $validated['unit_id'] ?? null,
             'status' => 'aktif',
         ]);
 
@@ -94,7 +85,6 @@ class UserController extends Controller
             'nama' => 'required|string|max:150',
             'email' => 'required|email|max:150|unique:users,email,' . $pengguna->user_id . ',user_id',
             'role' => 'required|in:admin,dosen_tendik,teknisi,pimpinan',
-            'unit_id' => 'nullable|exists:unit_bagian,unit_id',
             'status' => 'required|in:pending,aktif,nonaktif',
         ]);
 

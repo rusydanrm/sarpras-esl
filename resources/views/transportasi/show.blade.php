@@ -112,8 +112,8 @@
 
                     @if (auth()->user()->role === 'admin')
                         <button type="button" @click="editModalOpen = true"
-                            class="px-3.5 py-2 bg-white hover:bg-[#F4F6F5] text-[#0A0E2E] border border-[#E9EFEF] text-xs font-semibold rounded-xl shadow-2xs flex items-center gap-1.5 transition-colors cursor-pointer">
-                            <x-heroicon-o-pencil class="w-4 h-4 text-[#6C7E75]" />
+                            class="px-4 py-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-xl text-xs font-bold transition-all shadow-[0_4px_12px_rgba(37,99,235,0.25)] hover:shadow-[0_6px_16px_rgba(37,99,235,0.35)] flex items-center gap-1.5 active:scale-95 cursor-pointer">
+                            <x-heroicon-o-pencil class="w-4 h-4 stroke-2" />
                             <span>Edit Kendaraan</span>
                         </button>
                     @endif
@@ -142,13 +142,6 @@
                             </div>
                             <h3 class="text-sm font-bold text-[#0A0E2E]">Spesifikasi & Identitas Teknis</h3>
                         </div>
-                        @if (auth()->user()->role === 'admin')
-                            <button type="button" @click="editModalOpen = true"
-                                class="text-xs font-semibold text-[#ffa916] hover:underline flex items-center gap-1 cursor-pointer">
-                                <x-heroicon-o-pencil-square class="w-3.5 h-3.5" />
-                                <span>Edit</span>
-                            </button>
-                        @endif
                     </div>
                     <div class="p-4 sm:p-5 text-xs divide-y divide-[#E9EFEF]">
                         <div class="grid grid-cols-5 gap-2 py-2">
@@ -368,12 +361,6 @@
                             </div>
                             <h3 class="text-sm font-bold text-[#0A0E2E]">Riwayat Servis Bengkel</h3>
                         </div>
-                        @if (in_array(auth()->user()->role, ['admin', 'teknisi', 'dosen_tendik']))
-                            <button type="button" @click="servisModalOpen = true"
-                                class="px-2.5 py-1 bg-[#ffa916] hover:bg-[#ffb738] text-[#0A0E2E] text-xs font-bold rounded-lg shadow-2xs flex items-center gap-1 transition-colors cursor-pointer">
-                                <span>+</span> Catat Servis
-                            </button>
-                        @endif
                     </div>
                     <div class="p-4">
                         @if ($kendaraan->servis && $kendaraan->servis->count() > 0)

@@ -6,7 +6,6 @@
                     <th class="text-center w-12">No</th>
                     <th class="text-left">Pengguna & Identitas</th>
                     <th class="text-left">Email Akses</th>
-                    <th class="text-left">Unit / Divisi</th>
                     <th class="text-left">Hak Akses (Role)</th>
                     <th class="text-center">Status</th>
                     <th class="text-center w-28">Aksi</th>
@@ -48,16 +47,6 @@
                                 <x-heroicon-o-envelope class="w-3.5 h-3.5 text-[#6C7E75]" />
                                 <span>{{ $p->email }}</span>
                             </div>
-                        </td>
-                        <td>
-                            @if ($p->unit)
-                                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#F4F6F5] text-[#0A0E2E] border border-[#E9EFEF]">
-                                    <x-heroicon-o-building-office class="w-3.5 h-3.5 text-[#6C7E75]" />
-                                    {{ $p->unit->nama_unit }}
-                                </span>
-                            @else
-                                <span class="text-xs text-[#9EA9B9]">-</span>
-                            @endif
                         </td>
                         <td>
                             @if ($p->role === 'admin')
@@ -109,7 +98,7 @@
                                 @else
                                     <button type="button"
                                         @click="editUser({{ Illuminate\Support\Js::from($p) }})"
-                                        class="table-btn-action"
+                                        class="table-btn-action edit"
                                         title="Edit Pengguna">
                                         <x-heroicon-o-pencil-square class="w-4 h-4" />
                                     </button>
@@ -128,7 +117,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center py-12">
+                        <td colspan="6" class="text-center py-12">
                             <div class="w-12 h-12 rounded-2xl bg-[#0A0E2E]/5 border border-[#E9EFEF] flex items-center justify-center text-[#6C7E75] mx-auto mb-3">
                                 <x-heroicon-o-users class="w-6 h-6" />
                             </div>

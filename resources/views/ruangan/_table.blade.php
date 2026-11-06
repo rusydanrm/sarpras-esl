@@ -87,7 +87,7 @@
                                     @endphp
                                     <!-- Edit Button -->
                                     <button type="button"
-                                        class="table-btn-action"
+                                        class="table-btn-action edit"
                                         title="Edit Ruangan"
                                         @click="modalOpen = true; editData = {{ Illuminate\Support\Js::from($dataEdit) }}">
                                         <x-heroicon-o-pencil class="w-4 h-4" />

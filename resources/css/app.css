@@ -291,10 +291,27 @@
     box-shadow: 0 4px 10px rgba(10, 14, 46, 0.15);
 }
 
+.table-btn-action.edit {
+    color: #2563EB;
+}
+
+.table-btn-action.edit:hover {
+    background-color: #2563EB;
+    color: #FFFFFF;
+    border-color: #2563EB;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+.table-btn-action.delete {
+    color: #EF4444;
+}
+
 .table-btn-action.delete:hover {
     background-color: #EF4444;
     color: #FFFFFF;
     border-color: #EF4444;
+    transform: translateY(-1px);
     box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
 }
 

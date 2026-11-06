@@ -78,6 +78,13 @@
                             <span>Catat Servis</span>
                         </button>
                     @endif
+                    @if (in_array(auth()->user()->role, ['admin', 'dosen_tendik']))
+                        <button type="button" @click="editModalOpen = true"
+                            class="px-4 py-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white rounded-xl text-xs font-bold transition-all shadow-[0_4px_12px_rgba(37,99,235,0.25)] hover:shadow-[0_6px_16px_rgba(37,99,235,0.35)] flex items-center gap-1.5 active:scale-95 cursor-pointer">
+                            <x-heroicon-o-pencil class="w-4 h-4 stroke-2" />
+                            <span>Edit Data</span>
+                        </button>
+                    @endif
                     <a href="{{ route('laporan.pdf') }}" target="_blank"
                         class="px-4 py-2 bg-[#C8102E] hover:bg-[#A50D26] text-white rounded-xl text-xs font-bold transition-all shadow-[0_4px_12px_rgba(200,16,46,0.25)] hover:shadow-[0_6px_16px_rgba(200,16,46,0.35)] flex items-center gap-1.5 active:scale-95 cursor-pointer">
                         <x-heroicon-o-document-text class="w-4 h-4 stroke-2" />
@@ -98,13 +105,6 @@
                             <span class="w-2 h-2 rounded-full bg-[#ffa916]"></span>
                             <h2 class="text-xs font-bold uppercase tracking-wider text-[#0A0E2E]">Spesifikasi & Identitas Aset</h2>
                         </div>
-                        @if (in_array(auth()->user()->role, ['admin', 'dosen_tendik']))
-                            <button type="button" @click="editModalOpen = true"
-                                class="px-3 py-1.5 bg-white text-[#0A0E2E] hover:bg-[#F4F6F5] border border-[#E9EFEF] text-xs font-semibold rounded-xl shadow-2xs flex items-center gap-1 transition-all cursor-pointer">
-                                <x-heroicon-o-pencil class="w-3.5 h-3.5" />
-                                <span>Edit Data</span>
-                            </button>
-                        @endif
                     </div>
 
                     <div class="p-4 sm:p-6 text-xs divide-y divide-[#E9EFEF]/60">
@@ -282,13 +282,6 @@
                             <span class="w-2 h-2 rounded-full bg-[#120F8B]"></span>
                             <h2 class="text-xs font-bold uppercase tracking-wider text-[#0A0E2E]">Riwayat Perbaikan & Servis</h2>
                         </div>
-                        @if (in_array(auth()->user()->role, ['admin', 'teknisi', 'dosen_tendik']))
-                            <button type="button" @click="catatModalOpen = true"
-                                class="px-3 py-1.5 bg-[#ffa916] text-[#0A0E2E] hover:bg-[#ffb738] rounded-xl text-xs font-bold transition-all shadow-2xs flex items-center gap-1 cursor-pointer">
-                                <x-heroicon-o-plus class="w-3.5 h-3.5 stroke-2" />
-                                <span>Catat Servis</span>
-                            </button>
-                        @endif
                     </div>
 
                     <div class="p-4 sm:p-5">

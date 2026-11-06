@@ -257,7 +257,7 @@
 
                                         <!-- Edit Button -->
                                         <button type="button"
-                                            class="table-btn-action"
+                                            class="table-btn-action edit"
                                             title="Edit Barang"
                                             @click="modalOpen = true; editData = {{ Illuminate\Support\Js::from($b) }}">
                                             <x-heroicon-o-pencil class="w-4 h-4" />

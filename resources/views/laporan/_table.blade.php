@@ -10,6 +10,7 @@
                     <th class="text-left">Kondisi Fisik</th>
                     <th class="text-right">Harga Satuan</th>
                     <th class="text-right">Total Perolehan</th>
+                    <th class="text-right">Nilai Buku</th>
                     <th class="text-left">Sumber & Tahun</th>
                 </tr>
             </thead>
@@ -75,6 +76,19 @@
                         <td class="text-right text-xs font-bold text-[#0A0E2E]">
                             Rp {{ number_format($b->total_harga, 0, ',', '.') }}
                         </td>
+                        <td class="text-right">
+                            @if ($b->tahun_perolehan)
+                                <div class="text-xs font-bold {{ $b->nilai_buku <= 0 && $b->total_harga > 0 ? 'text-[#6C7E75]' : 'text-emerald-600' }}">
+                                    Rp {{ number_format($b->nilai_buku, 0, ',', '.') }}
+                                </div>
+                                <div class="text-[10px] text-[#6C7E75]">
+                                    Susut: Rp {{ number_format($b->akumulasi_penyusutan, 0, ',', '.') }} ({{ $b->masa_pakai }} thn)
+                                </div>
+                            @else
+                                <span class="text-xs font-bold text-[#0A0E2E]">Rp {{ number_format($b->total_harga, 0, ',', '.') }}</span>
+                                <span class="block text-[10px] text-[#9EA9B9]">Thn belum diisi</span>
+                            @endif
+                        </td>
                         <td>
                             <div class="flex flex-col gap-0.5">
                                 <span class="text-xs font-semibold text-[#0A0E2E]">{{ $b->sumber_dana ?: '-' }}</span>
@@ -84,7 +98,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="text-center py-12">
+                        <td colspan="9" class="text-center py-12">
                             <div class="w-12 h-12 rounded-2xl bg-[#0A0E2E]/5 border border-[#E9EFEF] flex items-center justify-center text-[#6C7E75] mx-auto mb-3">
                                 <x-heroicon-o-document-magnifying-glass class="w-6 h-6" />
                             </div>

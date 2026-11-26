@@ -82,7 +82,11 @@
                             <div class="font-bold text-xs text-[#0A0E2E]">
                                 Rp {{ number_format($b->total_harga, 0, ',', '.') }}
                             </div>
-                            @if ($b->harga_satuan > 0 && $b->jumlah > 1)
+                            @if ($b->total_harga > 0 && $b->tahun_perolehan)
+                                <div class="text-[10px] font-semibold {{ $b->nilai_buku <= 0 ? 'text-[#9EA9B9]' : 'text-emerald-600' }}">
+                                    Buku: Rp {{ number_format($b->nilai_buku, 0, ',', '.') }}
+                                </div>
+                            @elseif ($b->harga_satuan > 0 && $b->jumlah > 1)
                                 <div class="text-[10px] text-[#9EA9B9]">
                                     @ Rp {{ number_format($b->harga_satuan, 0, ',', '.') }}
                                 </div>

@@ -1,0 +1,19 @@
+flowchart TD
+    A([Mulai: Dosen / Tendik]) --> B[Mengisi Formulir Pengajuan Sarpras: Pengadaan / Perbaikan]
+    B --> C[Status: Diajukan]
+    
+    C --> D{Verifikasi Tahap 1: Admin TU}
+    D -- Tidak Memenuhi Syarat --> E[Status: Ditolak Admin]
+    E --> Z([Selesai])
+    
+    D -- Memenuhi Syarat --> F[Status: Diverifikasi]
+    F --> G{Persetujuan Tahap 2: Pimpinan Departemen}
+    
+    G -- Ditolak --> H[Status: Ditolak Pimpinan]
+    H --> Z
+    
+    G -- Disetujui --> I[Status: Disetujui]
+    I --> J[Penugasan Teknisi Sarpras: Status Diproses]
+    J --> K[Realisasi Pengerjaan Fisik / Pengadaan]
+    K --> L[Status: Selesai & Dicatat di Sistem]
+    L --> Z

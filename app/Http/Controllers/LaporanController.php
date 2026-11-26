@@ -31,6 +31,10 @@ class LaporanController extends Controller
         $totalAset = Barang::count();
         $totalUnit = (int) Barang::sum('jumlah');
         $totalNilaiPerolehan = (float) Barang::sum('total_harga');
+        $allValuasi = Barang::with('jenis')
+            ->get(['barang_id', 'jenis_id', 'tahun_perolehan', 'masa_manfaat', 'harga_satuan', 'jumlah', 'total_harga']);
+        $totalAkumulasiPenyusutan = (float) $allValuasi->sum('akumulasi_penyusutan');
+        $totalNilaiBuku = (float) $allValuasi->sum('nilai_buku');
         $totalBaik = (int) Barang::sum('kondisi_baik');
         $totalRusak = (int) (Barang::sum('kondisi_rusak_ringan') + Barang::sum('kondisi_rusak_berat'));
 
@@ -46,6 +50,8 @@ class LaporanController extends Controller
             'totalAset',
             'totalUnit',
             'totalNilaiPerolehan',
+            'totalAkumulasiPenyusutan',
+            'totalNilaiBuku',
             'totalBaik',
             'totalRusak'
         ));
@@ -62,11 +68,14 @@ class LaporanController extends Controller
     {
         $filter = $request->only(['gedung_id', 'kondisi', 'sumber_dana', 'tahun', 'q']);
 
-        $query = Barang::with(['ruangan.gedung']);
+        $query = Barang::with(['ruangan.gedung', 'jenis']);
         $this->terapkanFilter($query, $filter);
         $data = $query->orderBy('nama_barang')->get();
 
-        $pdf = Pdf::loadView('laporan.pdf', ['data' => $data, 'tanggal' => now()->format('d/m/Y H:i')]);
+        $pdf = Pdf::loadView('laporan.pdf', [
+            'data' => $data,
+            'tanggal' => now()->format('d/m/Y H:i'),
+        ])->setPaper('a4', 'landscape');
 
         return $pdf->download('laporan-sarpras-' . now()->format('Ymd-His') . '.pdf');
     }

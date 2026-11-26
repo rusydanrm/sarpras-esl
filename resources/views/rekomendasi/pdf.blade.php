@@ -198,7 +198,7 @@
                 <th class="text-center" style="width: 65px;">Thn / Usia</th>
                 <th class="text-center" style="width: 75px;">Kondisi (B/RR/RB)</th>
                 <th class="text-center" style="width: 80px;">Riwayat Servis</th>
-                <th class="text-right" style="width: 100px;">Nilai Perolehan (Rp)</th>
+                <th class="text-right" style="width: 105px;">Perolehan &amp; Nilai Buku</th>
                 <th class="text-right" style="width: 100px;">Biaya Servis (Rp)</th>
             </tr>
         </thead>
@@ -251,6 +251,9 @@
                     </td>
                     <td class="text-right">
                         Rp {{ number_format($b->total_harga, 0, ',', '.') }}
+                        @if ($b->tahun_perolehan)
+                            <br><span style="color: #059669; font-size: 7.5px;">Buku: Rp {{ number_format($b->nilai_buku, 0, ',', '.') }}</span>
+                        @endif
                     </td>
                     <td class="text-right">
                         @if ($totalBiaya > 0)

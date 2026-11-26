@@ -1,0 +1,19 @@
+flowchart LR
+    A([Mulai: Dosen / Tendik]) --> B[Isi Formulir Pengajuan: Pengadaan / Perbaikan]
+    B --> C[Status: Diajukan]
+    
+    C --> D{Verifikasi Tahap 1: Admin TU}
+    D -- Tidak Lolos --> E[Status: Ditolak Admin]
+    D -- Lolos --> F[Status: Diverifikasi]
+    
+    F --> G{Persetujuan Tahap 2: Pimpinan}
+    G -- Ditolak --> H[Status: Ditolak Pimpinan]
+    G -- Disetujui --> I[Status: Disetujui]
+    
+    I --> J[Disposisi ke Teknisi: Status Diproses]
+    J --> K[Realisasi Pengerjaan Fisik]
+    K --> L[Status: Selesai]
+    
+    E --> Z([Selesai])
+    H --> Z
+    L --> Z

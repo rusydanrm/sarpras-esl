@@ -1,0 +1,20 @@
+flowchart LR
+    A([Mulai: Pemohon]) --> B[Pilih Ruang / Barang & Waktu]
+    B --> C[Validasi Real-time Database]
+    
+    C --> D{Ada Jadwal Bentrok?}
+    D -- Ya: Bentrok --> E[Tolak Otomatis & Notifikasi Bentrok]
+    E --> B
+    
+    D -- Tidak: Aman --> F[Status: Diajukan]
+    F --> G{Persetujuan Admin / Pimpinan}
+    
+    G -- Ditolak --> H[Status: Ditolak]
+    G -- Disetujui --> I[Status: Disetujui Jadwal Terkunci]
+    
+    I --> J[Fasilitas Digunakan]
+    J --> K[Admin Konfirmasi Pengembalian]
+    K --> L[Status: Dikembalikan]
+    
+    H --> Z([Selesai])
+    L --> Z

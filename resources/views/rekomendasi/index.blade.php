@@ -277,16 +277,21 @@
 
         {{-- Modal Catat Pemeliharaan / Servis ala Spark Admin --}}
         <x-ui.modal open="catatModalOpen" maxWidth="lg" zIndex="z-[60]">
-            <div class="flex items-center gap-3 mb-5 pb-4 border-b border-[#E9EFEF]">
-                <div
-                    class="w-10 h-10 rounded-xl bg-[#0A0E2E] flex items-center justify-center text-[#ffa916] shrink-0 shadow-xs">
-                    <x-heroicon-o-wrench-screwdriver class="w-5 h-5 stroke-2" />
+            <div class="flex items-center justify-between gap-3 mb-5 pb-4 border-b border-[#E9EFEF]">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-[#0A0E2E] flex items-center justify-center text-[#ffa916] shrink-0 shadow-xs">
+                        <x-heroicon-o-wrench-screwdriver class="w-5 h-5 stroke-2" />
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-bold text-[#0A0E2E] leading-tight">Catat Pemeliharaan / Servis</h2>
+                        <p class="text-xs text-[#6C7E75] mt-0.5">Dokumentasikan tindakan perbaikan, servis rutin, atau
+                            penggantian aset</p>
+                    </div>
                 </div>
-                <div>
-                    <h2 class="text-lg font-bold text-[#0A0E2E] leading-tight">Catat Pemeliharaan / Servis</h2>
-                    <p class="text-xs text-[#6C7E75] mt-0.5">Dokumentasikan tindakan perbaikan, servis rutin, atau
-                        penggantian aset</p>
-                </div>
+                <button type="button" @click="catatModalOpen = false" class="text-[#6C7E75] hover:text-[#0A0E2E] p-1.5 rounded-lg hover:bg-[#F4F6F5] transition-colors cursor-pointer">
+                    <x-heroicon-o-x-mark class="w-5 h-5" />
+                </button>
             </div>
 
             <form method="POST" action="{{ route('pemeliharaan.store') }}">

@@ -1,0 +1,13 @@
+flowchart TD
+    subgraph Import ["Alur 1: Smart Import Data (2 Mode)"]
+        A1[Pilih Mode: Berkas .xlsx ATAU Salin Teks Clipboard] --> B1[Smart Parser Membaca Kolom DIR/DBR & Checkbox B/RR/RB]
+        B1 --> C1[Pratinjau / Preview Data & Validasi Baris]
+        C1 --> D1[(Simpan Massal ke Database Relasional)]
+    end
+
+    subgraph Maintenance ["Alur 2: Maintenance & Repair (MR) Terjadwal"]
+        A2[Cron Job / Scheduler Server Berjalan Harian Pukul 07:00] --> B2[Cek Interval Servis Barang & Pajak STNK Kendaraan]
+        B2 --> C2[Generate Notifikasi Peringatan ke Admin & Teknisi]
+        C2 --> D2[Teknisi Melakukan Servis & Input Riwayat Servis]
+        D2 --> E2[Pembaruan Status Kondisi: Baik / RR / RB]
+    end

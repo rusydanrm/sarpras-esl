@@ -1,0 +1,16 @@
+%%{init: {'theme': 'neutral'}}%%
+flowchart TD
+    subgraph Import ["Alur 1: Smart Import Data Inventaris (DIR/DBR)"]
+        direction LR
+        A1[Pilih Mode: Berkas .xlsx / Salin Teks Clipboard] --> B1[Smart Parser Baca Kolom & Checkbox B/RR/RB]
+        B1 --> C1[Pratinjau / Preview Data & Validasi Baris]
+        C1 --> D1[(Simpan Massal ke Basis Data Ruangan)]
+    end
+
+    subgraph Maintenance ["Alur 2: Pemeliharaan Terjadwal (MR) & Armada Dinas"]
+        direction LR
+        A2[Scheduler Server Berjalan Harian 07:00 WIB] --> B2[Pemeriksaan Interval Servis & Pajak STNK]
+        B2 --> C2[Generate Notifikasi Peringatan ke Admin & Teknisi]
+        C2 --> D2[Teknisi Melakukan Servis & Input Riwayat]
+        D2 --> E2[Pembaruan Status Kondisi: Baik / RR / RB]
+    end

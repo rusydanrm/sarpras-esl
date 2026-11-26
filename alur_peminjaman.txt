@@ -1,0 +1,19 @@
+flowchart TD
+    A([Mulai: Pemohon]) --> B[Pilih Fasilitas: Ruang Sidang / Barang]
+    B --> C[Pilih Tanggal & Jam Mulai - Selesai]
+    C --> D[Sistem Memeriksa Database Secara Real-time]
+    
+    D --> E{Apakah Ada Jadwal Bentrok / Overlap?}
+    E -- Ya: Terjadi Bentrok --> F[Tampilkan Peringatan Bentrok: Permohonan Ditolak Otomatis]
+    F --> C
+    
+    E -- Tidak: Jadwal Aman --> G[Kirim Tiket Peminjaman: Status Diajukan]
+    G --> H{Persetujuan Pengelola: Admin / Pimpinan}
+    
+    H -- Ditolak --> I[Status: Ditolak]
+    I --> Z([Selesai])
+    
+    H -- Disetujui --> J[Status: Disetujui: Jadwal Terkunci di Kalender]
+    J --> K[Fasilitas Digunakan]
+    K --> L[Admin Tandai Pengembalian: Status Dikembalikan]
+    L --> Z

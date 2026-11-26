@@ -214,7 +214,7 @@
                                 <x-ui.input type="number" label="Masa Pakai Standar (Tahun)" name="masa_pakai_tahun"
                                     x-bind:value="editData ? editData.masa_pakai_tahun : 5" min="1" max="50"
                                     placeholder="Contoh: 5" required />
-                                <p class="text-[11px] text-[#6C7E75] mt-1">Digunakan untuk acuan perhitungan rekomendasi pemeliharaan/peremajaan aset.</p>
+                                <p class="text-[11px] text-[#6C7E75] mt-1">Digunakan sebagai masa manfaat default untuk perhitungan penyusutan & rekomendasi peremajaan aset.</p>
                             </div>
                         @endif
                     </div>

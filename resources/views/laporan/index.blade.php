@@ -84,11 +84,14 @@
                     <div class="text-xl sm:text-2xl font-extrabold text-white leading-tight">
                         Rp {{ number_format($totalNilaiPerolehan, 0, ',', '.') }}
                     </div>
+                    <div class="text-[11px] text-slate-300 mt-1">
+                        Nilai Buku: <span class="text-[#ffa916] font-bold">Rp {{ number_format($totalNilaiBuku ?? 0, 0, ',', '.') }}</span>
+                    </div>
                 </div>
 
                 <div class="relative z-10 text-[11px] text-slate-300 font-medium flex items-center gap-1.5 mt-2">
                     <span class="w-1.5 h-1.5 rounded-full bg-[#ffa916]"></span>
-                    <span>{{ number_format($totalAset, 0, ',', '.') }} jenis barang terdata</span>
+                    <span>Susut: Rp {{ number_format($totalAkumulasiPenyusutan ?? 0, 0, ',', '.') }} • {{ number_format($totalAset, 0, ',', '.') }} aset</span>
                 </div>
             </div>
 

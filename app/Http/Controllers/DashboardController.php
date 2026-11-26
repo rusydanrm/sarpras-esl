@@ -14,6 +14,9 @@ class DashboardController extends Controller
         $totalRuangan = Ruangan::count();
         $totalBarang = Barang::sum('jumlah');
         $totalNilaiAset = Barang::sum('total_harga');
+        $totalNilaiBuku = Barang::with('jenis')
+            ->get(['barang_id', 'jenis_id', 'tahun_perolehan', 'masa_manfaat', 'harga_satuan', 'jumlah', 'total_harga'])
+            ->sum('nilai_buku');
 
         // 1 query saja untuk hitung semua kondisi sekaligus
         $kondisiSum = Barang::selectRaw('
@@ -54,6 +57,7 @@ class DashboardController extends Controller
             'totalRuangan',
             'totalBarang',
             'totalNilaiAset',
+            'totalNilaiBuku',
             'barangRusakBerat',
             'labelGedung',
             'dataGedung',

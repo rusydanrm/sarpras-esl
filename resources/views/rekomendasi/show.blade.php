@@ -1,8 +1,10 @@
 <x-layouts.app>
     <div x-data="{
         catatModalOpen: {{ $errors->hasAny(['jenis_tindakan', 'tanggal_tindakan', 'biaya']) ? 'true' : 'false' }},
-        editModalOpen: {{ $errors->hasAny(['nama_barang', 'ruangan_id', 'jumlah', 'harga_satuan']) ? 'true' : 'false' }},
-        editData: {{ Illuminate\Support\Js::from($barang) }}
+        editModalOpen: {{ $errors->hasAny(['nama_barang', 'ruangan_id', 'jumlah', 'harga_satuan', 'masa_manfaat']) ? 'true' : 'false' }},
+        editData: {{ Illuminate\Support\Js::from($barang) }},
+        jenisId: '{{ $barang->jenis_id ?? '' }}',
+        jenisMasaPakaiMap: {{ Illuminate\Support\Js::from($jenisList->pluck('masa_pakai_tahun', 'jenis_id')) }}
     }">
         {{-- Link Navigasi Kembali --}}
         <div class="mb-4">
@@ -213,6 +215,90 @@
                         </div>
                     </div>
                 </div>
+
+                {{-- Kartu Penyusutan & Nilai Buku Aset --}}
+                @php
+                    $totalPerolehan = (float) ($barang->total_harga ?: ($barang->harga_satuan * $barang->jumlah));
+                    $nilaiBuku = $barang->nilai_buku;
+                    $akumulasi = $barang->akumulasi_penyusutan;
+                    $persenSusut = $barang->persen_penyusutan;
+                @endphp
+                <div class="bg-white border border-[#E9EFEF] rounded-2xl shadow-[0_2px_12px_rgba(10,14,46,0.03)] overflow-hidden">
+                    <div class="p-4 sm:p-5 border-b border-[#E9EFEF] flex items-center justify-between bg-[#F8FAF9]">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            <h2 class="text-xs font-bold uppercase tracking-wider text-[#0A0E2E]">Valuasi & Penyusutan Aset</h2>
+                        </div>
+                        <span class="text-[11px] font-semibold text-[#6C7E75] bg-white px-2.5 py-0.5 rounded-full border border-[#E9EFEF]">
+                            Metode Garis Lurus
+                        </span>
+                    </div>
+
+                    <div class="p-4 sm:p-6 space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div class="bg-[#F8FAF9] p-3.5 rounded-xl border border-[#E9EFEF]">
+                                <div class="text-[11px] text-[#6C7E75] font-medium">Masa Manfaat</div>
+                                <div class="text-base font-extrabold text-[#0A0E2E] mt-0.5">{{ $barang->masa_pakai }} Tahun</div>
+                                <div class="text-[10px] text-[#6C7E75] mt-0.5">{{ $barang->sumber_masa_pakai }}</div>
+                            </div>
+                            <div class="bg-[#F8FAF9] p-3.5 rounded-xl border border-[#E9EFEF]">
+                                <div class="text-[11px] text-[#6C7E75] font-medium">Nilai Perolehan</div>
+                                <div class="text-sm font-extrabold text-[#0A0E2E] mt-0.5">
+                                    Rp {{ number_format($totalPerolehan, 0, ',', '.') }}
+                                </div>
+                                <div class="text-[10px] text-[#6C7E75] mt-0.5">
+                                    {{ $barang->tahun_perolehan ? "Tahun {$barang->tahun_perolehan} ({$barang->usia_teks})" : 'Tahun belum diisi' }}
+                                </div>
+                            </div>
+                            <div class="bg-[#F8FAF9] p-3.5 rounded-xl border border-[#E9EFEF]">
+                                <div class="text-[11px] text-[#6C7E75] font-medium">Nilai Buku Saat Ini</div>
+                                <div class="text-sm font-extrabold {{ $nilaiBuku <= 0 && $totalPerolehan > 0 ? 'text-[#6C7E75]' : 'text-emerald-600' }} mt-0.5">
+                                    Rp {{ number_format($nilaiBuku, 0, ',', '.') }}
+                                </div>
+                                <div class="text-[10px] text-[#6C7E75] mt-0.5">
+                                    @if (!$barang->tahun_perolehan)
+                                        Menunggu tahun perolehan
+                                    @elseif ($nilaiBuku <= 0 && $totalPerolehan > 0)
+                                        Disusutkan penuh
+                                    @else
+                                        Pasca penyusutan
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
+                        @if ($totalPerolehan > 0 && $barang->tahun_perolehan)
+                            <div>
+                                <div class="flex items-center justify-between text-[11px] font-semibold mb-1.5">
+                                    <span class="text-[#6C7E75]">Progres Penyusutan Aset</span>
+                                    <span class="text-[#0A0E2E]">{{ $persenSusut }}% tersusutkan</span>
+                                </div>
+                                <div class="w-full h-2 bg-[#F4F6F5] rounded-full overflow-hidden border border-[#E9EFEF]">
+                                    <div class="h-full rounded-full transition-all duration-500 {{ $persenSusut >= 100 ? 'bg-amber-500' : 'bg-[#0A0E2E]' }}"
+                                        style="width: {{ $persenSusut }}%"></div>
+                                </div>
+                            </div>
+                        @elseif (!$barang->tahun_perolehan)
+                            <div class="text-[11px] text-amber-700 bg-amber-50 border border-amber-200/80 rounded-xl px-3.5 py-2.5 font-medium">
+                                Tahun perolehan belum diisi sehingga penyusutan otomatis belum dihitung. Silakan lengkapi via tombol Edit Data.
+                            </div>
+                        @endif
+
+                        <div class="space-y-2 text-xs bg-[#F4F6F5] p-3.5 rounded-xl border border-[#E9EFEF]">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[#6C7E75]">Beban Penyusutan / Tahun:</span>
+                                <span class="font-semibold text-[#0A0E2E]">
+                                    Rp {{ number_format($barang->nilai_penyusutan_tahun, 0, ',', '.') }}
+                                    <span class="text-[10px] text-[#6C7E75] font-normal">(Rp {{ number_format($barang->nilai_penyusutan_bulan, 0, ',', '.') }}/bln)</span>
+                                </span>
+                            </div>
+                            <div class="flex items-center justify-between pt-2 border-t border-[#E9EFEF]">
+                                <span class="text-[#6C7E75]">Akumulasi Penyusutan Aset:</span>
+                                <span class="font-bold text-[#0A0E2E]">Rp {{ number_format($akumulasi, 0, ',', '.') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {{-- Kolom Kanan: Jadwal Pemeliharaan & Riwayat Servis (5 col) --}}
@@ -341,14 +427,19 @@
 
         {{-- Modal Catat Pemeliharaan / Servis Cepat --}}
         <x-ui.modal open="catatModalOpen" maxWidth="lg" zIndex="z-[60]">
-            <div class="flex items-center gap-3 mb-4 pb-3 border-b border-[#E9EFEF]">
-                <div class="w-10 h-10 rounded-xl bg-[#0A0E2E] flex items-center justify-center text-[#ffa916] shrink-0 shadow-xs">
-                    <x-heroicon-o-wrench-screwdriver class="w-5 h-5 stroke-2" />
+            <div class="flex items-center justify-between gap-3 mb-4 pb-3 border-b border-[#E9EFEF]">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-[#0A0E2E] flex items-center justify-center text-[#ffa916] shrink-0 shadow-xs">
+                        <x-heroicon-o-wrench-screwdriver class="w-5 h-5 stroke-2" />
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-bold text-[#0A0E2E] leading-tight">Catat Pemeliharaan / Servis</h2>
+                        <p class="text-xs text-[#6C7E75] mt-0.5">{{ $barang->nama_barang }} ({{ $barang->ruangan?->nama_ruang ?? 'Tanpa Ruangan' }})</p>
+                    </div>
                 </div>
-                <div>
-                    <h2 class="text-lg font-bold text-[#0A0E2E] leading-tight">Catat Pemeliharaan / Servis</h2>
-                    <p class="text-xs text-[#6C7E75] mt-0.5">{{ $barang->nama_barang }} ({{ $barang->ruangan?->nama_ruang ?? 'Tanpa Ruangan' }})</p>
-                </div>
+                <button type="button" @click="catatModalOpen = false" class="text-[#6C7E75] hover:text-[#0A0E2E] p-1.5 rounded-lg hover:bg-[#F4F6F5] transition-colors cursor-pointer">
+                    <x-heroicon-o-x-mark class="w-5 h-5" />
+                </button>
             </div>
 
             <form method="POST" action="{{ route('pemeliharaan.store') }}">
@@ -404,14 +495,19 @@
 
         {{-- Modal Edit Barang --}}
         <x-ui.modal open="editModalOpen" maxWidth="2xl" zIndex="z-[60]">
-            <div class="flex items-center gap-3 mb-4 pb-3 border-b border-[#E9EFEF]">
-                <div class="w-10 h-10 rounded-xl bg-[#0A0E2E] flex items-center justify-center text-[#ffa916] shrink-0 shadow-xs">
-                    <x-heroicon-o-pencil class="w-5 h-5 stroke-2" />
+            <div class="flex items-center justify-between gap-3 mb-4 pb-3 border-b border-[#E9EFEF]">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-[#0A0E2E] flex items-center justify-center text-[#ffa916] shrink-0 shadow-xs">
+                        <x-heroicon-o-pencil class="w-5 h-5 stroke-2" />
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-bold text-[#0A0E2E] leading-tight">Edit Data Barang</h2>
+                        <p class="text-xs text-[#6C7E75] mt-0.5">Perbarui spesifikasi, nilai perolehan, atau lokasi ruangan</p>
+                    </div>
                 </div>
-                <div>
-                    <h2 class="text-lg font-bold text-[#0A0E2E] leading-tight">Edit Data Barang</h2>
-                    <p class="text-xs text-[#6C7E75] mt-0.5">Perbarui spesifikasi, nilai perolehan, atau lokasi ruangan</p>
-                </div>
+                <button type="button" @click="editModalOpen = false" class="text-[#6C7E75] hover:text-[#0A0E2E] p-1.5 rounded-lg hover:bg-[#F4F6F5] transition-colors cursor-pointer">
+                    <x-heroicon-o-x-mark class="w-5 h-5" />
+                </button>
             </div>
 
             <form method="POST" action="{{ route('barang.update', $barang->barang_id) }}">
@@ -437,7 +533,7 @@
                             </x-ui.select>
                         </div>
                         <div>
-                            <x-ui.select label="Kategori / Jenis" name="jenis_id">
+                            <x-ui.select label="Kategori / Jenis" name="jenis_id" x-model="jenisId">
                                 <option value="">- Otomatis Deteksi -</option>
                                 @foreach ($jenisList as $j)
                                     <option value="{{ $j->jenis_id }}" @selected($barang->jenis_id == $j->jenis_id)>{{ $j->nama_jenis }}</option>
@@ -451,7 +547,13 @@
                             <x-ui.input label="Tahun Perolehan" type="number" name="tahun_perolehan" value="{{ $barang->tahun_perolehan }}" />
                         </div>
                         <div>
-                            <x-ui.input label="Harga Satuan (Rp)" type="number" name="harga_satuan" value="{{ $barang->harga_satuan }}" />
+                            <x-ui.input label="Masa Manfaat Khusus (Tahun)" type="number" name="masa_manfaat"
+                                value="{{ $barang->masa_manfaat }}" min="1" max="50"
+                                x-bind:placeholder="'Otomatis: ' + (jenisMasaPakaiMap[jenisId] ?? 5) + ' thn'" />
+                            <p class="text-[11px] text-[#9EA9B9] mt-1">Kosongkan untuk mengikuti jenis barang / default (5 thn).</p>
+                        </div>
+                        <div>
+                            <x-ui.input label="Harga Satuan (Rp)" type="number" name="harga_satuan" value="{{ $barang->harga_satuan }}" required />
                         </div>
                         <div>
                             <x-ui.input label="Sumber Dana" name="sumber_dana" value="{{ $barang->sumber_dana }}" placeholder="Contoh: DM, BOPTN" />

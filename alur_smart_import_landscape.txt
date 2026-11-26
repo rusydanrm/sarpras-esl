@@ -1,0 +1,15 @@
+flowchart LR
+    subgraph Import ["Alur 1: Smart Import Data DIR/DBR"]
+        direction LR
+        A1[Unggah .xlsx / Salin Clipboard] --> B1[Smart Parser Baca Kolom & Checkbox B/RR/RB]
+        B1 --> C1[Pratinjau / Preview Data]
+        C1 --> D1[(Simpan ke Database Ruangan)]
+    end
+
+    subgraph Maintenance ["Alur 2: Pemeliharaan Terjadwal (MR)"]
+        direction LR
+        A2[Scheduler Harian 07:00] --> B2[Cek Interval Servis & Pajak STNK]
+        B2 --> C2[Notifikasi Peringatan Terkirim]
+        C2 --> D2[Teknisi Input Log Servis]
+        D2 --> E2[Update Kondisi: Baik/RR/RB]
+    end

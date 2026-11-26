@@ -34,6 +34,9 @@
                     <span class="alert-spark-badge">Informasi Aset</span>
                     <div class="alert-spark-date">{{ now()->format('d M Y') }} • ESL IPB</div>
                     <div class="alert-spark-text">Total estimasi nilai perolehan aset Rp {{ number_format($totalNilaiAset, 0, ',', '.') }}</div>
+                    <div class="text-xs text-slate-300 font-medium mt-1.5">
+                        Nilai buku saat ini: <span class="text-[#ffa916] font-bold">Rp {{ number_format($totalNilaiBuku ?? 0, 0, ',', '.') }}</span>
+                    </div>
                 </div>
 
                 <div class="relative z-10">

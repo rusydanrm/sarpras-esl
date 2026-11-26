@@ -13,7 +13,7 @@ class Barang extends Model
 
     protected $fillable = [
         'ruangan_id', 'jenis_id', 'kode_barang', 'nama_barang', 'nup',
-        'merek_tipe', 'tahun_perolehan', 'harga_satuan', 'jumlah', 'satuan',
+        'merek_tipe', 'tahun_perolehan', 'masa_manfaat', 'harga_satuan', 'jumlah', 'satuan',
         'sumber_dana', 'kondisi_baik', 'kondisi_rusak_ringan', 'kondisi_rusak_berat', 'foto_url', 'qr_code',
         'interval_pemeliharaan_bulan', 'tanggal_pemeliharaan_terakhir', 'keterangan',
     ];
@@ -25,10 +25,10 @@ class Barang extends Model
         'usia_tahun',
         'usia_teks',
         'masa_pakai',
-        'masa_manfaat',
         'estimasi_biaya_ganti',
         'ringkasan_kondisi',
         'teks_kondisi',
+        'nilai_penyusutan_tahun',
         'nilai_penyusutan_bulan',
         'akumulasi_penyusutan',
         'nilai_buku',
@@ -43,6 +43,7 @@ class Barang extends Model
             'kondisi_rusak_berat' => 'integer',
             'jumlah' => 'integer',
             'interval_pemeliharaan_bulan' => 'integer',
+            'masa_manfaat' => 'integer',
         ];
     }
 
@@ -254,12 +255,18 @@ class Barang extends Model
 
     public function getMasaPakaiAttribute(): int
     {
-        // Prioritas 1: Ambil dari konfigurasi dinamis JenisBarang di database
+        // Prioritas 1: Masa manfaat khusus yang diatur langsung pada barang ini
+        $kustom = $this->attributes['masa_manfaat'] ?? null;
+        if (!empty($kustom) && (int) $kustom > 0) {
+            return (int) $kustom;
+        }
+
+        // Prioritas 2: Ambil dari konfigurasi dinamis JenisBarang di database
         if (!empty($this->jenis?->masa_pakai_tahun)) {
             return (int) $this->jenis->masa_pakai_tahun;
         }
 
-        // Prioritas 2: Fallback bawaan
+        // Prioritas 3: Fallback bawaan per jenis atau default sistem (5 tahun)
         $namaJenis = $this->jenis?->nama_jenis ?? '';
 
         return match ($namaJenis) {
@@ -270,9 +277,18 @@ class Barang extends Model
         };
     }
 
-    public function getMasaManfaatAttribute(): int
+    public function getSumberMasaPakaiAttribute(): string
     {
-        return $this->masa_pakai;
+        $kustom = $this->attributes['masa_manfaat'] ?? null;
+        if (!empty($kustom) && (int) $kustom > 0) {
+            return 'Kustom barang ini';
+        }
+
+        if (!empty($this->jenis?->masa_pakai_tahun)) {
+            return 'Kategori ' . $this->jenis->nama_jenis;
+        }
+
+        return 'Default sistem (5 thn)';
     }
 
     public function getStatusRekomendasiAttribute(): array
@@ -346,31 +362,58 @@ class Barang extends Model
         return 0;
     }
 
+    private function resolvedTotalHarga(): float
+    {
+        return (float) ($this->total_harga ?? ($this->harga_satuan * $this->jumlah));
+    }
+
+    public function getNilaiPenyusutanTahunAttribute(): float
+    {
+        $harga = $this->resolvedTotalHarga();
+        $masaPakai = max(1, $this->masa_pakai);
+
+        return $harga > 0 ? round($harga / $masaPakai, 2) : 0.0;
+    }
+
     public function getNilaiPenyusutanBulanAttribute(): float
     {
-        $harga = (float) ($this->total_harga ?? ($this->harga_satuan * $this->jumlah));
-        $masaManfaat = (int) ($this->masa_manfaat ?? 8);
-        if ($harga <= 0 || $masaManfaat <= 0) {
-            return 0.0;
-        }
-        return round($harga / ($masaManfaat * 12), 2);
+        $harga = $this->resolvedTotalHarga();
+        $masaPakai = max(1, $this->masa_pakai);
+
+        return $harga > 0 ? round($harga / ($masaPakai * 12), 2) : 0.0;
     }
 
     public function getAkumulasiPenyusutanAttribute(): float
     {
-        $harga = (float) ($this->total_harga ?? ($this->harga_satuan * $this->jumlah));
-        $usiaTahun = $this->usia_tahun ?? 0;
-        $usiaBulan = $usiaTahun * 12;
-        $penyusutanBulan = $this->nilai_penyusutan_bulan;
+        $harga = $this->resolvedTotalHarga();
+        $usiaTahun = $this->usia_tahun;
+        if ($harga <= 0 || $usiaTahun === null) {
+            return 0.0;
+        }
 
-        return min($harga, round($usiaBulan * $penyusutanBulan, 2));
+        $masaPakai = max(1, $this->masa_pakai);
+        if ($usiaTahun >= $masaPakai) {
+            return $harga;
+        }
+
+        return round(($harga * $usiaTahun) / $masaPakai, 2);
     }
 
     public function getNilaiBukuAttribute(): float
     {
-        $harga = (float) ($this->total_harga ?? ($this->harga_satuan * $this->jumlah));
-        $akumulasi = $this->akumulasi_penyusutan;
-        return max(0.0, round($harga - $akumulasi, 2));
+        $harga = $this->resolvedTotalHarga();
+
+        return max(0.0, round($harga - $this->akumulasi_penyusutan, 2));
+    }
+
+    public function getPersenPenyusutanAttribute(): float
+    {
+        $harga = $this->resolvedTotalHarga();
+        if ($harga <= 0 || $this->usia_tahun === null) {
+            return 0.0;
+        }
+
+        return min(100.0, round(($this->akumulasi_penyusutan / $harga) * 100, 1));
     }
 
     public function getUsiaTeksAttribute(): string

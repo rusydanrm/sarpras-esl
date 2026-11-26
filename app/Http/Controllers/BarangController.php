@@ -8,6 +8,7 @@ use App\Models\Gedung;
 use App\Models\JenisBarang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class BarangController extends Controller
 {
@@ -93,29 +94,7 @@ class BarangController extends Controller
     {
         $this->authorizeEdit($ruangan);
 
-        $validated = $request->validate([
-            'jenis_id' => 'nullable|exists:jenis_barang,jenis_id',
-            'kode_barang' => 'nullable|string|max:50',
-            'nama_barang' => 'required|string|max:150',
-            'nup' => 'nullable|string|max:50',
-            'merek_tipe' => 'nullable|string|max:100',
-            'tahun_perolehan' => 'nullable|integer|min:1990|max:'.date('Y'),
-            'harga_satuan' => 'required|numeric|min:0',
-            'kondisi_baik' => 'required|integer|min:0',
-            'kondisi_rusak_ringan' => 'required|integer|min:0',
-            'kondisi_rusak_berat' => 'required|integer|min:0',
-            'satuan' => 'nullable|string|max:20',
-            'sumber_dana' => 'nullable|string|max:100',
-            'interval_pemeliharaan_bulan' => 'nullable|integer|min:1|max:60',
-            'keterangan' => 'nullable|string',
-        ]);
-
-        $jumlah = $validated['kondisi_baik'] + $validated['kondisi_rusak_ringan'] + $validated['kondisi_rusak_berat'];
-        if ($jumlah < 1) {
-            return back()->withErrors(['kondisi_baik' => 'Total jumlah barang minimal 1 unit.'])->withInput();
-        }
-        $validated['jumlah'] = $jumlah;
-
+        $validated = $this->validateBarangPayload($request);
         $ruangan->barang()->create($validated);
 
         return redirect()->route('ruangan.show', $ruangan)->with('success', 'Barang berhasil ditambahkan.');
@@ -123,30 +102,7 @@ class BarangController extends Controller
 
     public function storeGlobal(Request $request)
     {
-        $validated = $request->validate([
-            'ruangan_id' => 'required|exists:ruangan,ruangan_id',
-            'jenis_id' => 'nullable|exists:jenis_barang,jenis_id',
-            'kode_barang' => 'nullable|string|max:50',
-            'nama_barang' => 'required|string|max:150',
-            'nup' => 'nullable|string|max:50',
-            'merek_tipe' => 'nullable|string|max:100',
-            'tahun_perolehan' => 'nullable|integer|min:1990|max:' . date('Y'),
-            'harga_satuan' => 'required|numeric|min:0',
-            'kondisi_baik' => 'required|integer|min:0',
-            'kondisi_rusak_ringan' => 'required|integer|min:0',
-            'kondisi_rusak_berat' => 'required|integer|min:0',
-            'satuan' => 'nullable|string|max:20',
-            'sumber_dana' => 'nullable|string|max:100',
-            'interval_pemeliharaan_bulan' => 'nullable|integer|min:1|max:60',
-            'keterangan' => 'nullable|string',
-        ]);
-
-        $jumlah = $validated['kondisi_baik'] + $validated['kondisi_rusak_ringan'] + $validated['kondisi_rusak_berat'];
-        if ($jumlah < 1) {
-            return back()->withErrors(['kondisi_baik' => 'Total jumlah barang minimal 1 unit.'])->withInput();
-        }
-        $validated['jumlah'] = $jumlah;
-
+        $validated = $this->validateBarangPayload($request, butuhRuangan: true);
         $ruangan = Ruangan::findOrFail($validated['ruangan_id']);
 
         // Dosen/Tendik cuma boleh tambah barang ke ruangan miliknya sendiri
@@ -163,13 +119,22 @@ class BarangController extends Controller
     {
         $this->authorizeEdit($barang->ruangan);
 
-        $validated = $request->validate([
+        $validated = $this->validateBarangPayload($request);
+        $barang->update($validated);
+
+        return back()->with('success', 'Barang berhasil diperbarui.');
+    }
+
+    private function validateBarangPayload(Request $request, bool $butuhRuangan = false): array
+    {
+        $rules = [
             'jenis_id' => 'nullable|exists:jenis_barang,jenis_id',
             'kode_barang' => 'nullable|string|max:50',
             'nama_barang' => 'required|string|max:150',
             'nup' => 'nullable|string|max:50',
             'merek_tipe' => 'nullable|string|max:100',
-            'tahun_perolehan' => 'nullable|integer|min:1990|max:'.date('Y'),
+            'tahun_perolehan' => 'nullable|integer|min:1990|max:' . date('Y'),
+            'masa_manfaat' => 'nullable|integer|min:1|max:50',
             'harga_satuan' => 'required|numeric|min:0',
             'kondisi_baik' => 'required|integer|min:0',
             'kondisi_rusak_ringan' => 'required|integer|min:0',
@@ -178,17 +143,21 @@ class BarangController extends Controller
             'sumber_dana' => 'nullable|string|max:100',
             'interval_pemeliharaan_bulan' => 'nullable|integer|min:1|max:60',
             'keterangan' => 'nullable|string',
-        ]);
+        ];
+
+        if ($butuhRuangan) {
+            $rules['ruangan_id'] = 'required|exists:ruangan,ruangan_id';
+        }
+
+        $validated = $request->validate($rules);
 
         $jumlah = $validated['kondisi_baik'] + $validated['kondisi_rusak_ringan'] + $validated['kondisi_rusak_berat'];
         if ($jumlah < 1) {
-            return back()->withErrors(['kondisi_baik' => 'Total jumlah barang minimal 1 unit.'])->withInput();
+            throw ValidationException::withMessages(['kondisi_baik' => 'Total jumlah barang minimal 1 unit.']);
         }
         $validated['jumlah'] = $jumlah;
 
-        $barang->update($validated);
-
-        return back()->with('success', 'Barang berhasil diperbarui.');
+        return $validated;
     }
 
     public function destroy(Barang $barang)

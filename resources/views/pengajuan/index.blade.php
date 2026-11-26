@@ -143,14 +143,19 @@
 
         {{-- Modal Ajukan Baru ala Spark Admin --}}
         <x-ui.modal open="modalOpen" maxWidth="lg">
-            <div class="flex items-center gap-3 mb-5 pb-4 border-b border-[#E9EFEF]">
-                <div class="w-10 h-10 rounded-xl bg-[#0A0E2E] flex items-center justify-center text-[#ffa916] shrink-0 shadow-xs">
-                    <x-heroicon-o-paper-airplane class="w-5 h-5 stroke-2" />
+            <div class="flex items-center justify-between gap-3 mb-5 pb-4 border-b border-[#E9EFEF]">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-[#0A0E2E] flex items-center justify-center text-[#ffa916] shrink-0 shadow-xs">
+                        <x-heroicon-o-paper-airplane class="w-5 h-5 stroke-2" />
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-bold text-[#0A0E2E] leading-tight">Buat Pengajuan Baru</h2>
+                        <p class="text-xs text-[#6C7E75] mt-0.5">Kirimkan permohonan sarana prasarana untuk diverifikasi</p>
+                    </div>
                 </div>
-                <div>
-                    <h2 class="text-lg font-bold text-[#0A0E2E] leading-tight">Buat Pengajuan Baru</h2>
-                    <p class="text-xs text-[#6C7E75] mt-0.5">Kirimkan permohonan sarana prasarana untuk diverifikasi</p>
-                </div>
+                <button type="button" @click="modalOpen = false" class="text-[#6C7E75] hover:text-[#0A0E2E] p-1.5 rounded-lg hover:bg-[#F4F6F5] transition-colors cursor-pointer">
+                    <x-heroicon-o-x-mark class="w-5 h-5" />
+                </button>
             </div>
 
             <form method="POST" action="{{ route('pengajuan.store') }}">
@@ -209,15 +214,20 @@
                                 <p class="text-xs text-[#6C7E75]">ID Pengajuan: #PGJ-<span x-text="selectedPengajuan.pengajuan_id"></span></p>
                             </div>
                         </div>
-                        <span class="badge-table"
-                            :class="{
-                                'success': ['Selesai', 'Disetujui'].includes(selectedPengajuan.status),
-                                'danger': selectedPengajuan.status === 'Ditolak',
-                                'accent': selectedPengajuan.status === 'Diverifikasi',
-                                'warning': ['Diajukan', 'Diproses'].includes(selectedPengajuan.status)
-                            }"
-                            x-text="selectedPengajuan.status">
-                        </span>
+                        <div class="flex items-center gap-2">
+                            <span class="badge-table"
+                                :class="{
+                                    'success': ['Selesai', 'Disetujui'].includes(selectedPengajuan.status),
+                                    'danger': selectedPengajuan.status === 'Ditolak',
+                                    'accent': selectedPengajuan.status === 'Diverifikasi',
+                                    'warning': ['Diajukan', 'Diproses'].includes(selectedPengajuan.status)
+                                }"
+                                x-text="selectedPengajuan.status">
+                            </span>
+                            <button type="button" @click="detailOpen = false" class="text-[#6C7E75] hover:text-[#0A0E2E] p-1.5 rounded-lg hover:bg-[#F4F6F5] transition-colors cursor-pointer">
+                                <x-heroicon-o-x-mark class="w-5 h-5" />
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Workflow Timeline Stepper -->
@@ -284,14 +294,19 @@
 
         {{-- Modal Tolak Pengajuan (Menggantikan prompt browser) --}}
         <x-ui.modal open="tolakModalOpen" maxWidth="sm">
-            <div class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-600 shrink-0">
-                    <x-heroicon-o-x-circle class="w-5 h-5" />
+            <div class="flex items-center justify-between gap-3 mb-4 pb-3 border-b border-[#E9EFEF]">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-600 shrink-0">
+                        <x-heroicon-o-x-circle class="w-5 h-5" />
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-base text-[#0A0E2E]">Tolak Pengajuan</h3>
+                        <p class="text-xs text-[#6C7E75]">Berikan alasan penolakan kepada pemohon</p>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="font-bold text-base text-[#0A0E2E]">Tolak Pengajuan</h3>
-                    <p class="text-xs text-[#6C7E75]">Berikan alasan penolakan kepada pemohon</p>
-                </div>
+                <button type="button" @click="tolakModalOpen = false" class="text-[#6C7E75] hover:text-[#0A0E2E] p-1 rounded-lg hover:bg-[#F4F6F5] transition-colors cursor-pointer">
+                    <x-heroicon-o-x-mark class="w-5 h-5" />
+                </button>
             </div>
 
             <form method="POST" :action="'/pengajuan/' + tolakPengajuanId + '/tolak'">

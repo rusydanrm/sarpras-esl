@@ -33,17 +33,15 @@
         @click.away="{{ $open }} = false"
         class="bg-white rounded-2xl w-full {{ $width }} p-6 max-h-[90vh] overflow-y-auto whitespace-normal text-left shadow-2xl border border-[#E9EFEF]">
         
-        <div class="flex items-center justify-between mb-5 pb-3 border-b border-[#E9EFEF]">
-            @if ($title)
+        @if ($title)
+            <div class="flex items-center justify-between mb-5 pb-3 border-b border-[#E9EFEF]">
                 <h2 class="text-base font-bold text-slate-900 -tracking-tight">{{ $title }}</h2>
-            @else
-                <div></div>
-            @endif
-            <button @click="{{ $open }} = false" type="button"
-                class="w-8 h-8 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-[#F4F6F5] transition-all duration-100 active:scale-95">
-                <x-heroicon-o-x-mark class="w-5 h-5" />
-            </button>
-        </div>
+                <button @click="{{ $open }} = false" type="button"
+                    class="w-8 h-8 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-[#F4F6F5] transition-all duration-100 active:scale-95 cursor-pointer">
+                    <x-heroicon-o-x-mark class="w-5 h-5" />
+                </button>
+            </div>
+        @endif
         
         {{ $slot }}
     </div>

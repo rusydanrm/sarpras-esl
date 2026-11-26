@@ -15,7 +15,7 @@ class LaporanBarangExport implements FromCollection, WithHeadings, WithMapping
 
     public function collection()
     {
-        $query = Barang::with(['ruangan.gedung']);
+        $query = Barang::with(['ruangan.gedung', 'jenis']);
 
         if (!empty($this->filter['q'])) {
             $query->where(function ($q) {
@@ -48,7 +48,26 @@ class LaporanBarangExport implements FromCollection, WithHeadings, WithMapping
 
     public function headings(): array
     {
-        return ['Nama Barang', 'Kode Barang', 'Ruangan', 'Gedung', 'Baik', 'Rusak Ringan', 'Rusak Berat', 'Total Jumlah', 'Satuan', 'Harga Satuan', 'Jumlah Harga Perolehan', 'Sumber Dana', 'Tahun Perolehan'];
+        return [
+            'Nama Barang',
+            'Kode Barang',
+            'Kategori / Jenis',
+            'Ruangan',
+            'Gedung',
+            'Baik',
+            'Rusak Ringan',
+            'Rusak Berat',
+            'Total Jumlah',
+            'Satuan',
+            'Harga Satuan',
+            'Jumlah Harga Perolehan',
+            'Sumber Dana',
+            'Tahun Perolehan',
+            'Masa Manfaat (Thn)',
+            'Penyusutan / Tahun (Rp)',
+            'Akumulasi Penyusutan (Rp)',
+            'Nilai Buku Saat Ini (Rp)',
+        ];
     }
 
     public function map($barang): array
@@ -56,8 +75,9 @@ class LaporanBarangExport implements FromCollection, WithHeadings, WithMapping
         return [
             $barang->nama_barang,
             $barang->kode_barang,
-            $barang->ruangan->nama_ruang,
-            $barang->ruangan->gedung->nama_gedung,
+            $barang->jenis?->nama_jenis ?? '-',
+            $barang->ruangan?->nama_ruang ?? '-',
+            $barang->ruangan?->gedung?->nama_gedung ?? '-',
             $barang->kondisi_baik,
             $barang->kondisi_rusak_ringan,
             $barang->kondisi_rusak_berat,
@@ -67,6 +87,10 @@ class LaporanBarangExport implements FromCollection, WithHeadings, WithMapping
             $barang->total_harga,
             $barang->sumber_dana,
             $barang->tahun_perolehan,
+            $barang->masa_pakai,
+            $barang->nilai_penyusutan_tahun,
+            $barang->akumulasi_penyusutan,
+            $barang->nilai_buku,
         ];
     }
 }

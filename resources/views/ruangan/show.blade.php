@@ -4,7 +4,9 @@
         editData: null,
         formBaik: 1,
         formRR: 0,
-        formRB: 0
+        formRB: 0,
+        formJenisId: '',
+        jenisMasaPakaiMap: {{ Illuminate\Support\Js::from($jenisList->pluck('masa_pakai_tahun', 'jenis_id')) }}
     }">
 
         <!-- Navigation Back Link -->
@@ -46,7 +48,7 @@
 
             <div class="flex items-center gap-2.5">
                 <button type="button" 
-                    @click="modalOpen = true; editData = null; formBaik = 1; formRR = 0; formRB = 0"
+                    @click="modalOpen = true; editData = null; formBaik = 1; formRR = 0; formRB = 0; formJenisId = ''"
                     class="px-4 py-2.5 bg-[#ffa916] text-[#0A0E2E] hover:bg-[#ffb738] rounded-xl text-xs font-bold transition-all shadow-[0_4px_12px_rgba(255,169,22,0.25)] hover:shadow-[0_6px_16px_rgba(255,169,22,0.35)] flex items-center gap-1.5 active:scale-95 cursor-pointer">
                     <x-heroicon-o-plus class="w-4 h-4 stroke-2" />
                     <span>Tambah Barang</span>
@@ -240,7 +242,11 @@
                                     <div class="font-bold text-xs text-[#0A0E2E]">
                                         Rp {{ number_format($b->total_harga, 0, ',', '.') }}
                                     </div>
-                                    @if ($b->harga_satuan > 0 && $b->jumlah > 1)
+                                    @if ($b->total_harga > 0 && $b->tahun_perolehan)
+                                        <div class="text-[10px] font-semibold {{ $b->nilai_buku <= 0 ? 'text-[#9EA9B9]' : 'text-emerald-600' }}">
+                                            Buku: Rp {{ number_format($b->nilai_buku, 0, ',', '.') }}
+                                        </div>
+                                    @elseif ($b->harga_satuan > 0 && $b->jumlah > 1)
                                         <div class="text-[10px] text-[#9EA9B9]">
                                             @ Rp {{ number_format($b->harga_satuan, 0, ',', '.') }}
                                         </div>
@@ -291,14 +297,19 @@
 
         {{-- Modal Tambah / Edit Barang di Ruangan ala Spark Admin --}}
         <x-ui.modal open="modalOpen" maxWidth="lg">
-            <div class="flex items-center gap-3 mb-5 pb-4 border-b border-[#E9EFEF]">
-                <div class="w-10 h-10 rounded-xl bg-[#0A0E2E] flex items-center justify-center text-[#ffa916] shrink-0 shadow-xs">
-                    <x-heroicon-o-cube class="w-5 h-5 stroke-2" />
+            <div class="flex items-center justify-between gap-3 mb-5 pb-4 border-b border-[#E9EFEF]">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-[#0A0E2E] flex items-center justify-center text-[#ffa916] shrink-0 shadow-xs">
+                        <x-heroicon-o-cube class="w-5 h-5 stroke-2" />
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-bold text-[#0A0E2E] leading-tight" x-text="editData ? 'Edit Data Barang' : 'Tambah Barang ke Ruangan'"></h2>
+                        <p class="text-xs text-[#6C7E75] mt-0.5">Penempatan inventaris pada ruangan <strong>{{ $ruangan->nama_ruang }}</strong></p>
+                    </div>
                 </div>
-                <div>
-                    <h2 class="text-lg font-bold text-[#0A0E2E] leading-tight" x-text="editData ? 'Edit Data Barang' : 'Tambah Barang ke Ruangan'"></h2>
-                    <p class="text-xs text-[#6C7E75] mt-0.5">Penempatan inventaris pada ruangan <strong>{{ $ruangan->nama_ruang }}</strong></p>
-                </div>
+                <button type="button" @click="modalOpen = false" class="text-[#6C7E75] hover:text-[#0A0E2E] p-1.5 rounded-lg hover:bg-[#F4F6F5] transition-colors cursor-pointer">
+                    <x-heroicon-o-x-mark class="w-5 h-5" />
+                </button>
             </div>
 
             <form method="POST"
@@ -316,20 +327,28 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <x-ui.input label="Merek / Tipe" name="merek_tipe" x-bind:value="editData?.merek_tipe" placeholder="Contoh: Acer / Daikin 1PK" />
-                        <x-ui.select label="Kategori / Jenis" name="jenis_id">
-                            <option value="">- Pilih Kategori -</option>
+                        <x-ui.select label="Kategori / Jenis" name="jenis_id" x-on:change="if (editData) editData.jenis_id = $event.target.value; else formJenisId = $event.target.value">
+                            <option value="" x-bind:selected="editData ? !editData.jenis_id : !formJenisId">- Pilih Kategori -</option>
                             @foreach ($jenisList as $j)
-                                <option value="{{ $j->jenis_id }}" x-bind:selected="editData && editData.jenis_id == {{ $j->jenis_id }}">{{ $j->nama_jenis }}</option>
+                                <option value="{{ $j->jenis_id }}" x-bind:selected="editData ? editData.jenis_id == {{ $j->jenis_id }} : formJenisId == '{{ $j->jenis_id }}'">{{ $j->nama_jenis }}</option>
                             @endforeach
                         </x-ui.select>
                     </div>
 
-                    <x-ui.select label="Tahun Perolehan" name="tahun_perolehan">
-                        <option value="">- Pilih Tahun -</option>
-                        @for ($y = date('Y'); $y >= 1990; $y--)
-                            <option value="{{ $y }}" x-bind:selected="editData && editData.tahun_perolehan == {{ $y }}">{{ $y }}</option>
-                        @endfor
-                    </x-ui.select>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <x-ui.select label="Tahun Perolehan" name="tahun_perolehan">
+                            <option value="" x-bind:selected="!editData || !editData.tahun_perolehan">- Pilih Tahun -</option>
+                            @for ($y = date('Y'); $y >= 1990; $y--)
+                                <option value="{{ $y }}" x-bind:selected="editData && editData.tahun_perolehan == {{ $y }}">{{ $y }}</option>
+                            @endfor
+                        </x-ui.select>
+                        <div>
+                            <x-ui.input label="Masa Manfaat Khusus (Thn)" type="number" name="masa_manfaat" min="1" max="50"
+                                x-bind:value="editData?.masa_manfaat ?? ''"
+                                x-bind:placeholder="'Otomatis: ' + (jenisMasaPakaiMap[editData ? editData.jenis_id : formJenisId] ?? 5) + ' thn'" />
+                            <p class="text-[10px] text-[#9EA9B9] mt-1">Kosongkan agar otomatis ikut kategori/default (5 thn).</p>
+                        </div>
+                    </div>
 
                     <!-- Kondisi & Unit Group -->
                     <div class="border border-[#E9EFEF] rounded-2xl p-4 bg-[#F8FAF9]">
